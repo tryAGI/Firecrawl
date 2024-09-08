@@ -11,20 +11,8 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("success")]
-        public bool Success { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("id")]
-        public string? Id { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("url")]
-        public string? Url { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("jobId")]
+        public string? JobId { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema

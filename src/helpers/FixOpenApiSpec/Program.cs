@@ -1,5 +1,4 @@
 using Microsoft.OpenApi;
-using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Readers;
@@ -7,13 +6,20 @@ using Microsoft.OpenApi.Readers;
 var path = args[0];
 var text = await File.ReadAllTextAsync(path);
 
-text = text
-        .Replace("openapi: 3.1.0", "openapi: 3.0.1")
-    ;
-
 var openApiDocument = new OpenApiStringReader().Read(text, out var diagnostics);
 
-//openApiDocument.Components.Schemas["GenerateCompletionRequest"]!.Properties["stream"]!.Default = new OpenApiBoolean(true);
+openApiDocument.Components.Schemas["CrawlResponse"]!.Properties.Clear();
+openApiDocument.Components.Schemas["CrawlResponse"]!.Properties.Add(
+    "jobId", new OpenApiSchema
+    {
+        Type = "string"
+    });
+
+openApiDocument.Components.Schemas["CrawlStatusResponseObj"]!.Properties.Add(
+    "url", new OpenApiSchema
+    {
+        Type = "string"
+    });
 
 text = openApiDocument.SerializeAsYaml(OpenApiSpecVersion.OpenApi3_0);
 _ = new OpenApiStringReader().Read(text, out diagnostics);
