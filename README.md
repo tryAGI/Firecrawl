@@ -50,7 +50,7 @@ foreach (var data in jobResponse.Data)
 dotnet tool install -g Firecrawl.Cli
 firecrawl auth <API_KEY>
 firecrawl scrape https://docs.firecrawl.dev/features/scrape // saves it to output.md
-firecrawl crawl https://docs.firecrawl.dev/features/scrape --limit 5 // saves all .md files to docs.firecrawl.dev folder
+firecrawl crawl https://docs.firecrawl.dev/ --limit 5 // saves all .md files to docs.firecrawl.dev folder
 ```
 
 ## Support
