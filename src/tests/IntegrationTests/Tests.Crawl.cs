@@ -3,7 +3,7 @@ namespace Firecrawl.IntegrationTests;
 public partial class Tests
 {
     [TestMethod]
-    public async Task CrawlUrls()
+    public async Task Crawl()
     {
         using var api = GetAuthenticatedApi();
         using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
@@ -13,7 +13,7 @@ public partial class Tests
             url: "https://docs.firecrawl.dev/",
             crawlerOptions: new CrawlUrlsRequestCrawlerOptions
             {
-                Limit = 1,
+                Limit = 3,
             },
             pageOptions: new CrawlUrlsRequestPageOptions
             {
@@ -22,13 +22,9 @@ public partial class Tests
             },
             cancellationToken: cancellationToken);
 
-        Console.WriteLine($"Success: {response.Success}");
-        Console.WriteLine($"Id: {response.Id}");
-        Console.WriteLine($"Url: {response.Url}");
+        Console.WriteLine($"JobId: {response.JobId}");
         
-        response.Success.Should().BeTrue();
-        response.Id.Should().NotBeNullOrEmpty();
-        response.Url.Should().NotBeNullOrEmpty();
+        response.JobId.Should().NotBeNullOrEmpty();
         
         GetCrawlStatusResponse? statusResponse = null;
         while (!cancellationToken.IsCancellationRequested)
@@ -36,21 +32,16 @@ public partial class Tests
             await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
             
             statusResponse = await api.Crawl.GetCrawlStatusAsync(
-                jobId: response.Id!,
+                jobId: response.JobId!,
                 cancellationToken: cancellationToken);
             if (statusResponse.Status == "completed")
             {
                 break;
             }
         }
-            
-        statusResponse.Should().NotBeNull();
-        statusResponse!.Status.Should().Be("completed");
-        statusResponse.Total.Should().Be(3);
-        statusResponse.Data.Should().NotBeNullOrEmpty();
         
         var index = 0;
-        foreach (var data in statusResponse.Data ?? [])
+        foreach (var data in statusResponse?.Data ?? [])
         {
             data.Html.Should().NotBeNullOrEmpty();
             data.Markdown.Should().NotBeNullOrEmpty();
@@ -59,5 +50,10 @@ public partial class Tests
             await File.WriteAllTextAsync(fileInfo.FullName, data.Markdown, cancellationToken);
             Console.WriteLine($"Output file: {new Uri(fileInfo.FullName).AbsoluteUri}");
         }
+        
+        statusResponse.Should().NotBeNull();
+        statusResponse!.Status.Should().Be("completed");
+        statusResponse.Total.Should().Be(3);
+        statusResponse.Data.Should().NotBeNullOrEmpty();
     }
 }
