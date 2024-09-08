@@ -38,7 +38,7 @@ namespace Firecrawl
         /// Maximum depth to crawl relative to the entered URL. A maxDepth of 0 scrapes only the entered URL. A maxDepth of 1 scrapes the entered URL and all pages one level deep. A maxDepth of 2 scrapes the entered URL and all pages up to two levels deep. Higher values follow the same pattern.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("maxDepth")]
-        public int MaxDepth { get; set; }
+        public int? MaxDepth { get; set; }
 
         /// <summary>
         /// The crawling mode to use. Fast mode crawls 4x faster websites without sitemap, but may not be as accurate and shouldn't be used in heavy js-rendered websites.<br/>

@@ -21,6 +21,14 @@ openApiDocument.Components.Schemas["CrawlStatusResponseObj"]!.Properties.Add(
         Type = "string"
     });
 
+openApiDocument.Paths["/crawl"]!
+    .Operations[OperationType.Post]!
+    .RequestBody
+    .Content["application/json"]!
+    .Schema
+    .Properties["crawlerOptions"]!
+    .Properties["maxDepth"].Nullable = true;
+
 text = openApiDocument.SerializeAsYaml(OpenApiSpecVersion.OpenApi3_0);
 _ = new OpenApiStringReader().Read(text, out diagnostics);
 
