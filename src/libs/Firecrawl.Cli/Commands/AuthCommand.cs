@@ -4,10 +4,12 @@ namespace Firecrawl.Cli.Commands;
 
 public class AuthCommand : Command
 {
-    public AuthCommand() : base(name: "auth", description: "Authenticates with API key")
+    public AuthCommand() : base(
+        name: "auth",
+        description: "Authenticates with API key")
     {
         var apiKeyOption = new Argument<string>(
-            name: "apiKey",
+            name: "api-key",
             getDefaultValue: () => string.Empty,
             description: "API key");
         AddArgument(apiKeyOption);

@@ -4,7 +4,9 @@ namespace Firecrawl.Cli.Commands;
 
 public class MapCommand : Command
 {
-    public MapCommand() : base(name: "map", description: "Attempts to output all website's urls in a few seconds.")
+    public MapCommand() : base(
+        name: "map",
+        description: "Attempts to output all website's urls in a few seconds.")
     {
         var url = new Argument<string>(
             name: "url",
@@ -13,7 +15,7 @@ public class MapCommand : Command
         AddArgument(url);
         
         var outputPath = new Option<string>(
-            name: "outputPath",
+            aliases: ["--output", "-o"],
             getDefaultValue: () => string.Empty,
             description: "Output path");
         AddOption(outputPath);

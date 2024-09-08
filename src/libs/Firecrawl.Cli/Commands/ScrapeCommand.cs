@@ -4,7 +4,9 @@ namespace Firecrawl.Cli.Commands;
 
 public class ScrapeCommand : Command
 {
-    public ScrapeCommand() : base(name: "scrape", description: "Scrapes page and saves it as markdown")
+    public ScrapeCommand() : base(
+        name: "scrape",
+        description: "Scrapes page and saves it as markdown")
     {
         var url = new Argument<string>(
             name: "url",
@@ -13,7 +15,7 @@ public class ScrapeCommand : Command
         AddArgument(url);
         
         var outputPath = new Option<string>(
-            name: "outputPath",
+            aliases: ["--output", "-o"],
             getDefaultValue: () => "output.md",
             description: "Output path");
         AddOption(outputPath);

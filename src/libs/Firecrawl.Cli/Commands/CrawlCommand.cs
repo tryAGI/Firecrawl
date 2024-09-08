@@ -4,7 +4,9 @@ namespace Firecrawl.Cli.Commands;
 
 public class CrawlCommand : Command
 {
-    public CrawlCommand() : base(name: "crawl", description: "Crawl a url and saves all pages as markdown")
+    public CrawlCommand() : base(
+        name: "crawl",
+        description: "Crawl a url and saves all pages as markdown")
     {
         var url = new Argument<string>(
             name: "url",
@@ -13,19 +15,19 @@ public class CrawlCommand : Command
         AddArgument(url);
         
         var outputPath = new Option<string>(
-            name: "outputPath",
+            aliases: ["--output", "-o"],
             getDefaultValue: () => string.Empty,
             description: "Output path");
         AddOption(outputPath);
 
         var limit = new Option<int>(
-            name: "limit",
+            aliases: ["--limit", "-l"],
             getDefaultValue: () => 5,
             description: "Limit of pages to crawl");
         AddOption(limit);
         
         var maxDepth = new Option<int?>(
-            name: "maxDepth",
+            aliases: ["--max-depth", "-d"],
             getDefaultValue: () => null,
             description: "Maximum depth to crawl relative to the entered URL. A maxDepth of 0 scrapes only the entered URL. A maxDepth of 1 scrapes the entered URL and all pages one level deep. A maxDepth of 2 scrapes the entered URL and all pages up to two levels deep. Higher values follow the same pattern.");
         AddOption(maxDepth);
