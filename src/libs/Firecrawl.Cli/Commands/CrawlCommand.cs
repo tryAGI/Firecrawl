@@ -1,5 +1,4 @@
 using System.CommandLine;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Firecrawl.Cli.Commands;
 
@@ -21,7 +20,7 @@ public class CrawlCommand : Command
 
         var limit = new Option<int>(
             name: "limit",
-            getDefaultValue: () => 10,
+            getDefaultValue: () => 5,
             description: "Limit of pages to crawl");
         AddOption(limit);
         
@@ -67,18 +66,8 @@ public class CrawlCommand : Command
 
         Console.WriteLine($"JobId: {response.JobId}");
         
-        GetCrawlStatusResponse? statusResponse = null;
-        while (true)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
-            
-            statusResponse = await api.Crawl.GetCrawlStatusAsync(
-                jobId: response.JobId!).ConfigureAwait(false);
-            if (statusResponse.Status == "completed")
-            {
-                break;
-            }
-        }
+        var jobResponse = await api.Crawl.WaitJobAsync(
+            jobId: response.JobId!).ConfigureAwait(false);
         
         if (string.IsNullOrWhiteSpace(outputPath))
         {
@@ -88,7 +77,7 @@ public class CrawlCommand : Command
         Directory.CreateDirectory(outputPath);
         
         var index = 0;
-        foreach (var data in statusResponse.Data ?? [])
+        foreach (var data in jobResponse.Data ?? [])
         {
             var name = string.IsNullOrWhiteSpace(data.Metadata?.SourceURL)
                 ? $"output{++index}.md"
@@ -115,7 +104,7 @@ public class CrawlCommand : Command
             .Replace("www.", string.Empty, StringComparison.OrdinalIgnoreCase);
         
         // Replace invalid filename characters with '_'
-        foreach (char c in Path.GetInvalidFileNameChars())
+        foreach (var c in Path.GetInvalidFileNameChars())
         {
             url = url.Replace(c, '_');
         }

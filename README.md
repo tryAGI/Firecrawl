@@ -18,9 +18,31 @@ using Firecrawl;
 
 using var api = new FirecrawlApp(apiKey);
 
+// Scrape
 var response = await api.Scraping.ScrapeAsync("https://docs.firecrawl.dev/features/scrape");
 
 string markdown = response.Data.Markdown;
+
+// Crawl
+var response = await api.Crawling.CrawlUrlsAsync(
+    url: "https://docs.firecrawl.dev/",
+    crawlerOptions: new CrawlUrlsRequestCrawlerOptions
+    {
+        Limit = 3,
+    },
+    pageOptions: new CrawlUrlsRequestPageOptions
+    {
+        OnlyMainContent = true,
+    });
+
+var jobResponse = await api.Crawl.WaitJobAsync(
+    jobId: response.JobId);
+
+foreach (var data in jobResponse.Data)
+{
+    Console.WriteLine($"URL: {data.Metadata.SourceURL}");
+    Console.WriteLine($"Output file: {data.Markdown}");
+}
 ```
 
 ### CLI
@@ -28,6 +50,7 @@ string markdown = response.Data.Markdown;
 dotnet tool install -g Firecrawl.Cli
 firecrawl auth <API_KEY>
 firecrawl scrape https://docs.firecrawl.dev/features/scrape // saves it to output.md
+firecrawl crawl https://docs.firecrawl.dev/features/scrape --limit 5 // saves all .md files to docs.firecrawl.dev folder
 ```
 
 ## Support

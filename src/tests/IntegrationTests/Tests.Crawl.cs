@@ -26,22 +26,12 @@ public partial class Tests
         
         response.JobId.Should().NotBeNullOrEmpty();
         
-        GetCrawlStatusResponse? statusResponse = null;
-        while (!cancellationToken.IsCancellationRequested)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
-            
-            statusResponse = await api.Crawl.GetCrawlStatusAsync(
-                jobId: response.JobId!,
-                cancellationToken: cancellationToken);
-            if (statusResponse.Status == "completed")
-            {
-                break;
-            }
-        }
+        var jobResponse = await api.Crawl.WaitJobAsync(
+            jobId: response.JobId!,
+            cancellationToken: cancellationToken);
         
         var index = 0;
-        foreach (var data in statusResponse?.Data ?? [])
+        foreach (var data in jobResponse.Data ?? [])
         {
             data.Html.Should().NotBeNullOrEmpty();
             data.Markdown.Should().NotBeNullOrEmpty();
@@ -51,9 +41,9 @@ public partial class Tests
             Console.WriteLine($"Output file: {new Uri(fileInfo.FullName).AbsoluteUri}");
         }
         
-        statusResponse.Should().NotBeNull();
-        statusResponse!.Status.Should().Be("completed");
-        statusResponse.Total.Should().Be(3);
-        statusResponse.Data.Should().NotBeNullOrEmpty();
+        jobResponse.Should().NotBeNull();
+        jobResponse.Status.Should().Be("completed");
+        jobResponse.Total.Should().Be(3);
+        jobResponse.Data.Should().NotBeNullOrEmpty();
     }
 }

@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CA1724;CA1303</NoWarn>
+    <NoWarn>$(NoWarn);CA1724;CA1303;CA1054;CA1055</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
