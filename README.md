@@ -23,6 +23,13 @@ var response = await api.Scraping.ScrapeAsync("https://docs.firecrawl.dev/featur
 string markdown = response.Data.Markdown;
 ```
 
+### CLI
+```bash
+dotnet tool install -g Firecrawl.Cli
+firecrawl auth <API_KEY>
+firecrawl scrape https://docs.firecrawl.dev/features/scrape // saves it to output.md
+```
+
 ## Support
 
 Priority place for bugs: https://github.com/tryAGI/Firecrawl/issues  
