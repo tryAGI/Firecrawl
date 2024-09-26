@@ -51,21 +51,21 @@ namespace Firecrawl
         /// Default Value: true
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("onlyMainContent")]
-        public bool OnlyMainContent { get; set; } = true;
+        public bool? OnlyMainContent { get; set; } = true;
 
         /// <summary>
         /// Timeout in milliseconds for the request<br/>
         /// Default Value: 30000
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("timeout")]
-        public int Timeout { get; set; } = 30000;
+        public int? Timeout { get; set; } = 30000;
 
         /// <summary>
         /// Wait x amount of milliseconds for the page to load to fetch content<br/>
         /// Default Value: 0
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("waitFor")]
-        public int WaitFor { get; set; } = 0;
+        public int? WaitFor { get; set; } = 0;
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema

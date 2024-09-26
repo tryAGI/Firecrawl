@@ -42,7 +42,7 @@ namespace Firecrawl
         /// The status code of the page
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("statusCode")]
-        public int StatusCode { get; set; }
+        public int? StatusCode { get; set; }
 
         /// <summary>
         /// The error message of the page

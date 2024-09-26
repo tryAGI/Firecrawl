@@ -37,9 +37,13 @@ namespace Firecrawl
                 httpClient: _httpClient,
                 jobId: ref jobId);
 
+            var __pathBuilder = new PathBuilder(
+                path: $"/crawl/status/{jobId}",
+                baseUri: _httpClient.BaseAddress); 
+            var __path = __pathBuilder.ToString();
             using var httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
-                requestUri: new global::System.Uri(_httpClient.BaseAddress?.AbsoluteUri.TrimEnd('/') + $"/crawl/status/{jobId}", global::System.UriKind.RelativeOrAbsolute));
+                requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
 
             PrepareRequest(
                 client: _httpClient,
@@ -82,7 +86,7 @@ namespace Firecrawl
             }
 
             return
-                global::System.Text.Json.JsonSerializer.Deserialize(__content, global::Firecrawl.SourceGenerationContext.Default.GetCrawlStatusResponse) ??
+                global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(global::Firecrawl.GetCrawlStatusResponse), JsonSerializerContext) as global::Firecrawl.GetCrawlStatusResponse ??
                 throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
         }
     }

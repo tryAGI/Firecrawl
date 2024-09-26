@@ -8,7 +8,7 @@ namespace Firecrawl
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
-    public sealed partial class FirecrawlApp : global::System.IDisposable
+    public sealed partial class FirecrawlApp : global::Firecrawl.IFirecrawlApp, global::System.IDisposable
     {
         /// <summary>
         /// 
@@ -17,26 +17,43 @@ namespace Firecrawl
 
         private readonly global::System.Net.Http.HttpClient _httpClient;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; } = global::Firecrawl.SourceGenerationContext.Default;
+
 
         /// <summary>
         /// 
         /// </summary>
-        public ScrapingClient Scraping => new ScrapingClient(_httpClient);
+        public ScrapingClient Scraping => new ScrapingClient(_httpClient)
+        {
+            JsonSerializerContext = JsonSerializerContext,
+        };
 
         /// <summary>
         /// 
         /// </summary>
-        public CrawlingClient Crawling => new CrawlingClient(_httpClient);
+        public CrawlingClient Crawling => new CrawlingClient(_httpClient)
+        {
+            JsonSerializerContext = JsonSerializerContext,
+        };
 
         /// <summary>
         /// 
         /// </summary>
-        public SearchClient Search => new SearchClient(_httpClient);
+        public SearchClient Search => new SearchClient(_httpClient)
+        {
+            JsonSerializerContext = JsonSerializerContext,
+        };
 
         /// <summary>
         /// 
         /// </summary>
-        public CrawlClient Crawl => new CrawlClient(_httpClient);
+        public CrawlClient Crawl => new CrawlClient(_httpClient)
+        {
+            JsonSerializerContext = JsonSerializerContext,
+        };
 
         /// <summary>
         /// Creates a new instance of the FirecrawlApp.
@@ -47,8 +64,7 @@ namespace Firecrawl
         /// <param name="baseUri"></param> 
         public FirecrawlApp(
             global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null 
-            )
+            global::System.Uri? baseUri = null)
         {
             _httpClient = httpClient ?? new global::System.Net.Http.HttpClient();
             _httpClient.BaseAddress ??= baseUri ?? new global::System.Uri(BaseUrl);

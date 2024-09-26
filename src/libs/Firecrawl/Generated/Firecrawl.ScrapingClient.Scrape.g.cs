@@ -39,10 +39,14 @@ namespace Firecrawl
                 httpClient: _httpClient,
                 request: request);
 
+            var __pathBuilder = new PathBuilder(
+                path: "/scrape",
+                baseUri: _httpClient.BaseAddress); 
+            var __path = __pathBuilder.ToString();
             using var httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
-                requestUri: new global::System.Uri(_httpClient.BaseAddress?.AbsoluteUri.TrimEnd('/') + "/scrape", global::System.UriKind.RelativeOrAbsolute));
-            var __httpRequestContentBody = global::System.Text.Json.JsonSerializer.Serialize(request, global::Firecrawl.SourceGenerationContext.Default.ScrapeRequest);
+                requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
+            var __httpRequestContentBody = global::System.Text.Json.JsonSerializer.Serialize(request, request.GetType(), JsonSerializerContext);
             var __httpRequestContent = new global::System.Net.Http.StringContent(
                 content: __httpRequestContentBody,
                 encoding: global::System.Text.Encoding.UTF8,
@@ -90,7 +94,7 @@ namespace Firecrawl
             }
 
             return
-                global::System.Text.Json.JsonSerializer.Deserialize(__content, global::Firecrawl.SourceGenerationContext.Default.ScrapeResponse) ??
+                global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(global::Firecrawl.ScrapeResponse), JsonSerializerContext) as global::Firecrawl.ScrapeResponse ??
                 throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
         }
 
@@ -139,9 +143,9 @@ namespace Firecrawl
             global::Firecrawl.ScrapeRequestHeaders? headers = default,
             global::System.Collections.Generic.IList<string>? includeTags = default,
             global::System.Collections.Generic.IList<string>? excludeTags = default,
-            bool onlyMainContent = true,
-            int timeout = 30000,
-            int waitFor = 0,
+            bool? onlyMainContent = true,
+            int? timeout = 30000,
+            int? waitFor = 0,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             var request = new global::Firecrawl.ScrapeRequest

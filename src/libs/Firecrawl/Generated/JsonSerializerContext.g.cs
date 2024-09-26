@@ -13,10 +13,10 @@ namespace Firecrawl
         DefaultIgnoreCondition = global::System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         Converters = new global::System.Type[] 
         { 
-            typeof(global::OpenApiGenerator.JsonConverters.ScrapeRequestFormatJsonConverter),
-            typeof(global::OpenApiGenerator.JsonConverters.ScrapeRequestFormatNullableJsonConverter),
-            typeof(global::OpenApiGenerator.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeJsonConverter),
-            typeof(global::OpenApiGenerator.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeNullableJsonConverter),
+            typeof(global::Firecrawl.JsonConverters.ScrapeRequestFormatJsonConverter),
+            typeof(global::Firecrawl.JsonConverters.ScrapeRequestFormatNullableJsonConverter),
+            typeof(global::Firecrawl.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeJsonConverter),
+            typeof(global::Firecrawl.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeNullableJsonConverter),
         })]
 
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.JsonSerializerContextTypes))]

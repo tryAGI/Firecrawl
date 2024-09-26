@@ -1,6 +1,6 @@
 #nullable enable
 
-namespace OpenApiGenerator.JsonConverters
+namespace Firecrawl.JsonConverters
 {
     /// <inheritdoc />
     public sealed class CrawlUrlsRequestCrawlerOptionsModeJsonConverter : global::System.Text.Json.Serialization.JsonConverter<global::Firecrawl.CrawlUrlsRequestCrawlerOptionsMode>

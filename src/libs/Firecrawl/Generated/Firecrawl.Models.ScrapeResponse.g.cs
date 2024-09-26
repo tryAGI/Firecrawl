@@ -12,7 +12,7 @@ namespace Firecrawl
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("success")]
-        public bool Success { get; set; }
+        public bool? Success { get; set; }
 
         /// <summary>
         /// Warning message to let you know of any issues.

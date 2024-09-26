@@ -25,14 +25,14 @@ namespace Firecrawl
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("generateImgAltText")]
-        public bool GenerateImgAltText { get; set; } = false;
+        public bool? GenerateImgAltText { get; set; } = false;
 
         /// <summary>
         /// If true, returns only the URLs as a list on the crawl status. Attention: the return response will be a list of URLs inside the data, not a list of documents.<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("returnOnlyUrls")]
-        public bool ReturnOnlyUrls { get; set; } = false;
+        public bool? ReturnOnlyUrls { get; set; } = false;
 
         /// <summary>
         /// Maximum depth to crawl relative to the entered URL. A maxDepth of 0 scrapes only the entered URL. A maxDepth of 1 scrapes the entered URL and all pages one level deep. A maxDepth of 2 scrapes the entered URL and all pages up to two levels deep. Higher values follow the same pattern.
@@ -45,7 +45,7 @@ namespace Firecrawl
         /// Default Value: default
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("mode")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::OpenApiGenerator.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeJsonConverter))]
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Firecrawl.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeJsonConverter))]
         public global::Firecrawl.CrawlUrlsRequestCrawlerOptionsMode? Mode { get; set; } = global::Firecrawl.CrawlUrlsRequestCrawlerOptionsMode.Default;
 
         /// <summary>
@@ -53,28 +53,28 @@ namespace Firecrawl
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("ignoreSitemap")]
-        public bool IgnoreSitemap { get; set; } = false;
+        public bool? IgnoreSitemap { get; set; } = false;
 
         /// <summary>
         /// Maximum number of pages to crawl<br/>
         /// Default Value: 10000
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("limit")]
-        public int Limit { get; set; } = 10000;
+        public int? Limit { get; set; } = 10000;
 
         /// <summary>
         /// Enables the crawler to navigate from a specific URL to previously linked pages. For instance, from 'example.com/product/123' back to 'example.com/product'<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("allowBackwardCrawling")]
-        public bool AllowBackwardCrawling { get; set; } = false;
+        public bool? AllowBackwardCrawling { get; set; } = false;
 
         /// <summary>
         /// Allows the crawler to follow links to external websites.<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("allowExternalContentLinks")]
-        public bool AllowExternalContentLinks { get; set; } = false;
+        public bool? AllowExternalContentLinks { get; set; } = false;
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema

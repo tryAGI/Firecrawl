@@ -12,7 +12,7 @@ namespace Firecrawl
         /// Maximum number of results. Max is 20 during beta.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("limit")]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema

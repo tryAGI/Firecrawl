@@ -18,13 +18,13 @@ namespace Firecrawl
         /// Current page number
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("current")]
-        public int Current { get; set; }
+        public int? Current { get; set; }
 
         /// <summary>
         /// Total number of pages
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("total")]
-        public int Total { get; set; }
+        public int? Total { get; set; }
 
         /// <summary>
         /// Data returned from the job (null when it is in progress)
