@@ -1,6 +1,6 @@
-dotnet tool install --global openapigenerator.cli --prerelease
+dotnet tool install --global autosdk.cli --prerelease
 
-oag init \
+autosdk init \
   Firecrawl \
   FirecrawlApp \
   https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/openapi.json \
