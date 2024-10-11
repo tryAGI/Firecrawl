@@ -32,7 +32,7 @@ namespace Firecrawl
         /// Headers to send with the request. Can be used to send cookies, user-agent, etc.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("headers")]
-        public global::Firecrawl.ScrapeRequestHeaders? Headers { get; set; }
+        public object? Headers { get; set; }
 
         /// <summary>
         /// Only include tags, classes and ids from the page in the final output. Use comma separated values. Example: 'script, .ad, #footer'

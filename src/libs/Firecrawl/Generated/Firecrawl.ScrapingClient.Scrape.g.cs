@@ -156,7 +156,7 @@ namespace Firecrawl
         public async global::System.Threading.Tasks.Task<global::Firecrawl.ScrapeResponse> ScrapeAsync(
             string url,
             global::System.Collections.Generic.IList<global::Firecrawl.ScrapeRequestFormat>? formats = default,
-            global::Firecrawl.ScrapeRequestHeaders? headers = default,
+            object? headers = default,
             global::System.Collections.Generic.IList<string>? includeTags = default,
             global::System.Collections.Generic.IList<string>? excludeTags = default,
             bool? onlyMainContent = true,
