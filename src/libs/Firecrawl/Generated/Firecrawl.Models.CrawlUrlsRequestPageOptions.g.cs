@@ -12,7 +12,7 @@ namespace Firecrawl
         /// Headers to send with the request. Can be used to send cookies, user-agent, etc.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("headers")]
-        public global::Firecrawl.CrawlUrlsRequestPageOptionsHeaders? Headers { get; set; }
+        public object? Headers { get; set; }
 
         /// <summary>
         /// Include the HTML version of the content on page. Will output a html key in the response.<br/>

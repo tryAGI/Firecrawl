@@ -82,7 +82,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeRequestHeaders? Type16 { get; set; }
+        public object? Type16 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -102,90 +102,86 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsRequestPageOptionsHeaders? Type21 { get; set; }
+        public global::Firecrawl.SearchGoogleRequest? Type21 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.SearchGoogleRequest? Type22 { get; set; }
+        public global::Firecrawl.SearchGoogleRequestPageOptions? Type22 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.SearchGoogleRequestPageOptions? Type23 { get; set; }
+        public global::Firecrawl.SearchGoogleRequestSearchOptions? Type23 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.SearchGoogleRequestSearchOptions? Type24 { get; set; }
+        public global::Firecrawl.ScrapeResponse2? Type24 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponse2? Type25 { get; set; }
+        public global::Firecrawl.ScrapeResponse3? Type25 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponse3? Type26 { get; set; }
+        public global::Firecrawl.ScrapeResponse4? Type26 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponse4? Type27 { get; set; }
+        public global::Firecrawl.CrawlUrlsResponse? Type27 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsResponse? Type28 { get; set; }
+        public global::Firecrawl.CrawlUrlsResponse2? Type28 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsResponse2? Type29 { get; set; }
+        public global::Firecrawl.CrawlUrlsResponse3? Type29 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsResponse3? Type30 { get; set; }
+        public global::Firecrawl.SearchGoogleResponse? Type30 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.SearchGoogleResponse? Type31 { get; set; }
+        public global::Firecrawl.SearchGoogleResponse2? Type31 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.SearchGoogleResponse2? Type32 { get; set; }
+        public global::Firecrawl.SearchGoogleResponse3? Type32 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.SearchGoogleResponse3? Type33 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse? Type33 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse? Type34 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObj>? Type34 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObj>? Type35 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse2? Type35 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse2? Type36 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse3? Type36 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse3? Type37 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse4? Type37 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse4? Type38 { get; set; }
+        public global::Firecrawl.CancelCrawlJobResponse? Type38 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlJobResponse? Type39 { get; set; }
+        public global::Firecrawl.CancelCrawlJobResponse2? Type39 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlJobResponse2? Type40 { get; set; }
+        public global::Firecrawl.CancelCrawlJobResponse3? Type40 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlJobResponse3? Type41 { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public global::Firecrawl.CancelCrawlJobResponse4? Type42 { get; set; }
+        public global::Firecrawl.CancelCrawlJobResponse4? Type41 { get; set; }
     }
 }
