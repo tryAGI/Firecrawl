@@ -18,7 +18,7 @@ namespace Firecrawl
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
-        public global::System.Collections.Generic.IList<global::Firecrawl.SearchResponseDataItem>? Data { get; set; }
+        public global::System.Collections.Generic.IList<object>? Data { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
