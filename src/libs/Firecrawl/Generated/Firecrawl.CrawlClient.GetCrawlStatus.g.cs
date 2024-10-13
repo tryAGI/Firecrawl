@@ -102,7 +102,7 @@ namespace Firecrawl
             }
 
             return
-                global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(global::Firecrawl.GetCrawlStatusResponse), JsonSerializerContext) as global::Firecrawl.GetCrawlStatusResponse ??
+                global::Firecrawl.GetCrawlStatusResponse.FromJson(__content, JsonSerializerContext) ??
                 throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
         }
     }
