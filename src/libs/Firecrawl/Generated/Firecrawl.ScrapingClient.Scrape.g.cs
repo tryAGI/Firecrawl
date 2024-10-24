@@ -159,9 +159,9 @@ namespace Firecrawl
             object? headers = default,
             global::System.Collections.Generic.IList<string>? includeTags = default,
             global::System.Collections.Generic.IList<string>? excludeTags = default,
-            bool? onlyMainContent = true,
-            int? timeout = 30000,
-            int? waitFor = 0,
+            bool? onlyMainContent = default,
+            int? timeout = default,
+            int? waitFor = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             var __request = new global::Firecrawl.ScrapeRequest
