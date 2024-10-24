@@ -19,14 +19,14 @@ namespace Firecrawl
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("includeHtml")]
-        public bool? IncludeHtml { get; set; } = false;
+        public bool? IncludeHtml { get; set; }
 
         /// <summary>
         /// Include the raw HTML content of the page. Will output a rawHtml key in the response.<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("includeRawHtml")]
-        public bool? IncludeRawHtml { get; set; } = false;
+        public bool? IncludeRawHtml { get; set; }
 
         /// <summary>
         /// Only include tags, classes and ids from the page in the final output. Use comma separated values. Example: 'script, .ad, #footer'
@@ -39,7 +39,7 @@ namespace Firecrawl
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("onlyMainContent")]
-        public bool? OnlyMainContent { get; set; } = false;
+        public bool? OnlyMainContent { get; set; }
 
         /// <summary>
         /// Tags, classes and ids to remove from the page. Use comma separated values. Example: 'script, .ad, #footer'
@@ -52,28 +52,28 @@ namespace Firecrawl
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("replaceAllPathsWithAbsolutePaths")]
-        public bool? ReplaceAllPathsWithAbsolutePaths { get; set; } = false;
+        public bool? ReplaceAllPathsWithAbsolutePaths { get; set; }
 
         /// <summary>
         /// Include a screenshot of the top of the page that you are scraping.<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("screenshot")]
-        public bool? Screenshot { get; set; } = false;
+        public bool? Screenshot { get; set; }
 
         /// <summary>
         /// Include a full page screenshot of the page that you are scraping.<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("fullPageScreenshot")]
-        public bool? FullPageScreenshot { get; set; } = false;
+        public bool? FullPageScreenshot { get; set; }
 
         /// <summary>
         /// Wait x amount of milliseconds for the page to load to fetch content<br/>
         /// Default Value: 0
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("waitFor")]
-        public int? WaitFor { get; set; } = 0;
+        public int? WaitFor { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
