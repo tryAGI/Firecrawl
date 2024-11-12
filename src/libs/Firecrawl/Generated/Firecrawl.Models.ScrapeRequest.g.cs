@@ -73,91 +73,69 @@ namespace Firecrawl
         [global::System.Text.Json.Serialization.JsonExtensionData]
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
-
         /// <summary>
-        /// Serializes the current instance to a JSON string using the provided JsonSerializerContext.
+        /// Initializes a new instance of the <see cref="ScrapeRequest" /> class.
         /// </summary>
-        public string ToJson(
-            global::System.Text.Json.Serialization.JsonSerializerContext jsonSerializerContext)
+        /// <param name="url">
+        /// The URL to scrape
+        /// </param>
+        /// <param name="formats">
+        /// Specific formats to return.<br/>
+        ///  - markdown: The page in Markdown format.<br/>
+        ///  - html: The page's HTML, trimmed to include only meaningful content.<br/>
+        ///  - rawHtml: The page's original HTML.<br/>
+        ///  - links: The links on the page.<br/>
+        ///  - screenshot: A screenshot of the top of the page.<br/>
+        ///  - screenshot@fullPage: A screenshot of the full page. (overridden by screenshot if present)<br/>
+        /// Default Value: [markdown]
+        /// </param>
+        /// <param name="headers">
+        /// Headers to send with the request. Can be used to send cookies, user-agent, etc.
+        /// </param>
+        /// <param name="includeTags">
+        /// Only include tags, classes and ids from the page in the final output. Use comma separated values. Example: 'script, .ad, #footer'
+        /// </param>
+        /// <param name="excludeTags">
+        /// Tags, classes and ids to remove from the page. Use comma separated values. Example: 'script, .ad, #footer'
+        /// </param>
+        /// <param name="onlyMainContent">
+        /// Only return the main content of the page excluding headers, navs, footers, etc.<br/>
+        /// Default Value: true
+        /// </param>
+        /// <param name="timeout">
+        /// Timeout in milliseconds for the request<br/>
+        /// Default Value: 30000
+        /// </param>
+        /// <param name="waitFor">
+        /// Wait x amount of milliseconds for the page to load to fetch content<br/>
+        /// Default Value: 0
+        /// </param>
+        [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+        public ScrapeRequest(
+            string url,
+            global::System.Collections.Generic.IList<global::Firecrawl.ScrapeRequestFormat>? formats,
+            object? headers,
+            global::System.Collections.Generic.IList<string>? includeTags,
+            global::System.Collections.Generic.IList<string>? excludeTags,
+            bool? onlyMainContent,
+            int? timeout,
+            int? waitFor)
         {
-            return global::System.Text.Json.JsonSerializer.Serialize(
-                this,
-                this.GetType(),
-                jsonSerializerContext);
+            this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
+            this.Formats = formats;
+            this.Headers = headers;
+            this.IncludeTags = includeTags;
+            this.ExcludeTags = excludeTags;
+            this.OnlyMainContent = onlyMainContent;
+            this.Timeout = timeout;
+            this.WaitFor = waitFor;
         }
 
         /// <summary>
-        /// Serializes the current instance to a JSON string using the provided JsonSerializerOptions.
+        /// Initializes a new instance of the <see cref="ScrapeRequest" /> class.
         /// </summary>
-#if NET8_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.")]
-        [global::System.Diagnostics.CodeAnalysis.RequiresDynamicCode("JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.")]
-#endif
-        public string ToJson(
-            global::System.Text.Json.JsonSerializerOptions? jsonSerializerOptions = null)
+        public ScrapeRequest()
         {
-            return global::System.Text.Json.JsonSerializer.Serialize(
-                this,
-                jsonSerializerOptions);
         }
-
-        /// <summary>
-        /// Deserializes a JSON string using the provided JsonSerializerContext.
-        /// </summary>
-        public static global::Firecrawl.ScrapeRequest? FromJson(
-            string json,
-            global::System.Text.Json.Serialization.JsonSerializerContext jsonSerializerContext)
-        {
-            return global::System.Text.Json.JsonSerializer.Deserialize(
-                json,
-                typeof(global::Firecrawl.ScrapeRequest),
-                jsonSerializerContext) as global::Firecrawl.ScrapeRequest;
-        }
-
-        /// <summary>
-        /// Deserializes a JSON string using the provided JsonSerializerOptions.
-        /// </summary>
-#if NET8_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.")]
-        [global::System.Diagnostics.CodeAnalysis.RequiresDynamicCode("JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.")]
-#endif
-        public static global::Firecrawl.ScrapeRequest? FromJson(
-            string json,
-            global::System.Text.Json.JsonSerializerOptions? jsonSerializerOptions = null)
-        {
-            return global::System.Text.Json.JsonSerializer.Deserialize<global::Firecrawl.ScrapeRequest>(
-                json,
-                jsonSerializerOptions);
-        }
-
-        /// <summary>
-        /// Deserializes a JSON stream using the provided JsonSerializerContext.
-        /// </summary>
-        public static async global::System.Threading.Tasks.ValueTask<global::Firecrawl.ScrapeRequest?> FromJsonStream(
-            global::System.IO.Stream jsonStream,
-            global::System.Text.Json.Serialization.JsonSerializerContext jsonSerializerContext)
-        {
-            return (await global::System.Text.Json.JsonSerializer.DeserializeAsync(
-                jsonStream,
-                typeof(global::Firecrawl.ScrapeRequest),
-                jsonSerializerContext).ConfigureAwait(false)) as global::Firecrawl.ScrapeRequest;
-        }
-
-        /// <summary>
-        /// Deserializes a JSON stream using the provided JsonSerializerOptions.
-        /// </summary>
-#if NET8_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.")]
-        [global::System.Diagnostics.CodeAnalysis.RequiresDynamicCode("JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.")]
-#endif
-        public static global::System.Threading.Tasks.ValueTask<global::Firecrawl.ScrapeRequest?> FromJsonStream(
-            global::System.IO.Stream jsonStream,
-            global::System.Text.Json.JsonSerializerOptions? jsonSerializerOptions = null)
-        {
-            return global::System.Text.Json.JsonSerializer.DeserializeAsync<global::Firecrawl.ScrapeRequest?>(
-                jsonStream,
-                jsonSerializerOptions);
-        }
-
     }
 }
