@@ -17,6 +17,7 @@ namespace Firecrawl
             typeof(global::Firecrawl.JsonConverters.ScrapeRequestFormatNullableJsonConverter),
             typeof(global::Firecrawl.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeJsonConverter),
             typeof(global::Firecrawl.JsonConverters.CrawlUrlsRequestCrawlerOptionsModeNullableJsonConverter),
+            typeof(global::Firecrawl.JsonConverters.UnixTimestampJsonConverter),
         })]
 
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.JsonSerializerContextTypes))]
