@@ -9,9 +9,9 @@ namespace Firecrawl
     public sealed partial class GetCrawlStatusResponse2
     {
         /// <summary>
-        /// Example: Payment required to access this resource.
+        /// Example: Request rate limit exceeded. Please wait and try again later.
         /// </summary>
-        /// <example>Payment required to access this resource.</example>
+        /// <example>Request rate limit exceeded. Please wait and try again later.</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("error")]
         public string? Error { get; set; }
 
@@ -25,7 +25,7 @@ namespace Firecrawl
         /// Initializes a new instance of the <see cref="GetCrawlStatusResponse2" /> class.
         /// </summary>
         /// <param name="error">
-        /// Example: Payment required to access this resource.
+        /// Example: Request rate limit exceeded. Please wait and try again later.
         /// </param>
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
         public GetCrawlStatusResponse2(

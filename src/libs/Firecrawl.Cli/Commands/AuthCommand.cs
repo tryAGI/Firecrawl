@@ -2,7 +2,7 @@ using System.CommandLine;
 
 namespace Firecrawl.Cli.Commands;
 
-public class AuthCommand : Command
+internal sealed class AuthCommand : Command
 {
     public AuthCommand() : base(
         name: "auth",

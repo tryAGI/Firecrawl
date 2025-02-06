@@ -11,13 +11,10 @@ public partial class Tests
         
         var response = await api.Crawling.CrawlUrlsAsync(
             url: "https://docs.firecrawl.dev/",
-            crawlerOptions: new CrawlUrlsRequestCrawlerOptions
+            limit: 3,
+            scrapeOptions: new CrawlUrlsRequestScrapeOptions
             {
-                Limit = 3,
-            },
-            pageOptions: new CrawlUrlsRequestPageOptions
-            {
-                IncludeHtml = true,
+                //IncludeHtml = true,
                 OnlyMainContent = true,
             },
             cancellationToken: cancellationToken);
@@ -26,7 +23,7 @@ public partial class Tests
         
         response.JobId.Should().NotBeNullOrEmpty();
         
-        var jobResponse = await api.Crawl.WaitJobAsync(
+        var jobResponse = await api.Crawling.WaitJobAsync(
             jobId: response.JobId!,
             cancellationToken: cancellationToken);
         

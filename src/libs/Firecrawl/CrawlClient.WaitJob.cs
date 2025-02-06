@@ -1,6 +1,6 @@
 namespace Firecrawl;
 
-public partial class CrawlClient
+public partial class CrawlingClient
 {
     /// <summary>
     /// Waits for a crawl job to complete or fail.
@@ -8,7 +8,7 @@ public partial class CrawlClient
     /// <param name="jobId"></param>
     /// <param name="cancellationToken">The token to cancel the operation with</param>
     /// <exception cref="global::System.InvalidOperationException"></exception>
-    public async Task<GetCrawlStatusResponse> WaitJobAsync(
+    public async Task<CrawlStatusResponseObj> WaitJobAsync(
         string jobId,
         CancellationToken cancellationToken = default)
     {
@@ -19,7 +19,7 @@ public partial class CrawlClient
             await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
             
             var statusResponse = await GetCrawlStatusAsync(
-                jobId: jobId,
+                //jobId: jobId,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
             if (statusResponse.Status is "completed" or "failed")
             {

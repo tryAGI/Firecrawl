@@ -3,8 +3,7 @@ namespace Firecrawl.IntegrationTests;
 [TestClass]
 public partial class Tests
 {
-    [TestMethod]
-    public FirecrawlApp GetAuthenticatedApi()
+    private static FirecrawlApp GetAuthenticatedApi()
     {
         var apiKey =
             Environment.GetEnvironmentVariable("FIRECRAWL_API_KEY") ??

@@ -2,7 +2,7 @@ using System.CommandLine;
 
 namespace Firecrawl.Cli.Commands;
 
-public class MapCommand : Command
+internal sealed class MapCommand : Command
 {
     public MapCommand() : base(
         name: "map",

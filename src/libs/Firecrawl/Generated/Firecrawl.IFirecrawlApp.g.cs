@@ -50,12 +50,17 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public SearchClient Search { get; }
+        public MappingClient Mapping { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public CrawlClient Crawl { get; }
+        public ExtractionClient Extraction { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public BillingClient Billing { get; }
 
     }
 }

@@ -7,15 +7,11 @@ public partial class Tests
     {
         using var api = GetAuthenticatedApi();
         
-        var response = await api.Scraping.ScrapeAsync("https://docs.firecrawl.dev/features/scrape");
+        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync("https://docs.firecrawl.dev/features/scrape");
         response.Data.Should().NotBeNull();
         response.Data!.Markdown.Should().NotBeNullOrEmpty();
 
         Console.WriteLine($"Success: {response.Success}");
-        if (!string.IsNullOrWhiteSpace(response.Warning))
-        {
-            Console.WriteLine($"Warning: {response.Warning}");
-        }
         
         var fileInfo = new FileInfo("output.md");
         await File.WriteAllTextAsync(fileInfo.FullName, response.Data.Markdown);

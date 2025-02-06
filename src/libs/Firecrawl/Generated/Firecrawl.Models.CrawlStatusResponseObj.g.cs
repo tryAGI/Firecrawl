@@ -9,40 +9,46 @@ namespace Firecrawl
     public sealed partial class CrawlStatusResponseObj
     {
         /// <summary>
-        /// Markdown content of the page if the `markdown` format was specified (default)
+        /// The current status of the crawl. Can be `scraping`, `completed`, or `failed`.
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("markdown")]
-        public string? Markdown { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
 
         /// <summary>
-        /// HTML version of the content on page if the `html` format was specified
+        /// The total number of pages that were attempted to be crawled.
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("html")]
-        public string? Html { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("total")]
+        public int? Total { get; set; }
 
         /// <summary>
-        /// Raw HTML content of the page if the `rawHtml` format was specified
+        /// The number of pages that have been successfully crawled.
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("rawHtml")]
-        public string? RawHtml { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("completed")]
+        public int? Completed { get; set; }
 
         /// <summary>
-        /// Links on the page if the `links` format was specified
+        /// The number of credits used for the crawl.
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("links")]
-        public global::System.Collections.Generic.IList<string>? Links { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("creditsUsed")]
+        public int? CreditsUsed { get; set; }
 
         /// <summary>
-        /// URL of the screenshot of the page if the `screenshot` or `screenshot@fullSize` format was specified
+        /// The date and time when the crawl will expire.
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("screenshot")]
-        public string? Screenshot { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("expiresAt")]
+        public global::System.DateTime? ExpiresAt { get; set; }
 
         /// <summary>
-        /// 
+        /// The URL to retrieve the next 10MB of data. Returned if the crawl is not completed or if the response is larger than 10MB.
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
-        public global::Firecrawl.CrawlStatusResponseObjMetadata? Metadata { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("next")]
+        public string? Next { get; set; }
+
+        /// <summary>
+        /// The data of the crawl.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("data")]
+        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? Data { get; set; }
 
         /// <summary>
         /// 
@@ -59,39 +65,46 @@ namespace Firecrawl
         /// <summary>
         /// Initializes a new instance of the <see cref="CrawlStatusResponseObj" /> class.
         /// </summary>
-        /// <param name="markdown">
-        /// Markdown content of the page if the `markdown` format was specified (default)
+        /// <param name="status">
+        /// The current status of the crawl. Can be `scraping`, `completed`, or `failed`.
         /// </param>
-        /// <param name="html">
-        /// HTML version of the content on page if the `html` format was specified
+        /// <param name="total">
+        /// The total number of pages that were attempted to be crawled.
         /// </param>
-        /// <param name="rawHtml">
-        /// Raw HTML content of the page if the `rawHtml` format was specified
+        /// <param name="completed">
+        /// The number of pages that have been successfully crawled.
         /// </param>
-        /// <param name="links">
-        /// Links on the page if the `links` format was specified
+        /// <param name="creditsUsed">
+        /// The number of credits used for the crawl.
         /// </param>
-        /// <param name="screenshot">
-        /// URL of the screenshot of the page if the `screenshot` or `screenshot@fullSize` format was specified
+        /// <param name="expiresAt">
+        /// The date and time when the crawl will expire.
         /// </param>
-        /// <param name="metadata"></param>
+        /// <param name="next">
+        /// The URL to retrieve the next 10MB of data. Returned if the crawl is not completed or if the response is larger than 10MB.
+        /// </param>
+        /// <param name="data">
+        /// The data of the crawl.
+        /// </param>
         /// <param name="url"></param>
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
         public CrawlStatusResponseObj(
-            string? markdown,
-            string? html,
-            string? rawHtml,
-            global::System.Collections.Generic.IList<string>? links,
-            string? screenshot,
-            global::Firecrawl.CrawlStatusResponseObjMetadata? metadata,
+            string? status,
+            int? total,
+            int? completed,
+            int? creditsUsed,
+            global::System.DateTime? expiresAt,
+            string? next,
+            global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? data,
             string? url)
         {
-            this.Markdown = markdown;
-            this.Html = html;
-            this.RawHtml = rawHtml;
-            this.Links = links;
-            this.Screenshot = screenshot;
-            this.Metadata = metadata;
+            this.Status = status;
+            this.Total = total;
+            this.Completed = completed;
+            this.CreditsUsed = creditsUsed;
+            this.ExpiresAt = expiresAt;
+            this.Next = next;
+            this.Data = data;
             this.Url = url;
         }
 

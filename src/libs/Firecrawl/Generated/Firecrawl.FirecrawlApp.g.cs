@@ -13,7 +13,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public const string DefaultBaseUrl = "https://api.firecrawl.dev/v0";
+        public const string DefaultBaseUrl = "https://api.firecrawl.dev/v1";
 
         private bool _disposeHttpClient = true;
 
@@ -58,7 +58,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public SearchClient Search => new SearchClient(HttpClient, authorizations: Authorizations)
+        public MappingClient Mapping => new MappingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -67,7 +67,16 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public CrawlClient Crawl => new CrawlClient(HttpClient, authorizations: Authorizations)
+        public ExtractionClient Extraction => new ExtractionClient(HttpClient, authorizations: Authorizations)
+        {
+            ReadResponseAsString = ReadResponseAsString,
+            JsonSerializerContext = JsonSerializerContext,
+        };
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public BillingClient Billing => new BillingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,

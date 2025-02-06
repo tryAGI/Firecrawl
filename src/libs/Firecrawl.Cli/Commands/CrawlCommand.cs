@@ -2,7 +2,7 @@ using System.CommandLine;
 
 namespace Firecrawl.Cli.Commands;
 
-public class CrawlCommand : Command
+internal sealed class CrawlCommand : Command
 {
     public CrawlCommand() : base(
         name: "crawl",
@@ -55,12 +55,9 @@ public class CrawlCommand : Command
 
         var response = await api.Crawling.CrawlUrlsAsync(
             url: url,
-            crawlerOptions: new CrawlUrlsRequestCrawlerOptions
-            {
-                MaxDepth = maxDepth,
-                Limit = limit,
-            },
-            pageOptions: new CrawlUrlsRequestPageOptions
+            maxDepth: maxDepth,
+            limit: limit,
+            scrapeOptions: new CrawlUrlsRequestScrapeOptions
             {
                 OnlyMainContent = true,
                 WaitFor = 1000,
@@ -68,7 +65,7 @@ public class CrawlCommand : Command
 
         Console.WriteLine($"JobId: {response.JobId}");
         
-        var jobResponse = await api.Crawl.WaitJobAsync(
+        var jobResponse = await api.Crawling.WaitJobAsync(
             jobId: response.JobId!).ConfigureAwait(false);
         
         if (string.IsNullOrWhiteSpace(outputPath))

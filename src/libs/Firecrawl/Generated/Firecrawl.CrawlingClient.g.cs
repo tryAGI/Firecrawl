@@ -12,7 +12,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public const string DefaultBaseUrl = "https://api.firecrawl.dev/v0";
+        public const string DefaultBaseUrl = "https://api.firecrawl.dev/v1";
 
         private bool _disposeHttpClient = true;
 

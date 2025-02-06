@@ -2,7 +2,7 @@ using System.CommandLine;
 
 namespace Firecrawl.Cli.Commands;
 
-public class ScrapeCommand : Command
+internal sealed class ScrapeCommand : Command
 {
     public ScrapeCommand() : base(
         name: "scrape",
@@ -37,13 +37,9 @@ public class ScrapeCommand : Command
         
         Console.WriteLine($"Scraping {url}...");
 
-        var response = await api.Scraping.ScrapeAsync(url).ConfigureAwait(false);
+        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync(url).ConfigureAwait(false);
 
         Console.WriteLine($"Success: {response.Success}");
-        if (!string.IsNullOrWhiteSpace(response.Warning))
-        {
-            Console.WriteLine($"Warning: {response.Warning}");
-        }
         
         var fileInfo = new FileInfo(outputPath);
         await File.WriteAllTextAsync(fileInfo.FullName, response.Data?.Markdown).ConfigureAwait(false);
