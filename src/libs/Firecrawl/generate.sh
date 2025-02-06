@@ -9,6 +9,6 @@ fi
 autosdk generate openapi.yaml \
   --namespace Firecrawl \
   --clientClassName FirecrawlApp \
-  --targetFramework net9.0 \
+  --targetFramework net8.0 \
   --output Generated \
   --exclude-deprecated-operations

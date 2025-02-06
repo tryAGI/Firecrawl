@@ -672,6 +672,12 @@ paths:
         - Crawling
       summary: Get the status of a crawl job
       operationId: getCrawlStatus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Successful response

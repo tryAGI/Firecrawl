@@ -21,6 +21,19 @@ openApiDocument.Components.Schemas["CrawlStatusResponseObj"]!.Properties.Add(
         Type = "string"
     });
 
+openApiDocument.Paths["/crawl/{id}"]!
+    .Operations[OperationType.Get]!
+    .Parameters.Add(new OpenApiParameter
+    {
+        Name = "id",
+        In = ParameterLocation.Path,
+        Required = true,
+        Schema = new OpenApiSchema
+        {
+            Type = "string"
+        }
+    });
+
 // openApiDocument.Paths["/crawl"]!
 //     .Operations[OperationType.Post]!
 //     .RequestBody

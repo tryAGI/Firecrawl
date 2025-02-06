@@ -6,10 +6,12 @@ namespace Firecrawl
     public partial class CrawlingClient
     {
         partial void PrepareGetCrawlStatusArguments(
-            global::System.Net.Http.HttpClient httpClient);
+            global::System.Net.Http.HttpClient httpClient,
+            ref string id);
         partial void PrepareGetCrawlStatusRequest(
             global::System.Net.Http.HttpClient httpClient,
-            global::System.Net.Http.HttpRequestMessage httpRequestMessage);
+            global::System.Net.Http.HttpRequestMessage httpRequestMessage,
+            string id);
         partial void ProcessGetCrawlStatusResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
@@ -22,18 +24,21 @@ namespace Firecrawl
         /// <summary>
         /// Get the status of a crawl job
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Firecrawl.CrawlStatusResponseObj> GetCrawlStatusAsync(
+            string id,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             PrepareArguments(
                 client: HttpClient);
             PrepareGetCrawlStatusArguments(
-                httpClient: HttpClient);
+                httpClient: HttpClient,
+                id: ref id);
 
             var __pathBuilder = new PathBuilder(
-                path: "/crawl/{id}",
+                path: $"/crawl/{id}",
                 baseUri: HttpClient.BaseAddress); 
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
@@ -65,7 +70,8 @@ namespace Firecrawl
                 request: __httpRequest);
             PrepareGetCrawlStatusRequest(
                 httpClient: HttpClient,
-                httpRequestMessage: __httpRequest);
+                httpRequestMessage: __httpRequest,
+                id: id);
 
             using var __response = await HttpClient.SendAsync(
                 request: __httpRequest,
