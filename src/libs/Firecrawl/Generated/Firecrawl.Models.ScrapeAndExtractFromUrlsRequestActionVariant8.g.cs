@@ -40,7 +40,9 @@ namespace Firecrawl
         /// JavaScript code to execute<br/>
         /// Example: document.querySelector('.button').click();
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestActionVariant8(
             string script,
             global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant8Type type)

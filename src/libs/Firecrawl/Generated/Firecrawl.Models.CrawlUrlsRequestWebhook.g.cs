@@ -45,7 +45,9 @@ namespace Firecrawl
         /// <param name="metadata">
         /// Custom metadata that will be included in all webhook payloads for this crawl
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public CrawlUrlsRequestWebhook(
             string url,
             global::System.Collections.Generic.Dictionary<string, string>? headers,

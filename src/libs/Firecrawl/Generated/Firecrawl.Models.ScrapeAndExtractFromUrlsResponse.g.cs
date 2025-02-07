@@ -27,7 +27,9 @@ namespace Firecrawl
         /// <param name="error">
         /// Example: Payment required to access this resource.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsResponse(
             string? error)
         {

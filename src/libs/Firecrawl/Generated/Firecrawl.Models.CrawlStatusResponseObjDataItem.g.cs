@@ -67,7 +67,9 @@ namespace Firecrawl
         /// Screenshot of the page if `includeScreenshot` is true
         /// </param>
         /// <param name="metadata"></param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public CrawlStatusResponseObjDataItem(
             string? markdown,
             string? html,

@@ -28,7 +28,9 @@ namespace Firecrawl
         /// <param name="status">
         /// Example: cancelled
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public CancelCrawlResponse(
             global::Firecrawl.CancelCrawlResponseStatus? status)
         {

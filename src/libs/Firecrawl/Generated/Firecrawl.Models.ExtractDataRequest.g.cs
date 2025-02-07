@@ -44,7 +44,9 @@ namespace Firecrawl
         /// <param name="schema">
         /// Schema to define the structure of the extracted data
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ExtractDataRequest(
             global::System.Collections.Generic.IList<string> urls,
             string prompt,

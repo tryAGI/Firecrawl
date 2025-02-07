@@ -37,7 +37,9 @@ namespace Firecrawl
         /// <param name="languages">
         /// Preferred languages and locales for the request in order of priority. Defaults to the language of the specified location. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestLocation(
             string? country,
             global::System.Collections.Generic.IList<string>? languages)

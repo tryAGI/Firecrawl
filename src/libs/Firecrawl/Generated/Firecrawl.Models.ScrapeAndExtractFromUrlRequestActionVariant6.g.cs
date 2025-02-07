@@ -51,7 +51,9 @@ namespace Firecrawl
         /// Query selector for the element to scroll<br/>
         /// Example: #my-element
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlRequestActionVariant6(
             global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6Type type,
             global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6Direction? direction,

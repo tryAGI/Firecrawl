@@ -80,7 +80,9 @@ namespace Firecrawl
         /// <param name="data">
         /// The data of the batch scrape.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public BatchScrapeStatusResponseObj(
             string? status,
             int? total,

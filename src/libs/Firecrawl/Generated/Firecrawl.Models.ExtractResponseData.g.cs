@@ -31,7 +31,9 @@ namespace Firecrawl
         /// </summary>
         /// <param name="x_property1_"></param>
         /// <param name="x_property2_"></param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ExtractResponseData(
             string? x_property1_,
             double? x_property2_)

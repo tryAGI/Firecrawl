@@ -47,7 +47,9 @@ namespace Firecrawl
         /// <param name="invalidURLs">
         /// If ignoreInvalidURLs is true, this is an array containing the invalid URLs that were specified in the request. If there were no invalid URLs, this will be an empty array. If ignoreInvalidURLs is false, this field will be undefined.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public BatchScrapeResponseObj(
             bool? success,
             string? id,
