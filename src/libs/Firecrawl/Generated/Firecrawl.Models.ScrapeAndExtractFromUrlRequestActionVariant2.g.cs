@@ -38,7 +38,9 @@ namespace Firecrawl
         /// Should the screenshot be full-page or viewport sized?<br/>
         /// Default Value: false
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlRequestActionVariant2(
             global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant2Type type,
             bool? fullPage)

@@ -117,7 +117,9 @@ namespace Firecrawl
         /// </param>
         /// <param name="webhook"></param>
         /// <param name="scrapeOptions"></param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public CrawlUrlsRequest(
             string url,
             global::System.Collections.Generic.IList<string>? excludePaths,

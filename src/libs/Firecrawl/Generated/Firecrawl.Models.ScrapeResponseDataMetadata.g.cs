@@ -70,7 +70,9 @@ namespace Firecrawl
         /// <param name="error">
         /// The error message of the page
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeResponseDataMetadata(
             string? title,
             string? description,

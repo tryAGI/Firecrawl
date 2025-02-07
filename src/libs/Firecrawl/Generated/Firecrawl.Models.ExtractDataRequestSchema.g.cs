@@ -37,7 +37,9 @@ namespace Firecrawl
         /// <param name="property2">
         /// Description of property2
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ExtractDataRequestSchema(
             string property1,
             int property2)

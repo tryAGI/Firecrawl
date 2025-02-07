@@ -37,7 +37,9 @@ namespace Firecrawl
         /// <param name="error">
         /// Example: Internal server error while fetching credit usage
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public GetCreditUsageResponse3(
             bool? success,
             string? error)

@@ -40,7 +40,9 @@ namespace Firecrawl
         /// Key to press<br/>
         /// Example: Enter
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestActionVariant5(
             string key,
             global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant5Type type)

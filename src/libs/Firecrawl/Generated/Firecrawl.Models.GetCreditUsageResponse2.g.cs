@@ -37,7 +37,9 @@ namespace Firecrawl
         /// <param name="error">
         /// Example: Could not find credit usage information
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public GetCreditUsageResponse2(
             bool? success,
             string? error)

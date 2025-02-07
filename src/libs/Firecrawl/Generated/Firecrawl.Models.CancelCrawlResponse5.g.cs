@@ -27,7 +27,9 @@ namespace Firecrawl
         /// <param name="error">
         /// Example: Crawl job not found.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public CancelCrawlResponse5(
             string? error)
         {

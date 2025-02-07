@@ -40,7 +40,9 @@ namespace Firecrawl
         /// Text to type<br/>
         /// Example: Hello, world!
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlRequestActionVariant4(
             string text,
             global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant4Type type)

@@ -40,7 +40,9 @@ namespace Firecrawl
         /// Query selector to find the element by<br/>
         /// Example: #load-more-button
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestActionVariant3(
             string selector,
             global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant3Type type)

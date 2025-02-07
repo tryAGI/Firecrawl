@@ -31,7 +31,9 @@ namespace Firecrawl
         /// </summary>
         /// <param name="success"></param>
         /// <param name="data"></param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ExtractResponse(
             bool? success,
             global::Firecrawl.ExtractResponseData? data)

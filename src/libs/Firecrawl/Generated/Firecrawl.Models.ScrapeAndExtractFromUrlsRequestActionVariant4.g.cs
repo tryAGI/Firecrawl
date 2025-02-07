@@ -53,7 +53,9 @@ namespace Firecrawl
         /// Query selector for the input field<br/>
         /// Example: #search-input
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestActionVariant4(
             string text,
             string selector,

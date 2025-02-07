@@ -158,7 +158,9 @@ namespace Firecrawl
         /// <param name="removeBase64Images">
         /// Removes all base 64 images from the output, which may be overwhelmingly long. The image's alt text remains in the output, but the URL is replaced with a placeholder.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlRequest(
             string url,
             global::System.Collections.Generic.IList<global::Firecrawl.ScrapeAndExtractFromUrlRequestFormat>? formats,

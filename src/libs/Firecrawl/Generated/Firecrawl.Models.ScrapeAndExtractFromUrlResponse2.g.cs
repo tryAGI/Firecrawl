@@ -27,7 +27,9 @@ namespace Firecrawl
         /// <param name="error">
         /// Example: Request rate limit exceeded. Please wait and try again later.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlResponse2(
             string? error)
         {

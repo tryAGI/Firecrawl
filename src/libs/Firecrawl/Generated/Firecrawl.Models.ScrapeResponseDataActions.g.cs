@@ -26,7 +26,9 @@ namespace Firecrawl
         /// <param name="screenshots">
         /// Screenshot URLs, in the same order as the screenshot actions provided.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeResponseDataActions(
             global::System.Collections.Generic.IList<string>? screenshots)
         {

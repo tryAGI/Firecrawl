@@ -27,7 +27,9 @@ namespace Firecrawl
         /// <param name="error">
         /// Example: Invalid input data.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ExtractDataResponse(
             string? error)
         {

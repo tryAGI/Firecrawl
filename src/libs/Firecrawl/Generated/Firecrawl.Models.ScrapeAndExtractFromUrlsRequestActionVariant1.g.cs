@@ -48,7 +48,9 @@ namespace Firecrawl
         /// Query selector to find the element by<br/>
         /// Example: #my-element
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestActionVariant1(
             global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant1Type type,
             int? milliseconds,

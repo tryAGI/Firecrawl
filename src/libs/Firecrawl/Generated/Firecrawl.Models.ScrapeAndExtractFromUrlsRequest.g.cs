@@ -174,7 +174,9 @@ namespace Firecrawl
         /// If invalid URLs are specified in the urls array, they will be ignored. Instead of them failing the entire request, a batch scrape using the remaining valid URLs will be created, and the invalid URLs will be returned in the invalidURLs field of the response.<br/>
         /// Default Value: false
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequest(
             global::System.Collections.Generic.IList<string>? urls,
             global::Firecrawl.OneOf<string, global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhook>? webhook,

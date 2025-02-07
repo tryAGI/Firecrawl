@@ -94,7 +94,9 @@ namespace Firecrawl
         /// <param name="warning">
         /// Can be displayed when using LLM Extraction. Warning message will let you know any issues with the extraction.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeResponseData(
             string? markdown,
             string? html,

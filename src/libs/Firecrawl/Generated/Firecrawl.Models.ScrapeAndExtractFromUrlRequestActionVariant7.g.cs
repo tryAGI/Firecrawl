@@ -27,7 +27,9 @@ namespace Firecrawl
         /// <param name="type">
         /// Scrape the current page content, returns the url and the html.
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlRequestActionVariant7(
             global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant7Type type)
         {

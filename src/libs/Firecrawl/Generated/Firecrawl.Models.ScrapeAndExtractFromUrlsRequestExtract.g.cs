@@ -44,7 +44,9 @@ namespace Firecrawl
         /// <param name="prompt">
         /// The prompt to use for the extraction without a schema (Optional)
         /// </param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public ScrapeAndExtractFromUrlsRequestExtract(
             object? schema,
             string? systemPrompt,

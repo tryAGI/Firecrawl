@@ -87,7 +87,9 @@ namespace Firecrawl
         /// The data of the crawl.
         /// </param>
         /// <param name="url"></param>
+#if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public CrawlStatusResponseObj(
             string? status,
             int? total,
