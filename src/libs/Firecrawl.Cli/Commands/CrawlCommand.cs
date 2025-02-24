@@ -63,10 +63,12 @@ internal sealed class CrawlCommand : Command
                 WaitFor = 1000,
             }).ConfigureAwait(false);
 
-        Console.WriteLine($"JobId: {response.JobId}");
+        Console.WriteLine($"Success: {response.Success}");
+        Console.WriteLine($"JobId: {response.Id}");
+        Console.WriteLine($"Url: {response.Url}");
         
         var jobResponse = await api.Crawling.WaitJobAsync(
-            jobId: response.JobId!).ConfigureAwait(false);
+            jobId: response.Id!).ConfigureAwait(false);
         
         if (string.IsNullOrWhiteSpace(outputPath))
         {
