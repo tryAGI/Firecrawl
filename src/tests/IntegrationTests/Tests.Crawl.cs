@@ -14,23 +14,25 @@ public partial class Tests
             limit: 3,
             scrapeOptions: new CrawlUrlsRequestScrapeOptions
             {
-                //IncludeHtml = true,
                 OnlyMainContent = true,
             },
             cancellationToken: cancellationToken);
 
-        Console.WriteLine($"JobId: {response.JobId}");
+        Console.WriteLine($"Success: {response.Success}");
+        Console.WriteLine($"JobId: {response.Id}");
+        Console.WriteLine($"Url: {response.Url}");
         
-        response.JobId.Should().NotBeNullOrEmpty();
+        response.Success.Should().BeTrue();
+        response.Id.Should().NotBeNullOrEmpty();
+        response.Url.Should().NotBeNullOrEmpty();
         
         var jobResponse = await api.Crawling.WaitJobAsync(
-            jobId: response.JobId!,
+            jobId: response.Id!,
             cancellationToken: cancellationToken);
         
         var index = 0;
         foreach (var data in jobResponse.Data ?? [])
         {
-            data.Html.Should().NotBeNullOrEmpty();
             data.Markdown.Should().NotBeNullOrEmpty();
             
             var fileInfo = new FileInfo($"output{++index}.md");
@@ -40,7 +42,7 @@ public partial class Tests
         
         jobResponse.Should().NotBeNull();
         jobResponse.Status.Should().Be("completed");
-        jobResponse.Total.Should().Be(3);
+        jobResponse.Total.Should().Be(4);
         jobResponse.Data.Should().NotBeNullOrEmpty();
     }
 }

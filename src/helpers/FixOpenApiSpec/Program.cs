@@ -8,19 +8,6 @@ var text = await File.ReadAllTextAsync(path);
 
 var openApiDocument = new OpenApiStringReader().Read(text, out var diagnostics);
 
-openApiDocument.Components.Schemas["CrawlResponse"]!.Properties.Clear();
-openApiDocument.Components.Schemas["CrawlResponse"]!.Properties.Add(
-    "jobId", new OpenApiSchema
-    {
-        Type = "string"
-    });
-
-openApiDocument.Components.Schemas["CrawlStatusResponseObj"]!.Properties.Add(
-    "url", new OpenApiSchema
-    {
-        Type = "string"
-    });
-
 openApiDocument.Paths["/crawl/{id}"]!
     .Operations[OperationType.Get]!
     .Parameters.Add(new OpenApiParameter
@@ -33,14 +20,6 @@ openApiDocument.Paths["/crawl/{id}"]!
             Type = "string"
         }
     });
-
-// openApiDocument.Paths["/crawl"]!
-//     .Operations[OperationType.Post]!
-//     .RequestBody
-//     .Content["application/json"]!
-//     .Schema
-//     .Properties["crawlerOptions"]!
-//     .Properties["maxDepth"].Nullable = true;
 
 text = openApiDocument.SerializeAsYaml(OpenApiSpecVersion.OpenApi3_0);
 _ = new OpenApiStringReader().Read(text, out diagnostics);

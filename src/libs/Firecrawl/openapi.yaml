@@ -1255,8 +1255,6 @@ components:
                     description: The error message of the page
                     nullable: true
           description: The data of the crawl.
-        url:
-          type: string
     BatchScrapeStatusResponseObj:
       type: object
       properties:
@@ -1330,8 +1328,13 @@ components:
     CrawlResponse:
       type: object
       properties:
-        jobId:
+        success:
+          type: boolean
+        id:
           type: string
+        url:
+          type: string
+          format: uri
     BatchScrapeResponseObj:
       type: object
       properties:

@@ -51,12 +51,6 @@ namespace Firecrawl
         public global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? Data { get; set; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("url")]
-        public string? Url { get; set; }
-
-        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -86,7 +80,6 @@ namespace Firecrawl
         /// <param name="data">
         /// The data of the crawl.
         /// </param>
-        /// <param name="url"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -97,8 +90,7 @@ namespace Firecrawl
             int? creditsUsed,
             global::System.DateTime? expiresAt,
             string? next,
-            global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? data,
-            string? url)
+            global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? data)
         {
             this.Status = status;
             this.Total = total;
@@ -107,7 +99,6 @@ namespace Firecrawl
             this.ExpiresAt = expiresAt;
             this.Next = next;
             this.Data = data;
-            this.Url = url;
         }
 
         /// <summary>

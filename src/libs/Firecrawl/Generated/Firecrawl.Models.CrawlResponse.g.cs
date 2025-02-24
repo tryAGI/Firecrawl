@@ -11,8 +11,20 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        [global::System.Text.Json.Serialization.JsonPropertyName("jobId")]
-        public string? JobId { get; set; }
+        [global::System.Text.Json.Serialization.JsonPropertyName("success")]
+        public bool? Success { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("id")]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("url")]
+        public string? Url { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -23,14 +35,20 @@ namespace Firecrawl
         /// <summary>
         /// Initializes a new instance of the <see cref="CrawlResponse" /> class.
         /// </summary>
-        /// <param name="jobId"></param>
+        /// <param name="success"></param>
+        /// <param name="id"></param>
+        /// <param name="url"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public CrawlResponse(
-            string? jobId)
+            bool? success,
+            string? id,
+            string? url)
         {
-            this.JobId = jobId;
+            this.Success = success;
+            this.Id = id;
+            this.Url = url;
         }
 
         /// <summary>
