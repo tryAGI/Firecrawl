@@ -95,7 +95,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.CancelCrawlResponse2>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_404,
@@ -123,7 +123,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.CancelCrawlResponse3>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_500,

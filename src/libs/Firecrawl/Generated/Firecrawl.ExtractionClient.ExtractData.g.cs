@@ -109,7 +109,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.ExtractDataResponse>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_400,
@@ -137,7 +137,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.ExtractDataResponse2>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_500,
