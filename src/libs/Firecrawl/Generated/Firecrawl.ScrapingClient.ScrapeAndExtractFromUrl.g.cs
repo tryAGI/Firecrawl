@@ -109,7 +109,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlResponse>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_402 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_402,
@@ -137,7 +137,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlResponse2>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_429 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_429,
@@ -165,7 +165,7 @@ namespace Firecrawl
                 }
 
                 throw new global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlResponse3>(
-                    message: __response.ReasonPhrase ?? string.Empty,
+                    message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
                     statusCode: __response.StatusCode)
                 {
                     ResponseBody = __content_500,
