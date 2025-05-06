@@ -952,7 +952,7 @@ paths:
                   description: Include subdomains of the website
                   default: false
                 limit:
-                  maximum: 5000
+                  maximum: 30000
                   type: integer
                   description: Maximum number of links to return
                   default: 5000
