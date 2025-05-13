@@ -28,6 +28,10 @@ namespace Firecrawl.JsonConverters
                     var numValue = reader.GetInt32();
                     return (global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant1Type)numValue;
                 }
+                case global::System.Text.Json.JsonTokenType.Null:
+                {
+                    return default(global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant1Type?);
+                }
                 default:
                     throw new global::System.ArgumentOutOfRangeException(nameof(reader));
             }
