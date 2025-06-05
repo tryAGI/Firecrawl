@@ -37,7 +37,7 @@ namespace Firecrawl
                 httpClient: HttpClient,
                 id: ref id);
 
-            var __pathBuilder = new PathBuilder(
+            var __pathBuilder = new global::Firecrawl.PathBuilder(
                 path: $"/crawl/{id}",
                 baseUri: HttpClient.BaseAddress); 
             var __path = __pathBuilder.ToString();
