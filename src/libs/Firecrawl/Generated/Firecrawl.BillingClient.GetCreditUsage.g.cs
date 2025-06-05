@@ -32,7 +32,7 @@ namespace Firecrawl
             PrepareGetCreditUsageArguments(
                 httpClient: HttpClient);
 
-            var __pathBuilder = new PathBuilder(
+            var __pathBuilder = new global::Firecrawl.PathBuilder(
                 path: "/team/credit-usage",
                 baseUri: HttpClient.BaseAddress); 
             var __path = __pathBuilder.ToString();
