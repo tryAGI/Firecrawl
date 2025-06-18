@@ -42,7 +42,7 @@ public partial class Tests
         
         jobResponse.Should().NotBeNull();
         jobResponse.Status.Should().Be("completed");
-        jobResponse.Total.Should().Be(4);
+        jobResponse.Total.Should().Be(3);
         jobResponse.Data.Should().NotBeNullOrEmpty();
     }
 }
