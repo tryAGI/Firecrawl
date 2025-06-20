@@ -1,6 +1,4 @@
 
-#pragma warning disable CS0618 // Type or member is obsolete
-
 #nullable enable
 
 namespace Firecrawl
@@ -18,23 +16,29 @@ namespace Firecrawl
         public required string Url { get; set; }
 
         /// <summary>
-        /// Specifies URL patterns to exclude from the crawl by comparing website paths against the provided regex patterns. For example, if you set "excludePaths": ["blog/*"] for the base URL firecrawl.dev, any results matching that pattern will be excluded, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
+        /// URL pathname regex patterns that exclude matching URLs from the crawl. For example, if you set "excludePaths": ["blog/.*"] for the base URL firecrawl.dev, any results matching that pattern will be excluded, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("excludePaths")]
         public global::System.Collections.Generic.IList<string>? ExcludePaths { get; set; }
 
         /// <summary>
-        /// Specifies URL patterns to include in the crawl by comparing website paths against the provided regex patterns. Only the paths that match the specified patterns will be included in the response. For example, if you set "includePaths": ["blog/*"] for the base URL firecrawl.dev, only results matching that pattern will be included, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
+        /// URL pathname regex patterns that include matching URLs in the crawl. Only the paths that match the specified patterns will be included in the response. For example, if you set "includePaths": ["blog/.*"] for the base URL firecrawl.dev, only results matching that pattern will be included, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("includePaths")]
         public global::System.Collections.Generic.IList<string>? IncludePaths { get; set; }
 
         /// <summary>
-        /// Maximum depth to crawl relative to the entered URL.<br/>
-        /// Default Value: 2
+        /// Maximum depth to crawl relative to the base URL. Basically, the max number of slashes the pathname of a scraped URL may contain.<br/>
+        /// Default Value: 10
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("maxDepth")]
         public int? MaxDepth { get; set; }
+
+        /// <summary>
+        /// Maximum depth to crawl based on discovery order. The root site and sitemapped pages has a discovery depth of 0. For example, if you set it to 1, and you set ignoreSitemap, you will only crawl the entered URL and all URLs that are linked on that page.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("maxDiscoveryDepth")]
+        public int? MaxDiscoveryDepth { get; set; }
 
         /// <summary>
         /// Ignore the website sitemap when crawling<br/>
@@ -44,6 +48,13 @@ namespace Firecrawl
         public bool? IgnoreSitemap { get; set; }
 
         /// <summary>
+        /// Do not re-scrape the same path with different (or none) query parameters<br/>
+        /// Default Value: false
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("ignoreQueryParameters")]
+        public bool? IgnoreQueryParameters { get; set; }
+
+        /// <summary>
         /// Maximum number of pages to crawl. Default limit is 10000.<br/>
         /// Default Value: 10000
         /// </summary>
@@ -51,7 +62,13 @@ namespace Firecrawl
         public int? Limit { get; set; }
 
         /// <summary>
-        /// Enables the crawler to navigate from a specific URL to previously linked pages.<br/>
+        /// Allows the crawler to follow internal links to sibling or parent URLs, not just child paths.<br/>
+        /// false: Only crawls deeper (child) URLs.<br/>
+        /// → e.g. /features/feature-1 → /features/feature-1/tips ✅<br/>
+        /// → Won't follow /pricing or / ❌<br/>
+        /// true: Crawls any internal links, including siblings and parents.<br/>
+        /// → e.g. /features/feature-1 → /pricing, /, etc. ✅<br/>
+        /// Use true for broader internal coverage beyond nested paths.<br/>
         /// Default Value: false
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("allowBackwardLinks")]
@@ -65,17 +82,22 @@ namespace Firecrawl
         public bool? AllowExternalLinks { get; set; }
 
         /// <summary>
-        /// 
+        /// Delay in seconds between scrapes. This helps respect website rate limits.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("delay")]
+        public double? Delay { get; set; }
+
+        /// <summary>
+        /// A webhook specification object.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("webhook")]
-        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::Firecrawl.CrawlUrlsRequestWebhook>))]
-        public global::Firecrawl.OneOf<string, global::Firecrawl.CrawlUrlsRequestWebhook>? Webhook { get; set; }
+        public global::Firecrawl.CrawlUrlsRequestWebhook? Webhook { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("scrapeOptions")]
-        public global::Firecrawl.CrawlUrlsRequestScrapeOptions? ScrapeOptions { get; set; }
+        public global::Firecrawl.ScrapeOptions? ScrapeOptions { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -90,17 +112,24 @@ namespace Firecrawl
         /// The base URL to start crawling from
         /// </param>
         /// <param name="excludePaths">
-        /// Specifies URL patterns to exclude from the crawl by comparing website paths against the provided regex patterns. For example, if you set "excludePaths": ["blog/*"] for the base URL firecrawl.dev, any results matching that pattern will be excluded, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
+        /// URL pathname regex patterns that exclude matching URLs from the crawl. For example, if you set "excludePaths": ["blog/.*"] for the base URL firecrawl.dev, any results matching that pattern will be excluded, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
         /// </param>
         /// <param name="includePaths">
-        /// Specifies URL patterns to include in the crawl by comparing website paths against the provided regex patterns. Only the paths that match the specified patterns will be included in the response. For example, if you set "includePaths": ["blog/*"] for the base URL firecrawl.dev, only results matching that pattern will be included, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
+        /// URL pathname regex patterns that include matching URLs in the crawl. Only the paths that match the specified patterns will be included in the response. For example, if you set "includePaths": ["blog/.*"] for the base URL firecrawl.dev, only results matching that pattern will be included, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
         /// </param>
         /// <param name="maxDepth">
-        /// Maximum depth to crawl relative to the entered URL.<br/>
-        /// Default Value: 2
+        /// Maximum depth to crawl relative to the base URL. Basically, the max number of slashes the pathname of a scraped URL may contain.<br/>
+        /// Default Value: 10
+        /// </param>
+        /// <param name="maxDiscoveryDepth">
+        /// Maximum depth to crawl based on discovery order. The root site and sitemapped pages has a discovery depth of 0. For example, if you set it to 1, and you set ignoreSitemap, you will only crawl the entered URL and all URLs that are linked on that page.
         /// </param>
         /// <param name="ignoreSitemap">
         /// Ignore the website sitemap when crawling<br/>
+        /// Default Value: false
+        /// </param>
+        /// <param name="ignoreQueryParameters">
+        /// Do not re-scrape the same path with different (or none) query parameters<br/>
         /// Default Value: false
         /// </param>
         /// <param name="limit">
@@ -108,14 +137,25 @@ namespace Firecrawl
         /// Default Value: 10000
         /// </param>
         /// <param name="allowBackwardLinks">
-        /// Enables the crawler to navigate from a specific URL to previously linked pages.<br/>
+        /// Allows the crawler to follow internal links to sibling or parent URLs, not just child paths.<br/>
+        /// false: Only crawls deeper (child) URLs.<br/>
+        /// → e.g. /features/feature-1 → /features/feature-1/tips ✅<br/>
+        /// → Won't follow /pricing or / ❌<br/>
+        /// true: Crawls any internal links, including siblings and parents.<br/>
+        /// → e.g. /features/feature-1 → /pricing, /, etc. ✅<br/>
+        /// Use true for broader internal coverage beyond nested paths.<br/>
         /// Default Value: false
         /// </param>
         /// <param name="allowExternalLinks">
         /// Allows the crawler to follow links to external websites.<br/>
         /// Default Value: false
         /// </param>
-        /// <param name="webhook"></param>
+        /// <param name="delay">
+        /// Delay in seconds between scrapes. This helps respect website rate limits.
+        /// </param>
+        /// <param name="webhook">
+        /// A webhook specification object.
+        /// </param>
         /// <param name="scrapeOptions"></param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -125,21 +165,27 @@ namespace Firecrawl
             global::System.Collections.Generic.IList<string>? excludePaths,
             global::System.Collections.Generic.IList<string>? includePaths,
             int? maxDepth,
+            int? maxDiscoveryDepth,
             bool? ignoreSitemap,
+            bool? ignoreQueryParameters,
             int? limit,
             bool? allowBackwardLinks,
             bool? allowExternalLinks,
-            global::Firecrawl.OneOf<string, global::Firecrawl.CrawlUrlsRequestWebhook>? webhook,
-            global::Firecrawl.CrawlUrlsRequestScrapeOptions? scrapeOptions)
+            double? delay,
+            global::Firecrawl.CrawlUrlsRequestWebhook? webhook,
+            global::Firecrawl.ScrapeOptions? scrapeOptions)
         {
             this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
             this.ExcludePaths = excludePaths;
             this.IncludePaths = includePaths;
             this.MaxDepth = maxDepth;
+            this.MaxDiscoveryDepth = maxDiscoveryDepth;
             this.IgnoreSitemap = ignoreSitemap;
+            this.IgnoreQueryParameters = ignoreQueryParameters;
             this.Limit = limit;
             this.AllowBackwardLinks = allowBackwardLinks;
             this.AllowExternalLinks = allowExternalLinks;
+            this.Delay = delay;
             this.Webhook = webhook;
             this.ScrapeOptions = scrapeOptions;
         }
