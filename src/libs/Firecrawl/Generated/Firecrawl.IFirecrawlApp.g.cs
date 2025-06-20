@@ -60,7 +60,22 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
+        public ResearchClient Research { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public BillingClient Billing { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public SearchClient Search { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public LLMsTxtClient LLMsTxt { get; }
 
     }
 }

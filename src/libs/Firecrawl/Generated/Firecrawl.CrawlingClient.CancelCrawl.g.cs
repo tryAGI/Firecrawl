@@ -38,7 +38,7 @@ namespace Firecrawl
                 id: ref id);
 
             var __pathBuilder = new global::Firecrawl.PathBuilder(
-                path: $"/batch/scrape/{id}",
+                path: $"/crawl/{id}",
                 baseUri: HttpClient.BaseAddress); 
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
