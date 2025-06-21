@@ -4,7 +4,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// A complex webhook specification object.
+    /// A webhook specification object.
     /// </summary>
     public sealed partial class CrawlUrlsRequestWebhook
     {
@@ -28,6 +28,12 @@ namespace Firecrawl
         public object? Metadata { get; set; }
 
         /// <summary>
+        /// Type of events that should be sent to the webhook URL. (default: all)
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("events")]
+        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlUrlsRequestWebhookEvent>? Events { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -45,17 +51,22 @@ namespace Firecrawl
         /// <param name="metadata">
         /// Custom metadata that will be included in all webhook payloads for this crawl
         /// </param>
+        /// <param name="events">
+        /// Type of events that should be sent to the webhook URL. (default: all)
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public CrawlUrlsRequestWebhook(
             string url,
             global::System.Collections.Generic.Dictionary<string, string>? headers,
-            object? metadata)
+            object? metadata,
+            global::System.Collections.Generic.IList<global::Firecrawl.CrawlUrlsRequestWebhookEvent>? events)
         {
             this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
             this.Headers = headers;
             this.Metadata = metadata;
+            this.Events = events;
         }
 
         /// <summary>

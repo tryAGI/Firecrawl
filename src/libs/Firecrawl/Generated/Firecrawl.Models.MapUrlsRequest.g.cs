@@ -37,7 +37,7 @@ namespace Firecrawl
 
         /// <summary>
         /// Include subdomains of the website<br/>
-        /// Default Value: false
+        /// Default Value: true
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("includeSubdomains")]
         public bool? IncludeSubdomains { get; set; }
@@ -48,6 +48,12 @@ namespace Firecrawl
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("limit")]
         public int? Limit { get; set; }
+
+        /// <summary>
+        /// Timeout in milliseconds. There is no timeout by default.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("timeout")]
+        public int? Timeout { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -74,11 +80,14 @@ namespace Firecrawl
         /// </param>
         /// <param name="includeSubdomains">
         /// Include subdomains of the website<br/>
-        /// Default Value: false
+        /// Default Value: true
         /// </param>
         /// <param name="limit">
         /// Maximum number of links to return<br/>
         /// Default Value: 5000
+        /// </param>
+        /// <param name="timeout">
+        /// Timeout in milliseconds. There is no timeout by default.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -89,7 +98,8 @@ namespace Firecrawl
             bool? ignoreSitemap,
             bool? sitemapOnly,
             bool? includeSubdomains,
-            int? limit)
+            int? limit,
+            int? timeout)
         {
             this.Url = url ?? throw new global::System.ArgumentNullException(nameof(url));
             this.Search = search;
@@ -97,6 +107,7 @@ namespace Firecrawl
             this.SitemapOnly = sitemapOnly;
             this.IncludeSubdomains = includeSubdomains;
             this.Limit = limit;
+            this.Timeout = timeout;
         }
 
         /// <summary>
