@@ -26,19 +26,19 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponse? Type0 { get; set; }
+        public global::Firecrawl.ScrapeOptions? Type0 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public bool? Type1 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeOptionsFormat>? Type1 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponseData? Type2 { get; set; }
+        public global::Firecrawl.ScrapeOptionsFormat? Type2 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string? Type3 { get; set; }
+        public bool? Type3 { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -46,446 +46,610 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponseDataActions? Type5 { get; set; }
+        public string? Type5 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeResponseDataMetadata? Type6 { get; set; }
+        public int? Type6 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int? Type7 { get; set; }
+        public object? Type7 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public object? Type8 { get; set; }
+        public global::Firecrawl.ScrapeOptionsJsonOptions? Type8 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlStatusResponseObj? Type9 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionVariant1, global::Firecrawl.ScrapeOptionsActionVariant2, global::Firecrawl.ScrapeOptionsActionVariant3, global::Firecrawl.ScrapeOptionsActionVariant4, global::Firecrawl.ScrapeOptionsActionVariant5, global::Firecrawl.ScrapeOptionsActionVariant6, global::Firecrawl.ScrapeOptionsActionVariant7, global::Firecrawl.ScrapeOptionsActionVariant8>>? Type9 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.DateTime? Type10 { get; set; }
+        public global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionVariant1, global::Firecrawl.ScrapeOptionsActionVariant2, global::Firecrawl.ScrapeOptionsActionVariant3, global::Firecrawl.ScrapeOptionsActionVariant4, global::Firecrawl.ScrapeOptionsActionVariant5, global::Firecrawl.ScrapeOptionsActionVariant6, global::Firecrawl.ScrapeOptionsActionVariant7, global::Firecrawl.ScrapeOptionsActionVariant8>? Type10 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? Type11 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant1? Type11 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlStatusResponseObjDataItem? Type12 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant1Type? Type12 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlStatusResponseObjDataItemMetadata? Type13 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant2? Type13 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.BatchScrapeStatusResponseObj? Type14 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant2Type? Type14 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.BatchScrapeStatusResponseObjDataItem>? Type15 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant3? Type15 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.BatchScrapeStatusResponseObjDataItem? Type16 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant3Type? Type16 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.BatchScrapeStatusResponseObjDataItemMetadata? Type17 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant4? Type17 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlResponse? Type18 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant4Type? Type18 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.BatchScrapeResponseObj? Type19 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant5? Type19 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.MapResponse? Type20 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant5Type? Type20 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ExtractResponse? Type21 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant6? Type21 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ExtractResponseData? Type22 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant6Type? Type22 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public double? Type23 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant6Direction? Type23 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequest? Type24 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant7? Type24 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeAndExtractFromUrlRequestFormat>? Type25 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant7Type? Type25 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestFormat? Type26 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant8? Type26 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestExtract? Type27 { get; set; }
+        public global::Firecrawl.ScrapeOptionsActionVariant8Type? Type27 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant1, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant2, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant3, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant4, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant5, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant7, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant8>>? Type28 { get; set; }
+        public global::Firecrawl.ScrapeOptionsLocation? Type28 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.OneOf<global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant1, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant2, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant3, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant4, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant5, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant7, global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant8>? Type29 { get; set; }
+        public global::Firecrawl.ScrapeOptionsProxy? Type29 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant1? Type30 { get; set; }
+        public global::Firecrawl.ScrapeOptionsChangeTrackingOptions? Type30 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant1Type? Type31 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeOptionsChangeTrackingOptionsMode>? Type31 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant2? Type32 { get; set; }
+        public global::Firecrawl.ScrapeOptionsChangeTrackingOptionsMode? Type32 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant2Type? Type33 { get; set; }
+        public global::Firecrawl.ScrapeResponse? Type33 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant3? Type34 { get; set; }
+        public global::Firecrawl.ScrapeResponseData? Type34 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant3Type? Type35 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataActions? Type35 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant4? Type36 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeResponseDataActionsScrape>? Type36 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant4Type? Type37 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataActionsScrape? Type37 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant5? Type38 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeResponseDataActionsJavascriptReturn>? Type38 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant5Type? Type39 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataActionsJavascriptReturn? Type39 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6? Type40 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataMetadata? Type40 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6Type? Type41 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataChangeTracking? Type41 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant6Direction? Type42 { get; set; }
+        public global::System.DateTime? Type42 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant7? Type43 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataChangeTrackingChangeStatus? Type43 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant7Type? Type44 { get; set; }
+        public global::Firecrawl.ScrapeResponseDataChangeTrackingVisibility? Type44 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant8? Type45 { get; set; }
+        public global::Firecrawl.CrawlStatusResponseObj? Type45 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestActionVariant8Type? Type46 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlStatusResponseObjDataItem>? Type46 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlRequestLocation? Type47 { get; set; }
+        public global::Firecrawl.CrawlStatusResponseObjDataItem? Type47 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequest? Type48 { get; set; }
+        public global::Firecrawl.CrawlStatusResponseObjDataItemMetadata? Type48 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.OneOf<string, global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhook>? Type49 { get; set; }
+        public global::Firecrawl.CrawlErrorsResponseObj? Type49 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhook? Type50 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlErrorsResponseObjError>? Type50 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.Dictionary<string, string>? Type51 { get; set; }
+        public global::Firecrawl.CrawlErrorsResponseObjError? Type51 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeAndExtractFromUrlsRequestFormat>? Type52 { get; set; }
+        public global::Firecrawl.BatchScrapeStatusResponseObj? Type52 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestFormat? Type53 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.BatchScrapeStatusResponseObjDataItem>? Type53 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestExtract? Type54 { get; set; }
+        public global::Firecrawl.BatchScrapeStatusResponseObjDataItem? Type54 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant1, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant2, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant3, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant4, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant5, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant6, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant7, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant8>>? Type55 { get; set; }
+        public global::Firecrawl.BatchScrapeStatusResponseObjDataItemMetadata? Type55 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.OneOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant1, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant2, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant3, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant4, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant5, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant6, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant7, global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant8>? Type56 { get; set; }
+        public global::Firecrawl.CrawlResponse? Type56 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant1? Type57 { get; set; }
+        public global::Firecrawl.BatchScrapeResponseObj? Type57 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant1Type? Type58 { get; set; }
+        public global::Firecrawl.MapResponse? Type58 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant2? Type59 { get; set; }
+        public global::Firecrawl.ExtractResponse? Type59 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant2Type? Type60 { get; set; }
+        public global::Firecrawl.ExtractStatusResponse? Type60 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant3? Type61 { get; set; }
+        public global::Firecrawl.ExtractStatusResponseStatus? Type61 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant3Type? Type62 { get; set; }
+        public global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlRequest2, global::Firecrawl.ScrapeOptions>? Type62 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant4? Type63 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlRequest2? Type63 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant4Type? Type64 { get; set; }
+        public global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>? Type64 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant5? Type65 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlsRequest2? Type65 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant5Type? Type66 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhook? Type66 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant6? Type67 { get; set; }
+        public global::System.Collections.Generic.Dictionary<string, string>? Type67 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant6Type? Type68 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhookEvent>? Type68 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant6Direction? Type69 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhookEvent? Type69 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant7? Type70 { get; set; }
+        public global::Firecrawl.CrawlUrlsRequest? Type70 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant7Type? Type71 { get; set; }
+        public double? Type71 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant8? Type72 { get; set; }
+        public global::Firecrawl.CrawlUrlsRequestWebhook? Type72 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestActionVariant8Type? Type73 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlUrlsRequestWebhookEvent>? Type73 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsRequestLocation? Type74 { get; set; }
+        public global::Firecrawl.CrawlUrlsRequestWebhookEvent? Type74 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsRequest? Type75 { get; set; }
+        public global::Firecrawl.MapUrlsRequest? Type75 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.OneOf<string, global::Firecrawl.CrawlUrlsRequestWebhook>? Type76 { get; set; }
+        public global::Firecrawl.ExtractDataRequest? Type76 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsRequestWebhook? Type77 { get; set; }
+        public global::Firecrawl.StartDeepResearchRequest? Type77 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsRequestScrapeOptions? Type78 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.StartDeepResearchRequestFormat>? Type78 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Collections.Generic.IList<global::Firecrawl.CrawlUrlsRequestScrapeOptionsFormat>? Type79 { get; set; }
+        public global::Firecrawl.StartDeepResearchRequestFormat? Type79 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsRequestScrapeOptionsFormat? Type80 { get; set; }
+        public global::Firecrawl.StartDeepResearchRequestJsonOptions? Type80 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.MapUrlsRequest? Type81 { get; set; }
+        public global::Firecrawl.SearchAndScrapeRequest? Type81 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ExtractDataRequest? Type82 { get; set; }
+        public global::Firecrawl.SearchAndScrapeRequestScrapeOptions? Type82 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ExtractDataRequestSchema? Type83 { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.SearchAndScrapeRequestScrapeOptionsFormat>? Type83 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlResponse? Type84 { get; set; }
+        public global::Firecrawl.SearchAndScrapeRequestScrapeOptionsFormat? Type84 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlResponse2? Type85 { get; set; }
+        public global::Firecrawl.GenerateLLMsTxtRequest? Type85 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlResponse3? Type86 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlResponse? Type86 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsResponse? Type87 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlResponse2? Type87 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsResponse2? Type88 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlResponse3? Type88 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ScrapeAndExtractFromUrlsResponse3? Type89 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlsResponse? Type89 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetBatchScrapeStatusResponse? Type90 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlsResponse2? Type90 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetBatchScrapeStatusResponse2? Type91 { get; set; }
+        public global::Firecrawl.ScrapeAndExtractFromUrlsResponse3? Type91 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetBatchScrapeStatusResponse3? Type92 { get; set; }
+        public global::Firecrawl.GetBatchScrapeStatusResponse? Type92 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponse? Type93 { get; set; }
+        public global::Firecrawl.GetBatchScrapeStatusResponse2? Type93 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponseStatus? Type94 { get; set; }
+        public global::Firecrawl.GetBatchScrapeStatusResponse3? Type94 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponse2? Type95 { get; set; }
+        public global::Firecrawl.CancelBatchScrapeResponse? Type95 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponse3? Type96 { get; set; }
+        public global::Firecrawl.CancelBatchScrapeResponse2? Type96 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse? Type97 { get; set; }
+        public global::Firecrawl.CancelBatchScrapeResponse3? Type97 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse2? Type98 { get; set; }
+        public global::Firecrawl.GetBatchScrapeErrorsResponse? Type98 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCrawlStatusResponse3? Type99 { get; set; }
+        public global::Firecrawl.GetBatchScrapeErrorsResponse2? Type99 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponse4? Type100 { get; set; }
+        public global::Firecrawl.GetBatchScrapeErrorsResponse3? Type100 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponseStatus2? Type101 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse? Type101 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponse5? Type102 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse2? Type102 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CancelCrawlResponse6? Type103 { get; set; }
+        public global::Firecrawl.GetCrawlStatusResponse3? Type103 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsResponse? Type104 { get; set; }
+        public global::Firecrawl.CancelCrawlResponse? Type104 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsResponse2? Type105 { get; set; }
+        public global::Firecrawl.CancelCrawlResponseStatus? Type105 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.CrawlUrlsResponse3? Type106 { get; set; }
+        public global::Firecrawl.CancelCrawlResponse2? Type106 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.MapUrlsResponse? Type107 { get; set; }
+        public global::Firecrawl.CancelCrawlResponse3? Type107 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.MapUrlsResponse2? Type108 { get; set; }
+        public global::Firecrawl.GetCrawlErrorsResponse? Type108 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.MapUrlsResponse3? Type109 { get; set; }
+        public global::Firecrawl.GetCrawlErrorsResponse2? Type109 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ExtractDataResponse? Type110 { get; set; }
+        public global::Firecrawl.GetCrawlErrorsResponse3? Type110 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.ExtractDataResponse2? Type111 { get; set; }
+        public global::Firecrawl.CrawlUrlsResponse? Type111 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCreditUsageResponse? Type112 { get; set; }
+        public global::Firecrawl.CrawlUrlsResponse2? Type112 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCreditUsageResponseData? Type113 { get; set; }
+        public global::Firecrawl.CrawlUrlsResponse3? Type113 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCreditUsageResponse2? Type114 { get; set; }
+        public global::Firecrawl.MapUrlsResponse? Type114 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public global::Firecrawl.GetCreditUsageResponse3? Type115 { get; set; }
+        public global::Firecrawl.MapUrlsResponse2? Type115 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.MapUrlsResponse3? Type116 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.ExtractDataResponse? Type117 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.ExtractDataResponse2? Type118 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetActiveCrawlsResponse? Type119 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::Firecrawl.GetActiveCrawlsResponseCrawl>? Type120 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetActiveCrawlsResponseCrawl? Type121 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Guid? Type122 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetActiveCrawlsResponseCrawlOptions? Type123 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetActiveCrawlsResponse2? Type124 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetActiveCrawlsResponse3? Type125 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetActiveCrawlsResponse4? Type126 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.StartDeepResearchResponse? Type127 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.StartDeepResearchResponse2? Type128 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetDeepResearchStatusResponse? Type129 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetDeepResearchStatusResponseData? Type130 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::Firecrawl.GetDeepResearchStatusResponseDataActivitie>? Type131 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetDeepResearchStatusResponseDataActivitie? Type132 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::Firecrawl.GetDeepResearchStatusResponseDataSource>? Type133 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetDeepResearchStatusResponseDataSource? Type134 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetDeepResearchStatusResponseDataStatus? Type135 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetDeepResearchStatusResponse2? Type136 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetCreditUsageResponse? Type137 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetCreditUsageResponseData? Type138 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetCreditUsageResponse2? Type139 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetCreditUsageResponse3? Type140 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetTokenUsageResponse? Type141 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetTokenUsageResponseData? Type142 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetTokenUsageResponse2? Type143 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetTokenUsageResponse3? Type144 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.SearchAndScrapeResponse? Type145 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::System.Collections.Generic.IList<global::Firecrawl.SearchAndScrapeResponseDataItem>? Type146 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.SearchAndScrapeResponseDataItem? Type147 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.SearchAndScrapeResponseDataItemMetadata? Type148 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.SearchAndScrapeResponse2? Type149 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.SearchAndScrapeResponse3? Type150 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GenerateLLMsTxtResponse? Type151 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GenerateLLMsTxtResponse2? Type152 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetLLMsTxtStatusResponse? Type153 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetLLMsTxtStatusResponseStatus? Type154 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetLLMsTxtStatusResponseData? Type155 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::Firecrawl.GetLLMsTxtStatusResponse2? Type156 { get; set; }
     }
 }
