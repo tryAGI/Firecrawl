@@ -7,7 +7,13 @@ public partial class Tests
     {
         using var api = GetAuthenticatedApi();
         
-        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync("https://docs.firecrawl.dev/features/scrape");
+        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions> 
+        {
+            Value1 = new ScrapeAndExtractFromUrlRequest2
+            {
+                Url = "https://docs.firecrawl.dev/features/scrape",
+            },
+        });
         response.Data.Should().NotBeNull();
         response.Data!.Markdown.Should().NotBeNullOrEmpty();
 

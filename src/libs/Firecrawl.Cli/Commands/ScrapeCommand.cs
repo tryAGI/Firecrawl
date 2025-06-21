@@ -37,7 +37,13 @@ internal sealed class ScrapeCommand : Command
         
         Console.WriteLine($"Scraping {url}...");
 
-        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync(url).ConfigureAwait(false);
+        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions>
+        {
+            Value1 = new ScrapeAndExtractFromUrlRequest2
+            {
+                Url = url,
+            }
+        }).ConfigureAwait(false);
 
         Console.WriteLine($"Success: {response.Success}");
         

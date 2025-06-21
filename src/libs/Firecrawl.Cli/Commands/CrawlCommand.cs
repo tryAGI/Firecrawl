@@ -57,7 +57,7 @@ internal sealed class CrawlCommand : Command
             url: url,
             maxDepth: maxDepth,
             limit: limit,
-            scrapeOptions: new CrawlUrlsRequestScrapeOptions
+            scrapeOptions: new ScrapeOptions
             {
                 OnlyMainContent = true,
                 WaitFor = 1000,
