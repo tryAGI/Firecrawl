@@ -15,6 +15,18 @@ namespace Firecrawl
         public global::System.Collections.Generic.IList<string>? Screenshots { get; set; }
 
         /// <summary>
+        /// Scrape contents, in the same order as the scrape actions provided.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("scrapes")]
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeResponseDataActionsScrape>? Scrapes { get; set; }
+
+        /// <summary>
+        /// JavaScript return values, in the same order as the executeJavascript actions provided.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("javascriptReturns")]
+        public global::System.Collections.Generic.IList<global::Firecrawl.ScrapeResponseDataActionsJavascriptReturn>? JavascriptReturns { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -26,13 +38,23 @@ namespace Firecrawl
         /// <param name="screenshots">
         /// Screenshot URLs, in the same order as the screenshot actions provided.
         /// </param>
+        /// <param name="scrapes">
+        /// Scrape contents, in the same order as the scrape actions provided.
+        /// </param>
+        /// <param name="javascriptReturns">
+        /// JavaScript return values, in the same order as the executeJavascript actions provided.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
         public ScrapeResponseDataActions(
-            global::System.Collections.Generic.IList<string>? screenshots)
+            global::System.Collections.Generic.IList<string>? screenshots,
+            global::System.Collections.Generic.IList<global::Firecrawl.ScrapeResponseDataActionsScrape>? scrapes,
+            global::System.Collections.Generic.IList<global::Firecrawl.ScrapeResponseDataActionsJavascriptReturn>? javascriptReturns)
         {
             this.Screenshots = screenshots;
+            this.Scrapes = scrapes;
+            this.JavascriptReturns = javascriptReturns;
         }
 
         /// <summary>
