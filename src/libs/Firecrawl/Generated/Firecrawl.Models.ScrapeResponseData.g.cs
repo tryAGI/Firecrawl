@@ -63,6 +63,12 @@ namespace Firecrawl
         public string? Warning { get; set; }
 
         /// <summary>
+        /// Change tracking information if `changeTracking` is in `formats`. Only present when the `changeTracking` format is requested.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("changeTracking")]
+        public global::Firecrawl.ScrapeResponseDataChangeTracking? ChangeTracking { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -94,6 +100,9 @@ namespace Firecrawl
         /// <param name="warning">
         /// Can be displayed when using LLM Extraction. Warning message will let you know any issues with the extraction.
         /// </param>
+        /// <param name="changeTracking">
+        /// Change tracking information if `changeTracking` is in `formats`. Only present when the `changeTracking` format is requested.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -106,7 +115,8 @@ namespace Firecrawl
             global::Firecrawl.ScrapeResponseDataActions? actions,
             global::Firecrawl.ScrapeResponseDataMetadata? metadata,
             object? llmExtraction,
-            string? warning)
+            string? warning,
+            global::Firecrawl.ScrapeResponseDataChangeTracking? changeTracking)
         {
             this.Markdown = markdown;
             this.Html = html;
@@ -117,6 +127,7 @@ namespace Firecrawl
             this.Metadata = metadata;
             this.LlmExtraction = llmExtraction;
             this.Warning = warning;
+            this.ChangeTracking = changeTracking;
         }
 
         /// <summary>
