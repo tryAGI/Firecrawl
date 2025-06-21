@@ -33,11 +33,14 @@ namespace Firecrawl
         /// </param>
         /// <param name="includeSubdomains">
         /// Include subdomains of the website<br/>
-        /// Default Value: false
+        /// Default Value: true
         /// </param>
         /// <param name="limit">
         /// Maximum number of links to return<br/>
         /// Default Value: 5000
+        /// </param>
+        /// <param name="timeout">
+        /// Timeout in milliseconds. There is no timeout by default.
         /// </param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -48,6 +51,7 @@ namespace Firecrawl
             bool? sitemapOnly = default,
             bool? includeSubdomains = default,
             int? limit = default,
+            int? timeout = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
