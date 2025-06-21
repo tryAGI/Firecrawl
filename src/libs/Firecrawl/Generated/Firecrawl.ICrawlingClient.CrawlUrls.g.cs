@@ -21,17 +21,24 @@ namespace Firecrawl
         /// The base URL to start crawling from
         /// </param>
         /// <param name="excludePaths">
-        /// Specifies URL patterns to exclude from the crawl by comparing website paths against the provided regex patterns. For example, if you set "excludePaths": ["blog/*"] for the base URL firecrawl.dev, any results matching that pattern will be excluded, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
+        /// URL pathname regex patterns that exclude matching URLs from the crawl. For example, if you set "excludePaths": ["blog/.*"] for the base URL firecrawl.dev, any results matching that pattern will be excluded, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
         /// </param>
         /// <param name="includePaths">
-        /// Specifies URL patterns to include in the crawl by comparing website paths against the provided regex patterns. Only the paths that match the specified patterns will be included in the response. For example, if you set "includePaths": ["blog/*"] for the base URL firecrawl.dev, only results matching that pattern will be included, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
+        /// URL pathname regex patterns that include matching URLs in the crawl. Only the paths that match the specified patterns will be included in the response. For example, if you set "includePaths": ["blog/.*"] for the base URL firecrawl.dev, only results matching that pattern will be included, such as https://www.firecrawl.dev/blog/firecrawl-launch-week-1-recap.
         /// </param>
         /// <param name="maxDepth">
-        /// Maximum depth to crawl relative to the entered URL.<br/>
-        /// Default Value: 2
+        /// Maximum depth to crawl relative to the base URL. Basically, the max number of slashes the pathname of a scraped URL may contain.<br/>
+        /// Default Value: 10
+        /// </param>
+        /// <param name="maxDiscoveryDepth">
+        /// Maximum depth to crawl based on discovery order. The root site and sitemapped pages has a discovery depth of 0. For example, if you set it to 1, and you set ignoreSitemap, you will only crawl the entered URL and all URLs that are linked on that page.
         /// </param>
         /// <param name="ignoreSitemap">
         /// Ignore the website sitemap when crawling<br/>
+        /// Default Value: false
+        /// </param>
+        /// <param name="ignoreQueryParameters">
+        /// Do not re-scrape the same path with different (or none) query parameters<br/>
         /// Default Value: false
         /// </param>
         /// <param name="limit">
@@ -39,14 +46,25 @@ namespace Firecrawl
         /// Default Value: 10000
         /// </param>
         /// <param name="allowBackwardLinks">
-        /// Enables the crawler to navigate from a specific URL to previously linked pages.<br/>
+        /// Allows the crawler to follow internal links to sibling or parent URLs, not just child paths.<br/>
+        /// false: Only crawls deeper (child) URLs.<br/>
+        /// → e.g. /features/feature-1 → /features/feature-1/tips ✅<br/>
+        /// → Won't follow /pricing or / ❌<br/>
+        /// true: Crawls any internal links, including siblings and parents.<br/>
+        /// → e.g. /features/feature-1 → /pricing, /, etc. ✅<br/>
+        /// Use true for broader internal coverage beyond nested paths.<br/>
         /// Default Value: false
         /// </param>
         /// <param name="allowExternalLinks">
         /// Allows the crawler to follow links to external websites.<br/>
         /// Default Value: false
         /// </param>
-        /// <param name="webhook"></param>
+        /// <param name="delay">
+        /// Delay in seconds between scrapes. This helps respect website rate limits.
+        /// </param>
+        /// <param name="webhook">
+        /// A webhook specification object.
+        /// </param>
         /// <param name="scrapeOptions"></param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -55,12 +73,15 @@ namespace Firecrawl
             global::System.Collections.Generic.IList<string>? excludePaths = default,
             global::System.Collections.Generic.IList<string>? includePaths = default,
             int? maxDepth = default,
+            int? maxDiscoveryDepth = default,
             bool? ignoreSitemap = default,
+            bool? ignoreQueryParameters = default,
             int? limit = default,
             bool? allowBackwardLinks = default,
             bool? allowExternalLinks = default,
-            global::Firecrawl.OneOf<string, global::Firecrawl.CrawlUrlsRequestWebhook>? webhook = default,
-            global::Firecrawl.CrawlUrlsRequestScrapeOptions? scrapeOptions = default,
+            double? delay = default,
+            global::Firecrawl.CrawlUrlsRequestWebhook? webhook = default,
+            global::Firecrawl.ScrapeOptions? scrapeOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
