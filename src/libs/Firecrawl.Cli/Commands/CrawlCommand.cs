@@ -4,48 +4,55 @@ namespace Firecrawl.Cli.Commands;
 
 internal sealed class CrawlCommand : Command
 {
+    private Argument<string> Url { get; } = new(name: "url")
+    {
+        DefaultValueFactory = _ => string.Empty,
+        Description = "Input url",
+    };
+    
+    private Option<string> OutputPath { get; } = new(
+        name: "--output",
+        aliases: ["-o"])
+    {
+        DefaultValueFactory = _ => string.Empty,
+        Description = "Output path",
+    };
+    
+    private Option<int> Limit { get; } = new(
+        name: "--limit",
+        aliases: ["-l"])
+    {
+        DefaultValueFactory = _ => 5,
+        Description = "Limit of pages to crawl",
+    };
+    
+    private Option<int?> MaxDepth { get; } = new(
+        name: "--max-depth",
+        aliases: ["-d"])
+    {
+        DefaultValueFactory = _ => null,
+        Description = "Maximum depth to crawl relative to the entered URL. A maxDepth of 0 scrapes only the entered URL. A maxDepth of 1 scrapes the entered URL and all pages one level deep. A maxDepth of 2 scrapes the entered URL and all pages up to two levels deep. Higher values follow the same pattern.",
+    };
+
     public CrawlCommand() : base(
         name: "crawl",
         description: "Crawl a url and saves all pages as markdown")
     {
-        var url = new Argument<string>(
-            name: "url",
-            getDefaultValue: () => string.Empty,
-            description: "Input url");
-        AddArgument(url);
+        Arguments.Add(Url);
+        Options.Add(OutputPath);
+        Options.Add(Limit);
+        Options.Add(MaxDepth);
         
-        var outputPath = new Option<string>(
-            aliases: ["--output", "-o"],
-            getDefaultValue: () => string.Empty,
-            description: "Output path");
-        AddOption(outputPath);
-
-        var limit = new Option<int>(
-            aliases: ["--limit", "-l"],
-            getDefaultValue: () => 5,
-            description: "Limit of pages to crawl");
-        AddOption(limit);
-        
-        var maxDepth = new Option<int?>(
-            aliases: ["--max-depth", "-d"],
-            getDefaultValue: () => null,
-            description: "Maximum depth to crawl relative to the entered URL. A maxDepth of 0 scrapes only the entered URL. A maxDepth of 1 scrapes the entered URL and all pages one level deep. A maxDepth of 2 scrapes the entered URL and all pages up to two levels deep. Higher values follow the same pattern.");
-        AddOption(maxDepth);
-        
-        this.SetHandler(
-            HandleAsync,
-            url,
-            outputPath,
-            limit,
-            maxDepth);
+        SetAction(HandleAsync);
     }
 
-    private static async Task HandleAsync(
-        string url,
-        string outputPath,
-        int limit,
-        int? maxDepth)
+    private async Task HandleAsync(ParseResult parseResult)
     {
+        var url = parseResult.GetRequiredValue(Url);
+        var outputPath = parseResult.GetRequiredValue(OutputPath);
+        var limit = parseResult.GetRequiredValue(Limit);
+        var maxDepth = parseResult.GetRequiredValue(MaxDepth);
+            
         Console.WriteLine("Initializing...");
         
         var apiKey = await Helpers.GetApiKey().ConfigureAwait(false);

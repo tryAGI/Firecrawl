@@ -9,19 +9,21 @@ internal sealed class AuthCommand : Command
         description: "Authenticates with API key")
     {
         var apiKeyOption = new Argument<string>(
-            name: "api-key",
-            getDefaultValue: () => string.Empty,
-            description: "API key");
-        AddArgument(apiKeyOption);
+            name: "api-key")
+        {
+            Description = "API key",
+            DefaultValueFactory = _ => string.Empty,
+        };
+        Arguments.Add(apiKeyOption);
 
-        this.SetHandler(
-            HandleAsync,
-            apiKeyOption);
+        SetAction(HandleAsync);
     }
 
     private static async Task HandleAsync(
-        string apiKey)
+        ParseResult parseResult)
     {
+        var apiKey = parseResult.GetValue<string>("api-key");
+        
         Console.WriteLine("Authenticating with API key...");
         
         var apiKeyPath = Helpers.GetApiKeyPath();

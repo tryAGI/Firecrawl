@@ -4,32 +4,37 @@ namespace Firecrawl.Cli.Commands;
 
 internal sealed class ScrapeCommand : Command
 {
+    private Argument<string> Url { get; } = new(
+        name: "url")
+    {
+        DefaultValueFactory = _ => string.Empty,
+        Description = "Input url",
+    };
+    
+    private Option<string> OutputPath { get; } = new(
+        name: "--output",
+        aliases: ["-o"])
+    {
+        DefaultValueFactory = _ => "output.md",
+        Description = "Output path",
+    };
+    
     public ScrapeCommand() : base(
         name: "scrape",
         description: "Scrapes page and saves it as markdown")
     {
-        var url = new Argument<string>(
-            name: "url",
-            getDefaultValue: () => string.Empty,
-            description: "Input url");
-        AddArgument(url);
+        Arguments.Add(Url);
+        Options.Add(OutputPath);
         
-        var outputPath = new Option<string>(
-            aliases: ["--output", "-o"],
-            getDefaultValue: () => "output.md",
-            description: "Output path");
-        AddOption(outputPath);
-        
-        this.SetHandler(
-            HandleAsync,
-            url,
-            outputPath);
+        SetAction(HandleAsync);
     }
 
-    private static async Task HandleAsync(
-        string url,
-        string outputPath)
+    private async Task HandleAsync(
+        ParseResult parseResult)
     {
+        var url = parseResult.GetRequiredValue(Url);
+        var outputPath = parseResult.GetRequiredValue(OutputPath);
+
         Console.WriteLine("Initializing...");
         
         var apiKey = await Helpers.GetApiKey().ConfigureAwait(false);

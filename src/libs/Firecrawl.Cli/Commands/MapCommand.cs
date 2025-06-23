@@ -4,32 +4,36 @@ namespace Firecrawl.Cli.Commands;
 
 internal sealed class MapCommand : Command
 {
+    private Argument<string> Url { get; } = new(
+        name: "url")
+    {
+        DefaultValueFactory = _ => string.Empty,
+        Description = "Input url",
+    };
+    
+    private Option<string> OutputPath { get; } = new(
+        name: "--output",
+        aliases: ["-o"])
+    {
+        DefaultValueFactory = _ => string.Empty,
+        Description = "Output path",
+    };
+    
     public MapCommand() : base(
         name: "map",
         description: "Attempts to output all website's urls in a few seconds.")
     {
-        var url = new Argument<string>(
-            name: "url",
-            getDefaultValue: () => string.Empty,
-            description: "Input url");
-        AddArgument(url);
+        Arguments.Add(Url);
+        Options.Add(OutputPath);
         
-        var outputPath = new Option<string>(
-            aliases: ["--output", "-o"],
-            getDefaultValue: () => string.Empty,
-            description: "Output path");
-        AddOption(outputPath);
-        
-        this.SetHandler(
-            HandleAsync,
-            url,
-            outputPath);
+        SetAction(HandleAsync);
     }
 
-    private static async Task HandleAsync(
-        string url,
-        string outputPath)
+    private async Task HandleAsync(ParseResult parseResult)
     {
+        var url = parseResult.GetRequiredValue(Url);
+        var outputPath = parseResult.GetRequiredValue(OutputPath);
+        
         Console.WriteLine("Initializing...");
         
         var apiKey = await Helpers.GetApiKey().ConfigureAwait(false);
