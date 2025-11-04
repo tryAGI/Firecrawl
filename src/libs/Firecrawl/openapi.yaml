@@ -907,6 +907,7 @@ paths:
                     enum:
                       - markdown
                       - json
+                      - branding
                     type: string
                     default:
                       - markdown
@@ -1203,6 +1204,7 @@ paths:
                           - screenshot
                           - screenshot@fullPage
                           - json
+                          - branding
                         type: string
                       description: Formats to include in the output
                   description: Options for scraping search results
@@ -1430,6 +1432,7 @@ components:
               - screenshot@fullPage
               - json
               - changeTracking
+              - branding
             type: string
           description: Formats to include in the output.
           default:
@@ -1795,6 +1798,41 @@ components:
                   description: 'JSON comparison results when using ''json'' mode. Only present when the mode is set to ''json''. This will emit a list of all the keys and their values from the `previous` and `current` scrapes based on the type defined in the `schema`. Example [here](/features/change-tracking)'
                   nullable: true
               description: Change tracking information if `changeTracking` is in `formats`. Only present when the `changeTracking` format is requested.
+              nullable: true
+            branding:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  description: Primary logo URL if detected.
+                  nullable: true
+                fonts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      family:
+                        type: string
+                  description: Detected font families.
+                colors:
+                  type: object
+                typography:
+                  type: object
+                spacing:
+                  type: object
+                components:
+                  type: object
+                icons:
+                  type: object
+                images:
+                  type: object
+                animations:
+                  type: object
+                layout:
+                  type: object
+                tone:
+                  type: object
+              description: Brand identity information derived from executing on-page javascript.
               nullable: true
     CrawlStatusResponseObj:
       type: object
