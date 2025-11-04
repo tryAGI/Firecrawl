@@ -40,6 +40,10 @@ namespace Firecrawl
         /// 
         /// </summary>
         ChangeTracking,
+        /// <summary>
+        /// 
+        /// </summary>
+        Branding,
     }
 
     /// <summary>
@@ -62,6 +66,7 @@ namespace Firecrawl
                 ScrapeOptionsFormat.Screenshot_fullPage => "screenshot@fullPage",
                 ScrapeOptionsFormat.Json => "json",
                 ScrapeOptionsFormat.ChangeTracking => "changeTracking",
+                ScrapeOptionsFormat.Branding => "branding",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -80,6 +85,7 @@ namespace Firecrawl
                 "screenshot@fullPage" => ScrapeOptionsFormat.Screenshot_fullPage,
                 "json" => ScrapeOptionsFormat.Json,
                 "changeTracking" => ScrapeOptionsFormat.ChangeTracking,
+                "branding" => ScrapeOptionsFormat.Branding,
                 _ => null,
             };
         }
