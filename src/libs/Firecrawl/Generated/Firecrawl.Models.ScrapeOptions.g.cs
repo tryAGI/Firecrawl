@@ -94,7 +94,7 @@ namespace Firecrawl
         /// Actions to perform on the page before grabbing the content
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("actions")]
-        public global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionVariant1, global::Firecrawl.ScrapeOptionsActionVariant2, global::Firecrawl.ScrapeOptionsActionVariant3, global::Firecrawl.ScrapeOptionsActionVariant4, global::Firecrawl.ScrapeOptionsActionVariant5, global::Firecrawl.ScrapeOptionsActionVariant6, global::Firecrawl.ScrapeOptionsActionVariant7, global::Firecrawl.ScrapeOptionsActionVariant8>>? Actions { get; set; }
+        public global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionWait, global::Firecrawl.ScrapeOptionsActionScreenshot, global::Firecrawl.ScrapeOptionsActionClick, global::Firecrawl.ScrapeOptionsActionWriteText, global::Firecrawl.ScrapeOptionsActionPressAKey, global::Firecrawl.ScrapeOptionsActionScroll, global::Firecrawl.ScrapeOptionsActionScrape, global::Firecrawl.ScrapeOptionsActionExecuteJavaScript>>? Actions { get; set; }
 
         /// <summary>
         /// Location settings for the request. When specified, this will use an appropriate proxy if available and emulate the corresponding language and timezone settings. Defaults to 'US' if not specified.
@@ -118,8 +118,8 @@ namespace Firecrawl
         /// <summary>
         /// Specifies the type of proxy to use.<br/>
         ///  - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.<br/>
-        ///  - **stealth**: Stealth proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
-        ///  - **auto**: Firecrawl will automatically retry scraping with stealth proxies if the basic proxy fails. If the retry with stealth is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
+        ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
+        ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
         /// If you do not specify a proxy, Firecrawl will default to basic.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("proxy")]
@@ -208,8 +208,8 @@ namespace Firecrawl
         /// <param name="proxy">
         /// Specifies the type of proxy to use.<br/>
         ///  - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.<br/>
-        ///  - **stealth**: Stealth proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
-        ///  - **auto**: Firecrawl will automatically retry scraping with stealth proxies if the basic proxy fails. If the retry with stealth is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
+        ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
+        ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
         /// If you do not specify a proxy, Firecrawl will default to basic.
         /// </param>
         /// <param name="changeTrackingOptions">
@@ -235,7 +235,7 @@ namespace Firecrawl
             int? timeout,
             bool? parsePDF,
             global::Firecrawl.ScrapeOptionsJsonOptions? jsonOptions,
-            global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionVariant1, global::Firecrawl.ScrapeOptionsActionVariant2, global::Firecrawl.ScrapeOptionsActionVariant3, global::Firecrawl.ScrapeOptionsActionVariant4, global::Firecrawl.ScrapeOptionsActionVariant5, global::Firecrawl.ScrapeOptionsActionVariant6, global::Firecrawl.ScrapeOptionsActionVariant7, global::Firecrawl.ScrapeOptionsActionVariant8>>? actions,
+            global::System.Collections.Generic.IList<global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionWait, global::Firecrawl.ScrapeOptionsActionScreenshot, global::Firecrawl.ScrapeOptionsActionClick, global::Firecrawl.ScrapeOptionsActionWriteText, global::Firecrawl.ScrapeOptionsActionPressAKey, global::Firecrawl.ScrapeOptionsActionScroll, global::Firecrawl.ScrapeOptionsActionScrape, global::Firecrawl.ScrapeOptionsActionExecuteJavaScript>>? actions,
             global::Firecrawl.ScrapeOptionsLocation? location,
             bool? removeBase64Images,
             bool? blockAds,

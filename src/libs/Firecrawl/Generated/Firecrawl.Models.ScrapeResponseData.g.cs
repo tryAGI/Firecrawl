@@ -69,6 +69,12 @@ namespace Firecrawl
         public global::Firecrawl.ScrapeResponseDataChangeTracking? ChangeTracking { get; set; }
 
         /// <summary>
+        /// Brand identity information derived from executing on-page javascript.
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("branding")]
+        public global::Firecrawl.ScrapeResponseDataBranding? Branding { get; set; }
+
+        /// <summary>
         /// Additional properties that are not explicitly defined in the schema
         /// </summary>
         [global::System.Text.Json.Serialization.JsonExtensionData]
@@ -103,6 +109,9 @@ namespace Firecrawl
         /// <param name="changeTracking">
         /// Change tracking information if `changeTracking` is in `formats`. Only present when the `changeTracking` format is requested.
         /// </param>
+        /// <param name="branding">
+        /// Brand identity information derived from executing on-page javascript.
+        /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
@@ -116,7 +125,8 @@ namespace Firecrawl
             global::Firecrawl.ScrapeResponseDataMetadata? metadata,
             object? llmExtraction,
             string? warning,
-            global::Firecrawl.ScrapeResponseDataChangeTracking? changeTracking)
+            global::Firecrawl.ScrapeResponseDataChangeTracking? changeTracking,
+            global::Firecrawl.ScrapeResponseDataBranding? branding)
         {
             this.Markdown = markdown;
             this.Html = html;
@@ -128,6 +138,7 @@ namespace Firecrawl
             this.LlmExtraction = llmExtraction;
             this.Warning = warning;
             this.ChangeTracking = changeTracking;
+            this.Branding = branding;
         }
 
         /// <summary>

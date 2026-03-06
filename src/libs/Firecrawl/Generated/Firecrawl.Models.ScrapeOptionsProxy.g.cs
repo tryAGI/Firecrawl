@@ -6,8 +6,8 @@ namespace Firecrawl
     /// <summary>
     /// Specifies the type of proxy to use.<br/>
     ///  - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.<br/>
-    ///  - **stealth**: Stealth proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
-    ///  - **auto**: Firecrawl will automatically retry scraping with stealth proxies if the basic proxy fails. If the retry with stealth is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
+    ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
+    ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
     /// If you do not specify a proxy, Firecrawl will default to basic.
     /// </summary>
     public enum ScrapeOptionsProxy
@@ -17,11 +17,11 @@ namespace Firecrawl
         /// </summary>
         Basic,
         /// <summary>
-        /// Stealth proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.
+        /// Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.
         /// </summary>
-        Stealth,
+        Enhanced,
         /// <summary>
-        /// Firecrawl will automatically retry scraping with stealth proxies if the basic proxy fails. If the retry with stealth is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.
+        /// Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.
         /// </summary>
         Auto,
     }
@@ -39,7 +39,7 @@ namespace Firecrawl
             return value switch
             {
                 ScrapeOptionsProxy.Basic => "basic",
-                ScrapeOptionsProxy.Stealth => "stealth",
+                ScrapeOptionsProxy.Enhanced => "enhanced",
                 ScrapeOptionsProxy.Auto => "auto",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -52,7 +52,7 @@ namespace Firecrawl
             return value switch
             {
                 "basic" => ScrapeOptionsProxy.Basic,
-                "stealth" => ScrapeOptionsProxy.Stealth,
+                "enhanced" => ScrapeOptionsProxy.Enhanced,
                 "auto" => ScrapeOptionsProxy.Auto,
                 _ => null,
             };
