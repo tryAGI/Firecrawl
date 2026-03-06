@@ -16,6 +16,10 @@ namespace Firecrawl
         /// 
         /// </summary>
         Json,
+        /// <summary>
+        /// 
+        /// </summary>
+        Branding,
     }
 
     /// <summary>
@@ -32,6 +36,7 @@ namespace Firecrawl
             {
                 StartDeepResearchRequestFormat.Markdown => "markdown",
                 StartDeepResearchRequestFormat.Json => "json",
+                StartDeepResearchRequestFormat.Branding => "branding",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -44,6 +49,7 @@ namespace Firecrawl
             {
                 "markdown" => StartDeepResearchRequestFormat.Markdown,
                 "json" => StartDeepResearchRequestFormat.Json,
+                "branding" => StartDeepResearchRequestFormat.Branding,
                 _ => null,
             };
         }

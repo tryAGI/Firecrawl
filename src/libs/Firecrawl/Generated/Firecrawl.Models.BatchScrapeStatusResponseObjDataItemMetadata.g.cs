@@ -45,6 +45,12 @@ namespace Firecrawl
         public int? StatusCode { get; set; }
 
         /// <summary>
+        /// Timezone inferred by the scraping engine, when available
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("timezone")]
+        public string? Timezone { get; set; }
+
+        /// <summary>
         /// The error message of the page
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("error")]
@@ -67,6 +73,9 @@ namespace Firecrawl
         /// <param name="statusCode">
         /// The status code of the page
         /// </param>
+        /// <param name="timezone">
+        /// Timezone inferred by the scraping engine, when available
+        /// </param>
         /// <param name="error">
         /// The error message of the page
         /// </param>
@@ -80,6 +89,7 @@ namespace Firecrawl
             string? sourceURL,
             string? x_any_other_metadata__,
             int? statusCode,
+            string? timezone,
             string? error)
         {
             this.Title = title;
@@ -88,6 +98,7 @@ namespace Firecrawl
             this.SourceURL = sourceURL;
             this.x_any_other_metadata__ = x_any_other_metadata__;
             this.StatusCode = statusCode;
+            this.Timezone = timezone;
             this.Error = error;
         }
 
