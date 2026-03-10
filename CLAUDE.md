@@ -10,10 +10,10 @@ C# SDK for [Firecrawl](https://firecrawl.dev/), the web scraping and crawling AP
 
 ```bash
 # Build the solution
-dotnet build Firecrawl.sln
+dotnet build Firecrawl.slnx
 
 # Build for release (also produces NuGet packages)
-dotnet build Firecrawl.sln -c Release
+dotnet build Firecrawl.slnx -c Release
 
 # Run integration tests (requires FIRECRAWL_API_KEY env var)
 dotnet test src/tests/IntegrationTests/Firecrawl.IntegrationTests.csproj
