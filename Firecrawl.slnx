@@ -24,6 +24,7 @@
     <File Path=".github/workflows/pull-request.yml" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="src/tests/Firecrawl.Cli.Tests/Firecrawl.Cli.Tests.csproj" />
     <Project Path="src/tests/IntegrationTests/Firecrawl.IntegrationTests.csproj" />
   </Folder>
 </Solution>

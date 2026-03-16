@@ -1,11 +1,21 @@
-﻿using System.CommandLine;
-using Firecrawl.Cli.Commands;
+using Firecrawl;
+using Firecrawl.Cli;
 
-var rootCommand = new RootCommand(
-    description: "CLI tool to use Firecrawl API");
-rootCommand.Subcommands.Add(new AuthCommand());
-rootCommand.Subcommands.Add(new ScrapeCommand());
-rootCommand.Subcommands.Add(new CrawlCommand());
-rootCommand.Subcommands.Add(new MapCommand());
-
-return await rootCommand.Parse(args).InvokeAsync().ConfigureAwait(false);
+try
+{
+    return await CliRoot
+        .CreateRootCommand()
+        .Parse(args)
+        .InvokeAsync()
+        .ConfigureAwait(false);
+}
+catch (CliException ex)
+{
+    await Console.Error.WriteLineAsync(ex.Message).ConfigureAwait(false);
+    return 1;
+}
+catch (ApiException ex)
+{
+    await Console.Error.WriteLineAsync(CliRuntime.FormatApiException(ex)).ConfigureAwait(false);
+    return 1;
+}
