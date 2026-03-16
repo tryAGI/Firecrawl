@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Firecrawl.Cli.Tests;
 
 [TestClass]
@@ -15,9 +17,60 @@ public sealed class CliSpecCoverageTests
 
     private static IReadOnlyCollection<string> ExtractNonDeprecatedOperationIds(string specPath)
     {
-        var lines = File.ReadAllLines(specPath);
-        var results = new List<string>();
+        var content = File.ReadAllText(specPath);
+        var trimmed = content.TrimStart();
+        return trimmed.StartsWith('{')
+            ? ExtractFromJson(content)
+            : ExtractFromYamlLines(File.ReadAllLines(specPath));
+    }
 
+    private static IReadOnlyCollection<string> ExtractFromJson(string content)
+    {
+        var results = new List<string>();
+        using var document = JsonDocument.Parse(content);
+
+        if (!document.RootElement.TryGetProperty("paths", out var pathsElement) ||
+            pathsElement.ValueKind != JsonValueKind.Object)
+        {
+            return results;
+        }
+
+        foreach (var pathProperty in pathsElement.EnumerateObject())
+        {
+            if (pathProperty.Value.ValueKind != JsonValueKind.Object)
+            {
+                continue;
+            }
+
+            foreach (var operationProperty in pathProperty.Value.EnumerateObject())
+            {
+                if (!IsHttpMethod(operationProperty.Name) ||
+                    operationProperty.Value.ValueKind != JsonValueKind.Object)
+                {
+                    continue;
+                }
+
+                if (operationProperty.Value.TryGetProperty("deprecated", out var deprecatedElement) &&
+                    deprecatedElement.ValueKind is JsonValueKind.True)
+                {
+                    continue;
+                }
+
+                if (operationProperty.Value.TryGetProperty("operationId", out var operationIdElement) &&
+                    operationIdElement.ValueKind == JsonValueKind.String &&
+                    operationIdElement.GetString() is { Length: > 0 } operationId)
+                {
+                    results.Add(operationId);
+                }
+            }
+        }
+
+        return results;
+    }
+
+    private static IReadOnlyCollection<string> ExtractFromYamlLines(string[] lines)
+    {
+        var results = new List<string>();
         string? currentOperationId = null;
         var currentDeprecated = false;
         var currentMethodIndent = -1;
@@ -82,5 +135,10 @@ public sealed class CliSpecCoverageTests
     private static bool IsHttpMethodLine(string trimmed)
     {
         return trimmed is "get:" or "post:" or "put:" or "patch:" or "delete:" or "head:" or "options:" or "trace:";
+    }
+
+    private static bool IsHttpMethod(string methodName)
+    {
+        return methodName is "get" or "post" or "put" or "patch" or "delete" or "head" or "options" or "trace";
     }
 }
