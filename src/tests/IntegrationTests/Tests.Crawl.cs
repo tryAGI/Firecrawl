@@ -5,11 +5,11 @@ public partial class Tests
     // [TestMethod]
     // public async Task Crawl()
     // {
-    //     using var api = GetAuthenticatedApi();
+    //     using var client = GetAuthenticatedClient();
     //     using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
     //     var cancellationToken = cancellationTokenSource.Token;
     //     
-    //     var response = await api.Crawling.CrawlUrlsAsync(
+    //     var response = await client.Crawling.CrawlUrlsAsync(
     //         url: "https://docs.firecrawl.dev/",
     //         limit: 3,
     //         scrapeOptions: new ScrapeOptions
@@ -26,7 +26,7 @@ public partial class Tests
     //     response.Id.Should().NotBeNullOrEmpty();
     //     response.Url.Should().NotBeNullOrEmpty();
     //     
-    //     var jobResponse = await api.Crawling.WaitJobAsync(
+    //     var jobResponse = await client.Crawling.WaitJobAsync(
     //         jobId: response.Id!,
     //         cancellationToken: cancellationToken);
     //     

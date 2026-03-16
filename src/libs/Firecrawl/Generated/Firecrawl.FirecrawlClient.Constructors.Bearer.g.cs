@@ -3,10 +3,10 @@
 
 namespace Firecrawl
 {
-    public sealed partial class FirecrawlApp
+    public sealed partial class FirecrawlClient
     {
-        /// <inheritdoc cref="FirecrawlApp(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::Firecrawl.EndPointAuthorization}?, bool)"/>
-        public FirecrawlApp(
+        /// <inheritdoc cref="FirecrawlClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::Firecrawl.EndPointAuthorization}?, bool)"/>
+        public FirecrawlClient(
             string apiKey,
             global::System.Net.Http.HttpClient? httpClient = null,
             global::System.Uri? baseUri = null,

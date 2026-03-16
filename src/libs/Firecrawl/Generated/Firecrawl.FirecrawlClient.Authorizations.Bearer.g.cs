@@ -3,7 +3,7 @@
 
 namespace Firecrawl
 {
-    public sealed partial class FirecrawlApp
+    public sealed partial class FirecrawlClient
     {
         /// <inheritdoc/>
         public void AuthorizeUsingBearer(

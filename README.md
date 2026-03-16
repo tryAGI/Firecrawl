@@ -16,15 +16,15 @@
 ```csharp
 using Firecrawl;
 
-using var api = new FirecrawlApp(apiKey);
+using var client = new FirecrawlClient(apiKey);
 
 // Scrape
-var response = await api.Scraping.ScrapeAndExtractFromUrlAsync("https://docs.firecrawl.dev/features/scrape");
+var response = await client.Scraping.ScrapeAndExtractFromUrlAsync("https://docs.firecrawl.dev/features/scrape");
 
 string markdown = response.Data.Markdown;
 
 // Crawl
-var response = await api.Crawling.CrawlUrlsAsync(
+var response = await client.Crawling.CrawlUrlsAsync(
     url: "https://docs.firecrawl.dev/",
     limit: 3,
     scrapeOptions: new CrawlUrlsRequestScrapeOptions
@@ -32,7 +32,7 @@ var response = await api.Crawling.CrawlUrlsAsync(
         OnlyMainContent = true,
     });
 
-var jobResponse = await api.Crawling.WaitJobAsync(
+var jobResponse = await client.Crawling.WaitJobAsync(
     jobId: response.JobId);
 
 foreach (var data in jobResponse.Data)

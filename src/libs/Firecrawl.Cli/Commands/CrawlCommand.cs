@@ -56,11 +56,11 @@ internal sealed class CrawlCommand : Command
         Console.WriteLine("Initializing...");
         
         var apiKey = await Helpers.GetApiKey().ConfigureAwait(false);
-        using var api = new FirecrawlApp(apiKey);
+        using var client = new FirecrawlClient(apiKey);
         
         Console.WriteLine($"Crawling {url}...");
 
-        var response = await api.Crawling.CrawlUrlsAsync(
+        var response = await client.Crawling.CrawlUrlsAsync(
             url: url,
             maxDepth: maxDepth,
             limit: limit,
@@ -74,7 +74,7 @@ internal sealed class CrawlCommand : Command
         Console.WriteLine($"JobId: {response.Id}");
         Console.WriteLine($"Url: {response.Url}");
         
-        var jobResponse = await api.Crawling.WaitJobAsync(
+        var jobResponse = await client.Crawling.WaitJobAsync(
             jobId: response.Id!).ConfigureAwait(false);
         
         if (string.IsNullOrWhiteSpace(outputPath))

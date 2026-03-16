@@ -38,11 +38,11 @@ internal sealed class ScrapeCommand : Command
         Console.WriteLine("Initializing...");
         
         var apiKey = await Helpers.GetApiKey().ConfigureAwait(false);
-        using var api = new FirecrawlApp(apiKey);
+        using var client = new FirecrawlClient(apiKey);
         
         Console.WriteLine($"Scraping {url}...");
 
-        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions>
+        var response = await client.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions>
         {
             Value1 = new ScrapeAndExtractFromUrlRequest2
             {

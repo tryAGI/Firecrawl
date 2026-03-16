@@ -3,7 +3,7 @@
 
 namespace Firecrawl
 {
-    public partial interface IFirecrawlApp
+    public partial interface IFirecrawlClient
     {
         /// <summary>
         /// Authorize using bearer authentication.

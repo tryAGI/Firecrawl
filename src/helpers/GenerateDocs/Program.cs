@@ -26,8 +26,8 @@ foreach (var path in Directory.EnumerateFiles(sampleDirectory, "Tests.*.cs", Sea
 
     code = code
         .Replace(
-            "using var api = GetAuthenticatedApi();",
-            "using var api = new FirecrawlApp(apiKey);")
+            "using var client = GetAuthenticatedClient();",
+            "using var client = new FirecrawlClient(apiKey);")
         ;
     
     var newPath = Path.Combine(newDir, $"{Path.GetExtension(Path.GetFileNameWithoutExtension(path)).TrimStart('.')}.md");
@@ -43,4 +43,3 @@ var newMkDocs = mkDocs.Replace(
     .Select(x => $@"
   - {Path.GetFileNameWithoutExtension(x)}: samples/{Path.GetFileNameWithoutExtension(x)}.md"))}");
 await File.WriteAllTextAsync(mkDocsPath, newMkDocs);
-

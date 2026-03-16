@@ -43,7 +43,7 @@ The SDK code in `src/libs/Firecrawl/Generated/` is **entirely auto-generated** -
 
 | Project | Purpose |
 |---------|---------|
-| `src/libs/Firecrawl/` | Main SDK library (`FirecrawlApp`) |
+| `src/libs/Firecrawl/` | Main SDK library (`FirecrawlClient`) |
 | `src/libs/Firecrawl.Cli/` | .NET CLI tool for scraping/crawling (auth, scrape, crawl, map commands) |
 | `src/tests/IntegrationTests/` | Integration tests against real Firecrawl API |
 | `src/helpers/FixOpenApiSpec/` | OpenAPI spec fixer tool |
@@ -78,9 +78,9 @@ The `Firecrawl.Cli` project provides a command-line interface with these command
 
 ### Key Conventions
 
-- The client class is named `FirecrawlApp`
+- The client class is named `FirecrawlClient`
 - The namespace is `Firecrawl`
-- Crawl results are accessed via `api.Crawling.WaitJobAsync()` for polling until completion
+- Crawl results are accessed via `client.Crawling.WaitJobAsync()` for polling until completion
 
 ### CI/CD
 

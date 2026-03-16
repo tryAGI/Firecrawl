@@ -37,7 +37,7 @@ internal sealed class MapCommand : Command
         Console.WriteLine("Initializing...");
         
         var apiKey = await Helpers.GetApiKey().ConfigureAwait(false);
-        using var api = new FirecrawlApp(apiKey);
+        using var client = new FirecrawlClient(apiKey);
         
         Console.WriteLine($"Maps {url}...");
 

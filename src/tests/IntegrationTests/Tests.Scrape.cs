@@ -5,9 +5,9 @@ public partial class Tests
     [TestMethod]
     public async Task Scrape()
     {
-        using var api = GetAuthenticatedApi();
+        using var client = GetAuthenticatedClient();
         
-        var response = await api.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions> 
+        var response = await client.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions> 
         {
             Value1 = new ScrapeAndExtractFromUrlRequest2
             {
