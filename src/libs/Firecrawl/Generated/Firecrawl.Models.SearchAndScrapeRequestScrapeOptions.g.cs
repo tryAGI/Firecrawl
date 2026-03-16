@@ -4,12 +4,14 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// Options for scraping search results
+    /// Options for scraping search results<br/>
+    /// Default Value: {}
     /// </summary>
     public sealed partial class SearchAndScrapeRequestScrapeOptions
     {
         /// <summary>
-        /// Formats to include in the output
+        /// Formats to include in the output<br/>
+        /// Default Value: []
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("formats")]
         public global::System.Collections.Generic.IList<global::Firecrawl.SearchAndScrapeRequestScrapeOptionsFormat>? Formats { get; set; }
@@ -24,7 +26,8 @@ namespace Firecrawl
         /// Initializes a new instance of the <see cref="SearchAndScrapeRequestScrapeOptions" /> class.
         /// </summary>
         /// <param name="formats">
-        /// Formats to include in the output
+        /// Formats to include in the output<br/>
+        /// Default Value: []
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -49,7 +49,8 @@ namespace Firecrawl
         public bool? IgnoreInvalidURLs { get; set; }
 
         /// <summary>
-        /// Options for scraping search results
+        /// Options for scraping search results<br/>
+        /// Default Value: {}
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("scrapeOptions")]
         public global::Firecrawl.SearchAndScrapeRequestScrapeOptions? ScrapeOptions { get; set; }
@@ -85,7 +86,8 @@ namespace Firecrawl
         /// Default Value: false
         /// </param>
         /// <param name="scrapeOptions">
-        /// Options for scraping search results
+        /// Options for scraping search results<br/>
+        /// Default Value: {}
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
