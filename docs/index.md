@@ -45,10 +45,39 @@ foreach (var data in jobResponse.Data)
 ### CLI
 ```bash
 dotnet tool install -g Firecrawl.Cli
-firecrawl auth <API_KEY>
-firecrawl scrape https://docs.firecrawl.dev/features/scrape // saves it to output.md
-firecrawl crawl https://docs.firecrawl.dev/ --limit 5 // saves all .md files to docs.firecrawl.dev folder
+firecrawl auth set <API_KEY>
+firecrawl scrape https://docs.firecrawl.dev/features/scrape --format markdown
+firecrawl crawl start https://docs.firecrawl.dev/ --limit 5 --wait
+firecrawl team credit-usage --json
 ```
+
+Auth precedence:
+1. `--api-key`
+2. `FIRECRAWL_API_KEY`
+3. `~/.firecrawl/apiKey.txt` from `firecrawl auth set`
+
+Base URL precedence:
+1. `--base-url`
+2. `FIRECRAWL_BASE_URL`
+3. SDK default
+
+Universal CLI behavior:
+- `--json` is available on every command for deterministic machine-readable output.
+- Async start commands support `--wait`, `--poll-interval`, and `--wait-timeout`.
+- `--input <file|->` loads a JSON request body, and explicit flags override matching fields.
+- `crawl status` and `batch-scrape status` support `--output-dir` to write one file set per returned page.
+
+Command tree:
+- `auth set|clear|status`
+- `scrape <url>`
+- `batch-scrape start|status|cancel|errors`
+- `crawl start|status|cancel|errors|active`
+- `map <url>`
+- `extract start|status`
+- `deep-research start|status`
+- `team credit-usage|token-usage`
+- `search <query>`
+- `llmstxt generate|status`
 
 ## Support
 
