@@ -8,7 +8,7 @@ public sealed class CliSpecCoverageTests
     [TestMethod]
     public void Supported_operation_ids_match_openapi_spec()
     {
-        var specPath = Path.Combine(CliTestSupport.RepositoryRoot, "src", "libs", "Firecrawl", "openapi.yaml");
+        var specPath = Path.Combine(CliTestSupport.RepositoryRoot, "src", "libs", "Firecrawl", "openapi.json");
         var expected = ExtractNonDeprecatedOperationIds(specPath);
 
         CliRoot.SupportedOperationIds.Should().OnlyHaveUniqueItems();
