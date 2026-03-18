@@ -15,32 +15,50 @@ public partial class CrawlingClient
     /// Useful for UI progress bars or logging (e.g., <see cref="CrawlStatusResponseObj.Completed"/>
     /// and <see cref="CrawlStatusResponseObj.Total"/>).
     /// </param>
+    /// <param name="timeout">
+    /// Optional timeout for the entire wait operation. Defaults to no timeout.
+    /// </param>
     /// <param name="cancellationToken">The token to cancel the operation with</param>
     /// <exception cref="global::System.InvalidOperationException"></exception>
+    /// <exception cref="global::System.TimeoutException"></exception>
     public async Task<CrawlStatusResponseObj> WaitJobAsync(
         string jobId,
         TimeSpan? pollingInterval = null,
         IProgress<CrawlStatusResponseObj>? progress = null,
+        TimeSpan? timeout = null,
         CancellationToken cancellationToken = default)
     {
         var delay = pollingInterval ?? TimeSpan.FromSeconds(1);
 
-        while (true)
+        using var cts = timeout.HasValue
+            ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken)
+            : null;
+        cts?.CancelAfter(timeout!.Value);
+        var token = cts?.Token ?? cancellationToken;
+
+        try
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
-
-            var statusResponse = await GetCrawlStatusAsync(
-                id: jobId,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            progress?.Report(statusResponse);
-
-            if (statusResponse.Status is "completed" or "failed")
+            while (true)
             {
-                return statusResponse;
+                token.ThrowIfCancellationRequested();
+
+                await Task.Delay(delay, token).ConfigureAwait(false);
+
+                var statusResponse = await GetCrawlStatusAsync(
+                    id: jobId,
+                    cancellationToken: token).ConfigureAwait(false);
+
+                progress?.Report(statusResponse);
+
+                if (statusResponse.Status is "completed" or "failed")
+                {
+                    return statusResponse;
+                }
             }
+        }
+        catch (OperationCanceledException) when (timeout.HasValue && !cancellationToken.IsCancellationRequested)
+        {
+            throw new TimeoutException($"Crawl job {jobId} did not complete within {timeout.Value}.");
         }
     }
 }
