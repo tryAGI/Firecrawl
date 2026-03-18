@@ -36,7 +36,8 @@ var jobResponse = await client.Crawling.WaitJobAsync(
     jobId: response.JobId,
     pollingInterval: TimeSpan.FromSeconds(5),
     progress: new Progress<CrawlStatusResponseObj>(status =>
-        Console.WriteLine($"Progress: {status.Completed}/{status.Total}")));
+        Console.WriteLine($"Progress: {status.Completed}/{status.Total}")),
+    timeout: TimeSpan.FromMinutes(10));
 
 foreach (var data in jobResponse.Data)
 {
