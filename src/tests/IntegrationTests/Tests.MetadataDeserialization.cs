@@ -1,0 +1,45 @@
+namespace Firecrawl.IntegrationTests;
+
+public partial class Tests
+{
+    [TestMethod]
+    public void Metadata_Description_String()
+    {
+        var json = """
+            {
+                "title": "Test Page",
+                "description": "A simple description",
+                "sourceURL": "https://example.com"
+            }
+            """;
+
+        var metadata = System.Text.Json.JsonSerializer.Deserialize<ScrapeResponseDataMetadata>(
+            json, SourceGenerationContext.Default.ScrapeResponseDataMetadata);
+
+        metadata.Should().NotBeNull();
+        metadata!.Description.Should().NotBeNull();
+        metadata.Description!.Value.IsValue1.Should().BeTrue();
+        metadata.Description.Value.Value1.Should().Be("A simple description");
+    }
+
+    [TestMethod]
+    public void Metadata_Description_Array()
+    {
+        var json = """
+            {
+                "title": "Test Page",
+                "description": ["First description", "Second description"],
+                "sourceURL": "https://example.com"
+            }
+            """;
+
+        var metadata = System.Text.Json.JsonSerializer.Deserialize<ScrapeResponseDataMetadata>(
+            json, SourceGenerationContext.Default.ScrapeResponseDataMetadata);
+
+        metadata.Should().NotBeNull();
+        metadata!.Description.Should().NotBeNull();
+        metadata.Description!.Value.IsValue2.Should().BeTrue();
+        metadata.Description.Value.Value2.Should().HaveCount(2);
+        metadata.Description.Value.Value2![0].Should().Be("First description");
+    }
+}
