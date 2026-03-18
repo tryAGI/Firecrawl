@@ -10,9 +10,9 @@ public partial class CrawlingClient
     /// The interval between status checks. Defaults to 1 second.
     /// For large crawls, consider using a longer interval to reduce API calls and bandwidth.
     /// </param>
-    /// <param name="onProgress">
-    /// Optional callback invoked after each status check with the current crawl status.
-    /// Useful for monitoring progress (e.g., logging <see cref="CrawlStatusResponseObj.Completed"/>
+    /// <param name="progress">
+    /// Optional <see cref="IProgress{T}"/> instance to report crawl status after each poll.
+    /// Useful for UI progress bars or logging (e.g., <see cref="CrawlStatusResponseObj.Completed"/>
     /// and <see cref="CrawlStatusResponseObj.Total"/>).
     /// </param>
     /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -20,7 +20,7 @@ public partial class CrawlingClient
     public async Task<CrawlStatusResponseObj> WaitJobAsync(
         string jobId,
         TimeSpan? pollingInterval = null,
-        Action<CrawlStatusResponseObj>? onProgress = null,
+        IProgress<CrawlStatusResponseObj>? progress = null,
         CancellationToken cancellationToken = default)
     {
         var delay = pollingInterval ?? TimeSpan.FromSeconds(1);
@@ -35,7 +35,7 @@ public partial class CrawlingClient
                 id: jobId,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            onProgress?.Invoke(statusResponse);
+            progress?.Report(statusResponse);
 
             if (statusResponse.Status is "completed" or "failed")
             {
