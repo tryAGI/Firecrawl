@@ -21,44 +21,20 @@ public partial class CrawlingClient
     /// <param name="cancellationToken">The token to cancel the operation with</param>
     /// <exception cref="global::System.InvalidOperationException"></exception>
     /// <exception cref="global::System.TimeoutException"></exception>
-    public async Task<CrawlStatusResponseObj> WaitJobAsync(
+    public Task<CrawlStatusResponseObj> WaitJobAsync(
         string jobId,
         TimeSpan? pollingInterval = null,
         IProgress<CrawlStatusResponseObj>? progress = null,
         TimeSpan? timeout = null,
         CancellationToken cancellationToken = default)
     {
-        var delay = pollingInterval ?? TimeSpan.FromSeconds(1);
-
-        using var cts = timeout.HasValue
-            ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken)
-            : null;
-        cts?.CancelAfter(timeout!.Value);
-        var token = cts?.Token ?? cancellationToken;
-
-        try
-        {
-            while (true)
-            {
-                token.ThrowIfCancellationRequested();
-
-                await Task.Delay(delay, token).ConfigureAwait(false);
-
-                var statusResponse = await GetCrawlStatusAsync(
-                    id: jobId,
-                    cancellationToken: token).ConfigureAwait(false);
-
-                progress?.Report(statusResponse);
-
-                if (statusResponse.Status is "completed" or "failed")
-                {
-                    return statusResponse;
-                }
-            }
-        }
-        catch (OperationCanceledException) when (timeout.HasValue && !cancellationToken.IsCancellationRequested)
-        {
-            throw new TimeoutException($"Crawl job {jobId} did not complete within {timeout.Value}.");
-        }
+        return PollingHelper.PollUntilAsync(
+            fetchStatus: ct => GetCrawlStatusAsync(id: jobId, cancellationToken: ct),
+            isComplete: r => r.Status is "completed" or "failed",
+            jobDescription: $"Crawl job {jobId}",
+            pollingInterval: pollingInterval,
+            progress: progress,
+            timeout: timeout,
+            cancellationToken: cancellationToken);
     }
 }

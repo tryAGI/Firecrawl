@@ -19,46 +19,22 @@ public partial class ResearchClient
     /// <param name="cancellationToken">The token to cancel the operation with</param>
     /// <exception cref="global::System.InvalidOperationException"></exception>
     /// <exception cref="global::System.TimeoutException"></exception>
-    public async Task<GetDeepResearchStatusResponse> WaitDeepResearchAsync(
+    public Task<GetDeepResearchStatusResponse> WaitDeepResearchAsync(
         string jobId,
         TimeSpan? pollingInterval = null,
         IProgress<GetDeepResearchStatusResponse>? progress = null,
         TimeSpan? timeout = null,
         CancellationToken cancellationToken = default)
     {
-        var delay = pollingInterval ?? TimeSpan.FromSeconds(5);
-
-        using var cts = timeout.HasValue
-            ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken)
-            : null;
-        cts?.CancelAfter(timeout!.Value);
-        var token = cts?.Token ?? cancellationToken;
-
-        try
-        {
-            while (true)
-            {
-                token.ThrowIfCancellationRequested();
-
-                await Task.Delay(delay, token).ConfigureAwait(false);
-
-                var statusResponse = await GetDeepResearchStatusAsync(
-                    id: jobId,
-                    cancellationToken: token).ConfigureAwait(false);
-
-                progress?.Report(statusResponse);
-
-                if (statusResponse.Data?.Status is
-                    GetDeepResearchStatusResponseDataStatus.Completed or
-                    GetDeepResearchStatusResponseDataStatus.Failed)
-                {
-                    return statusResponse;
-                }
-            }
-        }
-        catch (OperationCanceledException) when (timeout.HasValue && !cancellationToken.IsCancellationRequested)
-        {
-            throw new TimeoutException($"Deep research job {jobId} did not complete within {timeout.Value}.");
-        }
+        return PollingHelper.PollUntilAsync(
+            fetchStatus: ct => GetDeepResearchStatusAsync(id: jobId, cancellationToken: ct),
+            isComplete: r => r.Data?.Status is
+                GetDeepResearchStatusResponseDataStatus.Completed or
+                GetDeepResearchStatusResponseDataStatus.Failed,
+            jobDescription: $"Deep research job {jobId}",
+            pollingInterval: pollingInterval ?? TimeSpan.FromSeconds(5),
+            progress: progress,
+            timeout: timeout,
+            cancellationToken: cancellationToken);
     }
 }
