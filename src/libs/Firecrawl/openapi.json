@@ -1841,7 +1841,10 @@
                                 "type": "string"
                               },
                               "description": {
-                                "type": "string"
+                                "oneOf": [
+                                  { "type": "string" },
+                                  { "type": "array", "items": { "type": "string" } }
+                                ]
                               },
                               "sourceURL": {
                                 "type": "string"
@@ -2488,7 +2491,10 @@
                     "type": "string"
                   },
                   "description": {
-                    "type": "string"
+                    "oneOf": [
+                      { "type": "string" },
+                      { "type": "array", "items": { "type": "string" } }
+                    ]
                   },
                   "language": {
                     "type": "string",

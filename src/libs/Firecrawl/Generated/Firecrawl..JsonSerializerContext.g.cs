@@ -58,8 +58,10 @@ namespace Firecrawl
             typeof(global::Firecrawl.JsonConverters.GetLLMsTxtStatusResponseStatusJsonConverter),
             typeof(global::Firecrawl.JsonConverters.GetLLMsTxtStatusResponseStatusNullableJsonConverter),
             typeof(global::Firecrawl.JsonConverters.OneOfJsonConverter<global::Firecrawl.ScrapeOptionsActionWait, global::Firecrawl.ScrapeOptionsActionScreenshot, global::Firecrawl.ScrapeOptionsActionClick, global::Firecrawl.ScrapeOptionsActionWriteText, global::Firecrawl.ScrapeOptionsActionPressAKey, global::Firecrawl.ScrapeOptionsActionScroll, global::Firecrawl.ScrapeOptionsActionScrape, global::Firecrawl.ScrapeOptionsActionExecuteJavaScript>),
+            typeof(global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>),
             typeof(global::Firecrawl.JsonConverters.AllOfJsonConverter<global::Firecrawl.ScrapeAndExtractFromUrlRequest2, global::Firecrawl.ScrapeOptions>),
             typeof(global::Firecrawl.JsonConverters.AllOfJsonConverter<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>),
+            typeof(global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>),
             typeof(global::Firecrawl.JsonConverters.UnixTimestampJsonConverter),
         })]
 

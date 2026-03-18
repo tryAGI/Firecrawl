@@ -1,4 +1,6 @@
 
+#pragma warning disable CS0618 // Type or member is obsolete
+
 #nullable enable
 
 namespace Firecrawl
@@ -18,7 +20,8 @@ namespace Firecrawl
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("description")]
-        public string? Description { get; set; }
+        [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>))]
+        public global::Firecrawl.OneOf<string, global::System.Collections.Generic.IList<string>>? Description { get; set; }
 
         /// <summary>
         /// 
@@ -84,7 +87,7 @@ namespace Firecrawl
 #endif
         public ScrapeResponseDataMetadata(
             string? title,
-            string? description,
+            global::Firecrawl.OneOf<string, global::System.Collections.Generic.IList<string>>? description,
             string? language,
             string? sourceURL,
             string? x_any_other_metadata__,
