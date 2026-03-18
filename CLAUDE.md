@@ -55,6 +55,9 @@ The SDK code in `src/libs/Firecrawl/Generated/` is **entirely auto-generated** -
 | File | Purpose |
 |------|---------|
 | `CrawlClient.WaitJob.cs` | Polling helper to wait for crawl jobs to complete |
+| `ScrapingClient.WaitBatch.cs` | Polling helper to wait for batch scrape jobs to complete |
+| `ExtractionClient.WaitExtract.cs` | Polling helper to wait for extract jobs to complete |
+| `ResearchClient.WaitDeepResearch.cs` | Polling helper to wait for deep research jobs to complete |
 
 ### CLI Tool Structure
 
