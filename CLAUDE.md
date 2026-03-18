@@ -48,7 +48,6 @@ The SDK code in `src/libs/Firecrawl/Generated/` is **entirely auto-generated** -
 | `src/tests/IntegrationTests/` | Integration tests against real Firecrawl API |
 | `src/helpers/FixOpenApiSpec/` | OpenAPI spec fixer tool |
 | `src/helpers/GenerateDocs/` | Documentation generator from integration tests |
-| `src/helpers/TrimmingHelper/` | NativeAOT/trimming compatibility validator |
 
 ### Hand-Written Extensions
 
