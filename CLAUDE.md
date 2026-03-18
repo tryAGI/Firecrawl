@@ -35,7 +35,6 @@ firecrawl crawl https://example.com --limit 5
 The SDK code in `src/libs/Firecrawl/Generated/` is **entirely auto-generated** -- do not manually edit files there.
 
 1. `src/libs/Firecrawl/openapi.yaml` -- the Firecrawl OpenAPI spec (fetched from the official Firecrawl repo)
-2. `src/helpers/FixOpenApiSpec/` -- converts OpenAPI 3.1 to 3.0 format for compatibility
 3. `src/libs/Firecrawl/generate.sh` -- orchestrates: download spec, fix spec, run AutoSDK CLI, output to `Generated/`
 4. CI auto-updates the spec and creates PRs if changes are detected
 
@@ -46,8 +45,6 @@ The SDK code in `src/libs/Firecrawl/Generated/` is **entirely auto-generated** -
 | `src/libs/Firecrawl/` | Main SDK library (`FirecrawlClient`) |
 | `src/libs/Firecrawl.Cli/` | .NET CLI tool for scraping/crawling (auth, scrape, crawl, map commands) |
 | `src/tests/IntegrationTests/` | Integration tests against real Firecrawl API |
-| `src/helpers/FixOpenApiSpec/` | OpenAPI spec fixer tool |
-| `src/helpers/GenerateDocs/` | Documentation generator from integration tests |
 
 ### Hand-Written Extensions
 
