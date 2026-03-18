@@ -6,18 +6,25 @@ public partial class CrawlingClient
     /// Waits for a crawl job to complete or fail.
     /// </summary>
     /// <param name="jobId"></param>
+    /// <param name="pollingInterval">
+    /// The interval between status checks. Defaults to 1 second.
+    /// For large crawls, consider using a longer interval to reduce API calls and bandwidth.
+    /// </param>
     /// <param name="cancellationToken">The token to cancel the operation with</param>
     /// <exception cref="global::System.InvalidOperationException"></exception>
     public async Task<CrawlStatusResponseObj> WaitJobAsync(
         string jobId,
+        TimeSpan? pollingInterval = null,
         CancellationToken cancellationToken = default)
     {
+        var delay = pollingInterval ?? TimeSpan.FromSeconds(1);
+
         while (true)
         {
             cancellationToken.ThrowIfCancellationRequested();
-                
-            await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
-            
+
+            await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+
             var statusResponse = await GetCrawlStatusAsync(
                 id: jobId,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
