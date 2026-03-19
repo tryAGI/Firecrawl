@@ -1,3 +1,9 @@
+/*
+order: 30
+title: Scrape
+slug: scrape
+*/
+
 namespace Firecrawl.IntegrationTests;
 
 public partial class Tests
