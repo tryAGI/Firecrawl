@@ -75,7 +75,7 @@ The `Firecrawl.Cli` project provides a command-line interface with these command
 - **Signing:** Strong-named assemblies via `src/key.snk`
 - **Versioning:** Semantic versioning from git tags (`v` prefix) via MinVer
 - **Analysis:** All .NET analyzers enabled, AOT/trimming compatibility enforced
-- **Testing:** MSTest + FluentAssertions
+- **Testing:** MSTest + AwesomeAssertions
 
 ### Key Conventions
 
