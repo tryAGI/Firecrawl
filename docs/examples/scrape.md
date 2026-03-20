@@ -1,3 +1,9 @@
+# Scrape
+
+
+
+This example assumes `using Firecrawl;` is in scope and `apiKey` contains your Firecrawl API key.
+
 ```csharp
 using var client = new FirecrawlClient(apiKey);
 

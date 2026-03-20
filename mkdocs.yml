@@ -3,8 +3,10 @@ nav:
 - Overview: index.md
 # EXAMPLES:START
 - Examples:
-  - Crawl: samples/Crawl.md
-  - Scrape: samples/Scrape.md
+  - Crawl: examples/crawl.md
+  - Metadata Description Array: examples/metadata-description-array.md
+  - Metadata Description String: examples/metadata-description-string.md
+  - Scrape: examples/scrape.md
 # EXAMPLES:END
         
 theme:
