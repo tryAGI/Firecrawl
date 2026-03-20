@@ -255,7 +255,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Extract structured data from pages using LLMs
         /// </summary>

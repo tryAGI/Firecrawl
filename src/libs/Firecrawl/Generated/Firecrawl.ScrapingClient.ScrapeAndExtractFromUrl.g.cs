@@ -291,7 +291,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Scrape a single URL and optionally extract information using an LLM
         /// </summary>

@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.CrawlUrlsRequest request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Crawl multiple URLs based on options
         /// </summary>

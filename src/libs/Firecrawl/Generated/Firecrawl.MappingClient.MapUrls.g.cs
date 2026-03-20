@@ -293,7 +293,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Map multiple URLs based on options
         /// </summary>

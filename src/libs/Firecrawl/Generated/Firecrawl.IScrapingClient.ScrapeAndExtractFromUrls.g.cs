@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions> request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Scrape multiple URLs and optionally extract information using an LLM
         /// </summary>

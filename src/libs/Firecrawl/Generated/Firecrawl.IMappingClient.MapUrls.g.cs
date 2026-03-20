@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.MapUrlsRequest request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Map multiple URLs based on options
         /// </summary>

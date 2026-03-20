@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.GenerateLLMsTxtRequest request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Generate LLMs.txt for a website
         /// </summary>
