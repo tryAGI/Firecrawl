@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.ExtractDataRequest request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Extract structured data from pages using LLMs
         /// </summary>

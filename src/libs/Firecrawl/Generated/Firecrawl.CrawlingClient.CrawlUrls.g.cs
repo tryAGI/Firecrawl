@@ -293,7 +293,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Crawl multiple URLs based on options
         /// </summary>

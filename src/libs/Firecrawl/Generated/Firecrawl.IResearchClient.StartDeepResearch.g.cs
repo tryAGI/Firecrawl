@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.StartDeepResearchRequest request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Start a deep research operation on a query
         /// </summary>

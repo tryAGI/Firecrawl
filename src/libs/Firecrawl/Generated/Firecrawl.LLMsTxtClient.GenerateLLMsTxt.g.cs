@@ -217,7 +217,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Generate LLMs.txt for a website
         /// </summary>

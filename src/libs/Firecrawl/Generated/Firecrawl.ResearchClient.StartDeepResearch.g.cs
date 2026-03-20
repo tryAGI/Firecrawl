@@ -217,7 +217,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Start a deep research operation on a query
         /// </summary>

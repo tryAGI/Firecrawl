@@ -255,7 +255,6 @@ namespace Firecrawl
                 }
             }
         }
-
         /// <summary>
         /// Search and optionally scrape search results
         /// </summary>

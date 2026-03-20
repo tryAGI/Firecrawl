@@ -14,7 +14,6 @@ namespace Firecrawl
 
             global::Firecrawl.SearchAndScrapeRequest request,
             global::System.Threading.CancellationToken cancellationToken = default);
-
         /// <summary>
         /// Search and optionally scrape search results
         /// </summary>
