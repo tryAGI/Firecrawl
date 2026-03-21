@@ -43,7 +43,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public ScrapingClient Scraping { get; }
+        public BillingClient Billing { get; }
 
         /// <summary>
         /// 
@@ -53,12 +53,17 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public MappingClient Mapping { get; }
+        public ExtractionClient Extraction { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ExtractionClient Extraction { get; }
+        public LLMsTxtClient LLMsTxt { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public MappingClient Mapping { get; }
 
         /// <summary>
         /// 
@@ -68,17 +73,12 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public BillingClient Billing { get; }
+        public ScrapingClient Scraping { get; }
 
         /// <summary>
         /// 
         /// </summary>
         public SearchClient Search { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LLMsTxtClient LLMsTxt { get; }
 
     }
 }
