@@ -40,7 +40,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public ScrapingClient Scraping => new ScrapingClient(HttpClient, authorizations: Authorizations)
+        public BillingClient Billing => new BillingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -58,7 +58,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public MappingClient Mapping => new MappingClient(HttpClient, authorizations: Authorizations)
+        public ExtractionClient Extraction => new ExtractionClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -67,7 +67,16 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public ExtractionClient Extraction => new ExtractionClient(HttpClient, authorizations: Authorizations)
+        public LLMsTxtClient LLMsTxt => new LLMsTxtClient(HttpClient, authorizations: Authorizations)
+        {
+            ReadResponseAsString = ReadResponseAsString,
+            JsonSerializerContext = JsonSerializerContext,
+        };
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public MappingClient Mapping => new MappingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -85,7 +94,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public BillingClient Billing => new BillingClient(HttpClient, authorizations: Authorizations)
+        public ScrapingClient Scraping => new ScrapingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -95,15 +104,6 @@ namespace Firecrawl
         /// 
         /// </summary>
         public SearchClient Search => new SearchClient(HttpClient, authorizations: Authorizations)
-        {
-            ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
-        };
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LLMsTxtClient LLMsTxt => new LLMsTxtClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
