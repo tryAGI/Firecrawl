@@ -15,11 +15,11 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Page,
+        Failed,
         /// <summary>
         /// 
         /// </summary>
-        Failed,
+        Page,
         /// <summary>
         /// 
         /// </summary>
@@ -39,8 +39,8 @@ namespace Firecrawl
             return value switch
             {
                 CrawlUrlsRequestWebhookEvent.Completed => "completed",
-                CrawlUrlsRequestWebhookEvent.Page => "page",
                 CrawlUrlsRequestWebhookEvent.Failed => "failed",
+                CrawlUrlsRequestWebhookEvent.Page => "page",
                 CrawlUrlsRequestWebhookEvent.Started => "started",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
@@ -53,8 +53,8 @@ namespace Firecrawl
             return value switch
             {
                 "completed" => CrawlUrlsRequestWebhookEvent.Completed,
-                "page" => CrawlUrlsRequestWebhookEvent.Page,
                 "failed" => CrawlUrlsRequestWebhookEvent.Failed,
+                "page" => CrawlUrlsRequestWebhookEvent.Page,
                 "started" => CrawlUrlsRequestWebhookEvent.Started,
                 _ => null,
             };

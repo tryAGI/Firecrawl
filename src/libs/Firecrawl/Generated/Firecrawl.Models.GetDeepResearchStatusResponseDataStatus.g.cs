@@ -11,15 +11,15 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Processing,
-        /// <summary>
-        /// 
-        /// </summary>
         Completed,
         /// <summary>
         /// 
         /// </summary>
         Failed,
+        /// <summary>
+        /// 
+        /// </summary>
+        Processing,
     }
 
     /// <summary>
@@ -34,9 +34,9 @@ namespace Firecrawl
         {
             return value switch
             {
-                GetDeepResearchStatusResponseDataStatus.Processing => "processing",
                 GetDeepResearchStatusResponseDataStatus.Completed => "completed",
                 GetDeepResearchStatusResponseDataStatus.Failed => "failed",
+                GetDeepResearchStatusResponseDataStatus.Processing => "processing",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -47,9 +47,9 @@ namespace Firecrawl
         {
             return value switch
             {
-                "processing" => GetDeepResearchStatusResponseDataStatus.Processing,
                 "completed" => GetDeepResearchStatusResponseDataStatus.Completed,
                 "failed" => GetDeepResearchStatusResponseDataStatus.Failed,
+                "processing" => GetDeepResearchStatusResponseDataStatus.Processing,
                 _ => null,
             };
         }

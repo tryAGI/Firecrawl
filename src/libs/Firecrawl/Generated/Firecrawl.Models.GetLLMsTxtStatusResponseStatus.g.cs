@@ -11,15 +11,15 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Processing,
-        /// <summary>
-        /// 
-        /// </summary>
         Completed,
         /// <summary>
         /// 
         /// </summary>
         Failed,
+        /// <summary>
+        /// 
+        /// </summary>
+        Processing,
     }
 
     /// <summary>
@@ -34,9 +34,9 @@ namespace Firecrawl
         {
             return value switch
             {
-                GetLLMsTxtStatusResponseStatus.Processing => "processing",
                 GetLLMsTxtStatusResponseStatus.Completed => "completed",
                 GetLLMsTxtStatusResponseStatus.Failed => "failed",
+                GetLLMsTxtStatusResponseStatus.Processing => "processing",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -47,9 +47,9 @@ namespace Firecrawl
         {
             return value switch
             {
-                "processing" => GetLLMsTxtStatusResponseStatus.Processing,
                 "completed" => GetLLMsTxtStatusResponseStatus.Completed,
                 "failed" => GetLLMsTxtStatusResponseStatus.Failed,
+                "processing" => GetLLMsTxtStatusResponseStatus.Processing,
                 _ => null,
             };
         }

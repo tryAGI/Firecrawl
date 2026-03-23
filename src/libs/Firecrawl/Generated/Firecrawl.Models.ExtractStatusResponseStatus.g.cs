@@ -11,11 +11,11 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Completed,
+        Cancelled,
         /// <summary>
         /// 
         /// </summary>
-        Processing,
+        Completed,
         /// <summary>
         /// 
         /// </summary>
@@ -23,7 +23,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Cancelled,
+        Processing,
     }
 
     /// <summary>
@@ -38,10 +38,10 @@ namespace Firecrawl
         {
             return value switch
             {
-                ExtractStatusResponseStatus.Completed => "completed",
-                ExtractStatusResponseStatus.Processing => "processing",
-                ExtractStatusResponseStatus.Failed => "failed",
                 ExtractStatusResponseStatus.Cancelled => "cancelled",
+                ExtractStatusResponseStatus.Completed => "completed",
+                ExtractStatusResponseStatus.Failed => "failed",
+                ExtractStatusResponseStatus.Processing => "processing",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -52,10 +52,10 @@ namespace Firecrawl
         {
             return value switch
             {
-                "completed" => ExtractStatusResponseStatus.Completed,
-                "processing" => ExtractStatusResponseStatus.Processing,
-                "failed" => ExtractStatusResponseStatus.Failed,
                 "cancelled" => ExtractStatusResponseStatus.Cancelled,
+                "completed" => ExtractStatusResponseStatus.Completed,
+                "failed" => ExtractStatusResponseStatus.Failed,
+                "processing" => ExtractStatusResponseStatus.Processing,
                 _ => null,
             };
         }

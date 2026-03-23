@@ -11,19 +11,19 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        New,
-        /// <summary>
-        /// 
-        /// </summary>
-        Same,
-        /// <summary>
-        /// 
-        /// </summary>
         Changed,
         /// <summary>
         /// 
         /// </summary>
+        New,
+        /// <summary>
+        /// 
+        /// </summary>
         Removed,
+        /// <summary>
+        /// 
+        /// </summary>
+        Same,
     }
 
     /// <summary>
@@ -38,10 +38,10 @@ namespace Firecrawl
         {
             return value switch
             {
-                ScrapeResponseDataChangeTrackingChangeStatus.New => "new",
-                ScrapeResponseDataChangeTrackingChangeStatus.Same => "same",
                 ScrapeResponseDataChangeTrackingChangeStatus.Changed => "changed",
+                ScrapeResponseDataChangeTrackingChangeStatus.New => "new",
                 ScrapeResponseDataChangeTrackingChangeStatus.Removed => "removed",
+                ScrapeResponseDataChangeTrackingChangeStatus.Same => "same",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -52,10 +52,10 @@ namespace Firecrawl
         {
             return value switch
             {
-                "new" => ScrapeResponseDataChangeTrackingChangeStatus.New,
-                "same" => ScrapeResponseDataChangeTrackingChangeStatus.Same,
                 "changed" => ScrapeResponseDataChangeTrackingChangeStatus.Changed,
+                "new" => ScrapeResponseDataChangeTrackingChangeStatus.New,
                 "removed" => ScrapeResponseDataChangeTrackingChangeStatus.Removed,
+                "same" => ScrapeResponseDataChangeTrackingChangeStatus.Same,
                 _ => null,
             };
         }

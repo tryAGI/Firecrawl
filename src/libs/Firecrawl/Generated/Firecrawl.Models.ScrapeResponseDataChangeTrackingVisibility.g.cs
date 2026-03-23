@@ -11,11 +11,11 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Visible,
+        Hidden,
         /// <summary>
         /// 
         /// </summary>
-        Hidden,
+        Visible,
     }
 
     /// <summary>
@@ -30,8 +30,8 @@ namespace Firecrawl
         {
             return value switch
             {
-                ScrapeResponseDataChangeTrackingVisibility.Visible => "visible",
                 ScrapeResponseDataChangeTrackingVisibility.Hidden => "hidden",
+                ScrapeResponseDataChangeTrackingVisibility.Visible => "visible",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -42,8 +42,8 @@ namespace Firecrawl
         {
             return value switch
             {
-                "visible" => ScrapeResponseDataChangeTrackingVisibility.Visible,
                 "hidden" => ScrapeResponseDataChangeTrackingVisibility.Hidden,
+                "visible" => ScrapeResponseDataChangeTrackingVisibility.Visible,
                 _ => null,
             };
         }

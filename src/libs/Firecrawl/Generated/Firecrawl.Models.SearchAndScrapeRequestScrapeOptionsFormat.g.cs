@@ -11,7 +11,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Markdown,
+        Branding,
         /// <summary>
         /// 
         /// </summary>
@@ -19,11 +19,19 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        RawHtml,
+        Json,
         /// <summary>
         /// 
         /// </summary>
         Links,
+        /// <summary>
+        /// 
+        /// </summary>
+        Markdown,
+        /// <summary>
+        /// 
+        /// </summary>
+        RawHtml,
         /// <summary>
         /// 
         /// </summary>
@@ -32,14 +40,6 @@ namespace Firecrawl
         /// 
         /// </summary>
         Screenshot_fullPage,
-        /// <summary>
-        /// 
-        /// </summary>
-        Json,
-        /// <summary>
-        /// 
-        /// </summary>
-        Branding,
     }
 
     /// <summary>
@@ -54,14 +54,14 @@ namespace Firecrawl
         {
             return value switch
             {
-                SearchAndScrapeRequestScrapeOptionsFormat.Markdown => "markdown",
+                SearchAndScrapeRequestScrapeOptionsFormat.Branding => "branding",
                 SearchAndScrapeRequestScrapeOptionsFormat.Html => "html",
-                SearchAndScrapeRequestScrapeOptionsFormat.RawHtml => "rawHtml",
+                SearchAndScrapeRequestScrapeOptionsFormat.Json => "json",
                 SearchAndScrapeRequestScrapeOptionsFormat.Links => "links",
+                SearchAndScrapeRequestScrapeOptionsFormat.Markdown => "markdown",
+                SearchAndScrapeRequestScrapeOptionsFormat.RawHtml => "rawHtml",
                 SearchAndScrapeRequestScrapeOptionsFormat.Screenshot => "screenshot",
                 SearchAndScrapeRequestScrapeOptionsFormat.Screenshot_fullPage => "screenshot@fullPage",
-                SearchAndScrapeRequestScrapeOptionsFormat.Json => "json",
-                SearchAndScrapeRequestScrapeOptionsFormat.Branding => "branding",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -72,14 +72,14 @@ namespace Firecrawl
         {
             return value switch
             {
-                "markdown" => SearchAndScrapeRequestScrapeOptionsFormat.Markdown,
+                "branding" => SearchAndScrapeRequestScrapeOptionsFormat.Branding,
                 "html" => SearchAndScrapeRequestScrapeOptionsFormat.Html,
-                "rawHtml" => SearchAndScrapeRequestScrapeOptionsFormat.RawHtml,
+                "json" => SearchAndScrapeRequestScrapeOptionsFormat.Json,
                 "links" => SearchAndScrapeRequestScrapeOptionsFormat.Links,
+                "markdown" => SearchAndScrapeRequestScrapeOptionsFormat.Markdown,
+                "rawHtml" => SearchAndScrapeRequestScrapeOptionsFormat.RawHtml,
                 "screenshot" => SearchAndScrapeRequestScrapeOptionsFormat.Screenshot,
                 "screenshot@fullPage" => SearchAndScrapeRequestScrapeOptionsFormat.Screenshot_fullPage,
-                "json" => SearchAndScrapeRequestScrapeOptionsFormat.Json,
-                "branding" => SearchAndScrapeRequestScrapeOptionsFormat.Branding,
                 _ => null,
             };
         }
