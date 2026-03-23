@@ -12,11 +12,11 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Up,
+        Down,
         /// <summary>
         /// 
         /// </summary>
-        Down,
+        Up,
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ namespace Firecrawl
         {
             return value switch
             {
-                ScrapeOptionsActionScrollDirection.Up => "up",
                 ScrapeOptionsActionScrollDirection.Down => "down",
+                ScrapeOptionsActionScrollDirection.Up => "up",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -43,8 +43,8 @@ namespace Firecrawl
         {
             return value switch
             {
-                "up" => ScrapeOptionsActionScrollDirection.Up,
                 "down" => ScrapeOptionsActionScrollDirection.Down,
+                "up" => ScrapeOptionsActionScrollDirection.Up,
                 _ => null,
             };
         }

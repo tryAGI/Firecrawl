@@ -11,7 +11,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Markdown,
+        Branding,
         /// <summary>
         /// 
         /// </summary>
@@ -19,7 +19,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        Branding,
+        Markdown,
     }
 
     /// <summary>
@@ -34,9 +34,9 @@ namespace Firecrawl
         {
             return value switch
             {
-                StartDeepResearchRequestFormat.Markdown => "markdown",
-                StartDeepResearchRequestFormat.Json => "json",
                 StartDeepResearchRequestFormat.Branding => "branding",
+                StartDeepResearchRequestFormat.Json => "json",
+                StartDeepResearchRequestFormat.Markdown => "markdown",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -47,9 +47,9 @@ namespace Firecrawl
         {
             return value switch
             {
-                "markdown" => StartDeepResearchRequestFormat.Markdown,
-                "json" => StartDeepResearchRequestFormat.Json,
                 "branding" => StartDeepResearchRequestFormat.Branding,
+                "json" => StartDeepResearchRequestFormat.Json,
+                "markdown" => StartDeepResearchRequestFormat.Markdown,
                 _ => null,
             };
         }

@@ -13,6 +13,10 @@ namespace Firecrawl
     public enum ScrapeOptionsProxy
     {
         /// <summary>
+        /// Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.
+        /// </summary>
+        Auto,
+        /// <summary>
         /// Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.
         /// </summary>
         Basic,
@@ -20,10 +24,6 @@ namespace Firecrawl
         /// Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.
         /// </summary>
         Enhanced,
-        /// <summary>
-        /// Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.
-        /// </summary>
-        Auto,
     }
 
     /// <summary>
@@ -38,9 +38,9 @@ namespace Firecrawl
         {
             return value switch
             {
+                ScrapeOptionsProxy.Auto => "auto",
                 ScrapeOptionsProxy.Basic => "basic",
                 ScrapeOptionsProxy.Enhanced => "enhanced",
-                ScrapeOptionsProxy.Auto => "auto",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -51,9 +51,9 @@ namespace Firecrawl
         {
             return value switch
             {
+                "auto" => ScrapeOptionsProxy.Auto,
                 "basic" => ScrapeOptionsProxy.Basic,
                 "enhanced" => ScrapeOptionsProxy.Enhanced,
-                "auto" => ScrapeOptionsProxy.Auto,
                 _ => null,
             };
         }
