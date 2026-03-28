@@ -2,7 +2,7 @@
 set -euo pipefail
 dotnet tool install --global autosdk.cli --prerelease
 rm -rf Generated
-curl --fail --silent --show-error -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
+curl --fail --silent --show-error -L -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
 
 # Fix metadata description field: Firecrawl API can return string or string[]
 # See: https://github.com/tryAGI/Firecrawl/issues/54
