@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 dotnet tool install --global autosdk.cli --prerelease
 rm -rf Generated
 curl --fail --silent --show-error -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
