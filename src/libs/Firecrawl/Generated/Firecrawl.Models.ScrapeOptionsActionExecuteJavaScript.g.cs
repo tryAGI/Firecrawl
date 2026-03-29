@@ -33,12 +33,12 @@ namespace Firecrawl
         /// <summary>
         /// Initializes a new instance of the <see cref="ScrapeOptionsActionExecuteJavaScript" /> class.
         /// </summary>
-        /// <param name="type">
-        /// Execute JavaScript code on the page
-        /// </param>
         /// <param name="script">
         /// JavaScript code to execute<br/>
         /// Example: document.querySelector('.button').click();
+        /// </param>
+        /// <param name="type">
+        /// Execute JavaScript code on the page
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -47,8 +47,8 @@ namespace Firecrawl
             string script,
             global::Firecrawl.ScrapeOptionsActionExecuteJavaScriptType type)
         {
-            this.Script = script ?? throw new global::System.ArgumentNullException(nameof(script));
             this.Type = type;
+            this.Script = script ?? throw new global::System.ArgumentNullException(nameof(script));
         }
 
         /// <summary>

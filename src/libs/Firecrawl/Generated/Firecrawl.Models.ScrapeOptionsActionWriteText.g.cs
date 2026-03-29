@@ -33,12 +33,12 @@ namespace Firecrawl
         /// <summary>
         /// Initializes a new instance of the <see cref="ScrapeOptionsActionWriteText" /> class.
         /// </summary>
-        /// <param name="type">
-        /// Write text into an input field, text area, or contenteditable element. Note: You must first focus the element using a 'click' action before writing. The text will be typed character by character to simulate keyboard input.
-        /// </param>
         /// <param name="text">
         /// Text to type<br/>
         /// Example: Hello, world!
+        /// </param>
+        /// <param name="type">
+        /// Write text into an input field, text area, or contenteditable element. Note: You must first focus the element using a 'click' action before writing. The text will be typed character by character to simulate keyboard input.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -47,8 +47,8 @@ namespace Firecrawl
             string text,
             global::Firecrawl.ScrapeOptionsActionWriteTextType type)
         {
-            this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
             this.Type = type;
+            this.Text = text ?? throw new global::System.ArgumentNullException(nameof(text));
         }
 
         /// <summary>
