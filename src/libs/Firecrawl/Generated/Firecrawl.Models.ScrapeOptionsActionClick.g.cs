@@ -40,12 +40,12 @@ namespace Firecrawl
         /// <summary>
         /// Initializes a new instance of the <see cref="ScrapeOptionsActionClick" /> class.
         /// </summary>
-        /// <param name="type">
-        /// Click on an element
-        /// </param>
         /// <param name="selector">
         /// Query selector to find the element by<br/>
         /// Example: #load-more-button
+        /// </param>
+        /// <param name="type">
+        /// Click on an element
         /// </param>
         /// <param name="all">
         /// Clicks all elements matched by the selector, not just the first one. Does not throw an error if no elements match the selector.<br/>
@@ -59,8 +59,8 @@ namespace Firecrawl
             global::Firecrawl.ScrapeOptionsActionClickType type,
             bool? all)
         {
-            this.Selector = selector ?? throw new global::System.ArgumentNullException(nameof(selector));
             this.Type = type;
+            this.Selector = selector ?? throw new global::System.ArgumentNullException(nameof(selector));
             this.All = all;
         }
 

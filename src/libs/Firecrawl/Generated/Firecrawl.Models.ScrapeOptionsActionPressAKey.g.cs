@@ -33,12 +33,12 @@ namespace Firecrawl
         /// <summary>
         /// Initializes a new instance of the <see cref="ScrapeOptionsActionPressAKey" /> class.
         /// </summary>
-        /// <param name="type">
-        /// Press a key on the page
-        /// </param>
         /// <param name="key">
         /// Key to press<br/>
         /// Example: Enter
+        /// </param>
+        /// <param name="type">
+        /// Press a key on the page
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -47,8 +47,8 @@ namespace Firecrawl
             string key,
             global::Firecrawl.ScrapeOptionsActionPressAKeyType type)
         {
-            this.Key = key ?? throw new global::System.ArgumentNullException(nameof(key));
             this.Type = type;
+            this.Key = key ?? throw new global::System.ArgumentNullException(nameof(key));
         }
 
         /// <summary>
