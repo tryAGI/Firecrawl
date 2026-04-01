@@ -13,13 +13,8 @@ public partial class Tests
     {
         using var client = GetAuthenticatedClient();
         
-        var response = await client.Scraping.ScrapeAndExtractFromUrlAsync(new AllOf<ScrapeAndExtractFromUrlRequest2, ScrapeOptions> 
-        {
-            Value1 = new ScrapeAndExtractFromUrlRequest2
-            {
-                Url = "https://docs.firecrawl.dev/features/scrape",
-            },
-        });
+        var response = await client.Scraping.ScrapeAndExtractFromUrlAsync(
+            url: "https://docs.firecrawl.dev/features/scrape");
         response.Data.Should().NotBeNull();
         response.Data!.Markdown.Should().NotBeNullOrEmpty();
 
