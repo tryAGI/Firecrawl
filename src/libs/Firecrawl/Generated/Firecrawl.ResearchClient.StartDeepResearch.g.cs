@@ -258,7 +258,6 @@ namespace Firecrawl
             global::Firecrawl.StartDeepResearchRequestJsonOptions? jsonOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::Firecrawl.StartDeepResearchRequest
             {
                 Query = query,
