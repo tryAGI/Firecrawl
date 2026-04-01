@@ -299,6 +299,7 @@ namespace Firecrawl
         public async global::System.Threading.Tasks.Task<global::Firecrawl.BatchScrapeResponseObj> ScrapeAndExtractFromUrlsAsync(
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+
             var __request = new global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>
             {
             };
