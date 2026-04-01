@@ -363,6 +363,7 @@ namespace Firecrawl
             global::Firecrawl.ScrapeOptions? scrapeOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+
             var __request = new global::Firecrawl.CrawlUrlsRequest
             {
                 Url = url,
