@@ -65,7 +65,7 @@ namespace Firecrawl
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 }
             }
-            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
+            var __httpRequestContentBody = request.ToJson(JsonSerializerOptions);
             var __httpRequestContent = new global::System.Net.Http.StringContent(
                 content: __httpRequestContentBody,
                 encoding: global::System.Text.Encoding.UTF8,
@@ -102,13 +102,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_402 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_402 = global::Firecrawl.ScrapeAndExtractFromUrlResponse.FromJson(__content_402, JsonSerializerContext);
+                        __value_402 = global::Firecrawl.ScrapeAndExtractFromUrlResponse.FromJson(__content_402, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_402 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_402 = global::Firecrawl.ScrapeAndExtractFromUrlResponse.FromJson(__content_402, JsonSerializerContext);
+                        __value_402 = global::Firecrawl.ScrapeAndExtractFromUrlResponse.FromJson(__content_402, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -140,13 +140,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_429 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_429 = global::Firecrawl.ScrapeAndExtractFromUrlResponse2.FromJson(__content_429, JsonSerializerContext);
+                        __value_429 = global::Firecrawl.ScrapeAndExtractFromUrlResponse2.FromJson(__content_429, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_429 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_429 = global::Firecrawl.ScrapeAndExtractFromUrlResponse2.FromJson(__content_429, JsonSerializerContext);
+                        __value_429 = global::Firecrawl.ScrapeAndExtractFromUrlResponse2.FromJson(__content_429, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -178,13 +178,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_500 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_500 = global::Firecrawl.ScrapeAndExtractFromUrlResponse3.FromJson(__content_500, JsonSerializerContext);
+                        __value_500 = global::Firecrawl.ScrapeAndExtractFromUrlResponse3.FromJson(__content_500, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_500 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_500 = global::Firecrawl.ScrapeAndExtractFromUrlResponse3.FromJson(__content_500, JsonSerializerContext);
+                        __value_500 = global::Firecrawl.ScrapeAndExtractFromUrlResponse3.FromJson(__content_500, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -228,7 +228,7 @@ namespace Firecrawl
                     __response.EnsureSuccessStatusCode();
 
                     return
-                        global::Firecrawl.ScrapeResponse.FromJson(__content, JsonSerializerContext) ??
+                        global::Firecrawl.ScrapeResponse.FromJson(__content, JsonSerializerOptions) ??
                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
                 }
                 catch (global::System.Exception __ex)
@@ -251,7 +251,6 @@ namespace Firecrawl
                 try
                 {
                     __response.EnsureSuccessStatusCode();
-
                     using var __content = await __response.Content.ReadAsStreamAsync(
 #if NET5_0_OR_GREATER
                         cancellationToken
@@ -259,7 +258,7 @@ namespace Firecrawl
                     ).ConfigureAwait(false);
 
                     return
-                        await global::Firecrawl.ScrapeResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                        await global::Firecrawl.ScrapeResponse.FromJsonStreamAsync(__content, JsonSerializerOptions).ConfigureAwait(false) ??
                         throw new global::System.InvalidOperationException("Response deserialization failed.");
                 }
                 catch (global::System.Exception __ex)

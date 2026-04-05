@@ -34,7 +34,68 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; } = global::Firecrawl.SourceGenerationContext.Default;
+        #pragma warning disable CS0618 // Type or member is obsolete
+        public global::System.Text.Json.JsonSerializerOptions JsonSerializerOptions { get; set; } = new global::System.Text.Json.JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                DefaultIgnoreCondition = global::System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+                Converters =
+                {
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsFormatJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsFormatNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionWaitTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionWaitTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScreenshotTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScreenshotTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionClickTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionClickTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionWriteTextTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionWriteTextTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionPressAKeyTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionPressAKeyTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScrollTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScrollTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScrollDirectionJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScrollDirectionNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScrapeTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionScrapeTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionExecuteJavaScriptTypeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsActionExecuteJavaScriptTypeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsProxyJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsProxyNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsChangeTrackingOptionsModeJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeOptionsChangeTrackingOptionsModeNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeResponseDataChangeTrackingChangeStatusJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeResponseDataChangeTrackingChangeStatusNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeResponseDataChangeTrackingVisibilityJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeResponseDataChangeTrackingVisibilityNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ExtractStatusResponseStatusJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ExtractStatusResponseStatusNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeAndExtractFromUrlsRequestWebhookEventJsonConverter(),
+                    new global::Firecrawl.JsonConverters.ScrapeAndExtractFromUrlsRequestWebhookEventNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.CrawlUrlsRequestWebhookEventJsonConverter(),
+                    new global::Firecrawl.JsonConverters.CrawlUrlsRequestWebhookEventNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.StartDeepResearchRequestFormatJsonConverter(),
+                    new global::Firecrawl.JsonConverters.StartDeepResearchRequestFormatNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.SearchAndScrapeRequestScrapeOptionsFormatJsonConverter(),
+                    new global::Firecrawl.JsonConverters.SearchAndScrapeRequestScrapeOptionsFormatNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.CancelCrawlResponseStatusJsonConverter(),
+                    new global::Firecrawl.JsonConverters.CancelCrawlResponseStatusNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.GetDeepResearchStatusResponseDataStatusJsonConverter(),
+                    new global::Firecrawl.JsonConverters.GetDeepResearchStatusResponseDataStatusNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.GetLLMsTxtStatusResponseStatusJsonConverter(),
+                    new global::Firecrawl.JsonConverters.GetLLMsTxtStatusResponseStatusNullableJsonConverter(),
+                    new global::Firecrawl.JsonConverters.OneOfJsonConverter<global::Firecrawl.ScrapeOptionsActionWait, global::Firecrawl.ScrapeOptionsActionScreenshot, global::Firecrawl.ScrapeOptionsActionClick, global::Firecrawl.ScrapeOptionsActionWriteText, global::Firecrawl.ScrapeOptionsActionPressAKey, global::Firecrawl.ScrapeOptionsActionScroll, global::Firecrawl.ScrapeOptionsActionScrape, global::Firecrawl.ScrapeOptionsActionExecuteJavaScript>(),
+                    new global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>(),
+                    new global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>(),
+                    new global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>(),
+                    new global::Firecrawl.JsonConverters.AllOfJsonConverter<global::Firecrawl.ScrapeAndExtractFromUrlRequest2, global::Firecrawl.ScrapeOptions>(),
+                    new global::Firecrawl.JsonConverters.AllOfJsonConverter<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>(),
+                    new global::Firecrawl.JsonConverters.OneOfJsonConverter<string, global::System.Collections.Generic.IList<string>>(),
+                    new global::Firecrawl.JsonConverters.UnixTimestampJsonConverter(),
+                }
+            };
+        #pragma warning restore CS0618 // Type or member is obsolete
 
 
         /// <summary>
@@ -43,7 +104,7 @@ namespace Firecrawl
         public BillingClient Billing => new BillingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -52,7 +113,7 @@ namespace Firecrawl
         public CrawlingClient Crawling => new CrawlingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -61,7 +122,7 @@ namespace Firecrawl
         public ExtractionClient Extraction => new ExtractionClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -70,7 +131,7 @@ namespace Firecrawl
         public LLMsTxtClient LLMsTxt => new LLMsTxtClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -79,7 +140,7 @@ namespace Firecrawl
         public MappingClient Mapping => new MappingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -88,7 +149,7 @@ namespace Firecrawl
         public ResearchClient Research => new ResearchClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -97,7 +158,7 @@ namespace Firecrawl
         public ScrapingClient Scraping => new ScrapingClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
@@ -106,7 +167,7 @@ namespace Firecrawl
         public SearchClient Search => new SearchClient(HttpClient, authorizations: Authorizations)
         {
             ReadResponseAsString = ReadResponseAsString,
-            JsonSerializerContext = JsonSerializerContext,
+            JsonSerializerOptions = JsonSerializerOptions,
         };
 
         /// <summary>
