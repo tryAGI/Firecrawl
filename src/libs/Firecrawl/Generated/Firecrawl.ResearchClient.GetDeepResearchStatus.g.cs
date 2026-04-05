@@ -95,13 +95,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_404 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_404 = global::Firecrawl.GetDeepResearchStatusResponse2.FromJson(__content_404, JsonSerializerContext);
+                        __value_404 = global::Firecrawl.GetDeepResearchStatusResponse2.FromJson(__content_404, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_404 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_404 = global::Firecrawl.GetDeepResearchStatusResponse2.FromJson(__content_404, JsonSerializerContext);
+                        __value_404 = global::Firecrawl.GetDeepResearchStatusResponse2.FromJson(__content_404, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -145,7 +145,7 @@ namespace Firecrawl
                     __response.EnsureSuccessStatusCode();
 
                     return
-                        global::Firecrawl.GetDeepResearchStatusResponse.FromJson(__content, JsonSerializerContext) ??
+                        global::Firecrawl.GetDeepResearchStatusResponse.FromJson(__content, JsonSerializerOptions) ??
                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
                 }
                 catch (global::System.Exception __ex)
@@ -168,7 +168,6 @@ namespace Firecrawl
                 try
                 {
                     __response.EnsureSuccessStatusCode();
-
                     using var __content = await __response.Content.ReadAsStreamAsync(
 #if NET5_0_OR_GREATER
                         cancellationToken
@@ -176,7 +175,7 @@ namespace Firecrawl
                     ).ConfigureAwait(false);
 
                     return
-                        await global::Firecrawl.GetDeepResearchStatusResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                        await global::Firecrawl.GetDeepResearchStatusResponse.FromJsonStreamAsync(__content, JsonSerializerOptions).ConfigureAwait(false) ??
                         throw new global::System.InvalidOperationException("Response deserialization failed.");
                 }
                 catch (global::System.Exception __ex)

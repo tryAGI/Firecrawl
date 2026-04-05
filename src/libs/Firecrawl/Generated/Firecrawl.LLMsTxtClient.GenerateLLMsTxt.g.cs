@@ -67,7 +67,7 @@ namespace Firecrawl
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 }
             }
-            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
+            var __httpRequestContentBody = request.ToJson(JsonSerializerOptions);
             var __httpRequestContent = new global::System.Net.Http.StringContent(
                 content: __httpRequestContentBody,
                 encoding: global::System.Text.Encoding.UTF8,
@@ -104,13 +104,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_400 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_400 = global::Firecrawl.GenerateLLMsTxtResponse2.FromJson(__content_400, JsonSerializerContext);
+                        __value_400 = global::Firecrawl.GenerateLLMsTxtResponse2.FromJson(__content_400, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_400 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_400 = global::Firecrawl.GenerateLLMsTxtResponse2.FromJson(__content_400, JsonSerializerContext);
+                        __value_400 = global::Firecrawl.GenerateLLMsTxtResponse2.FromJson(__content_400, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -154,7 +154,7 @@ namespace Firecrawl
                     __response.EnsureSuccessStatusCode();
 
                     return
-                        global::Firecrawl.GenerateLLMsTxtResponse.FromJson(__content, JsonSerializerContext) ??
+                        global::Firecrawl.GenerateLLMsTxtResponse.FromJson(__content, JsonSerializerOptions) ??
                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
                 }
                 catch (global::System.Exception __ex)
@@ -177,7 +177,6 @@ namespace Firecrawl
                 try
                 {
                     __response.EnsureSuccessStatusCode();
-
                     using var __content = await __response.Content.ReadAsStreamAsync(
 #if NET5_0_OR_GREATER
                         cancellationToken
@@ -185,7 +184,7 @@ namespace Firecrawl
                     ).ConfigureAwait(false);
 
                     return
-                        await global::Firecrawl.GenerateLLMsTxtResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                        await global::Firecrawl.GenerateLLMsTxtResponse.FromJsonStreamAsync(__content, JsonSerializerOptions).ConfigureAwait(false) ??
                         throw new global::System.InvalidOperationException("Response deserialization failed.");
                 }
                 catch (global::System.Exception __ex)

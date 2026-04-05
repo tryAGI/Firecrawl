@@ -67,7 +67,7 @@ namespace Firecrawl
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 }
             }
-            var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
+            var __httpRequestContentBody = request.ToJson(JsonSerializerOptions);
             var __httpRequestContent = new global::System.Net.Http.StringContent(
                 content: __httpRequestContentBody,
                 encoding: global::System.Text.Encoding.UTF8,
@@ -104,13 +104,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_408 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_408 = global::Firecrawl.SearchAndScrapeResponse2.FromJson(__content_408, JsonSerializerContext);
+                        __value_408 = global::Firecrawl.SearchAndScrapeResponse2.FromJson(__content_408, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_408 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_408 = global::Firecrawl.SearchAndScrapeResponse2.FromJson(__content_408, JsonSerializerContext);
+                        __value_408 = global::Firecrawl.SearchAndScrapeResponse2.FromJson(__content_408, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -142,13 +142,13 @@ namespace Firecrawl
                     if (ReadResponseAsString)
                     {
                         __content_500 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                        __value_500 = global::Firecrawl.SearchAndScrapeResponse3.FromJson(__content_500, JsonSerializerContext);
+                        __value_500 = global::Firecrawl.SearchAndScrapeResponse3.FromJson(__content_500, JsonSerializerOptions);
                     }
                     else
                     {
                         __content_500 = await __response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        __value_500 = global::Firecrawl.SearchAndScrapeResponse3.FromJson(__content_500, JsonSerializerContext);
+                        __value_500 = global::Firecrawl.SearchAndScrapeResponse3.FromJson(__content_500, JsonSerializerOptions);
                     }
                 }
                 catch (global::System.Exception __ex)
@@ -192,7 +192,7 @@ namespace Firecrawl
                     __response.EnsureSuccessStatusCode();
 
                     return
-                        global::Firecrawl.SearchAndScrapeResponse.FromJson(__content, JsonSerializerContext) ??
+                        global::Firecrawl.SearchAndScrapeResponse.FromJson(__content, JsonSerializerOptions) ??
                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
                 }
                 catch (global::System.Exception __ex)
@@ -215,7 +215,6 @@ namespace Firecrawl
                 try
                 {
                     __response.EnsureSuccessStatusCode();
-
                     using var __content = await __response.Content.ReadAsStreamAsync(
 #if NET5_0_OR_GREATER
                         cancellationToken
@@ -223,7 +222,7 @@ namespace Firecrawl
                     ).ConfigureAwait(false);
 
                     return
-                        await global::Firecrawl.SearchAndScrapeResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                        await global::Firecrawl.SearchAndScrapeResponse.FromJsonStreamAsync(__content, JsonSerializerOptions).ConfigureAwait(false) ??
                         throw new global::System.InvalidOperationException("Response deserialization failed.");
                 }
                 catch (global::System.Exception __ex)
