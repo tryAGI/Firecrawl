@@ -8,11 +8,13 @@ namespace Firecrawl
         /// Start a deep research operation on a query
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.StartDeepResearchResponse> StartDeepResearchAsync(
 
             global::Firecrawl.StartDeepResearchRequest request,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Start a deep research operation on a query
@@ -42,6 +44,7 @@ namespace Firecrawl
         /// <param name="jsonOptions">
         /// Options for JSON output
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.StartDeepResearchResponse> StartDeepResearchAsync(
@@ -53,6 +56,7 @@ namespace Firecrawl
             string? systemPrompt = default,
             global::System.Collections.Generic.IList<global::Firecrawl.StartDeepResearchRequestFormat>? formats = default,
             global::Firecrawl.StartDeepResearchRequestJsonOptions? jsonOptions = default,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

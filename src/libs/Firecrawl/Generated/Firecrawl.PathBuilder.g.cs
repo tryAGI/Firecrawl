@@ -225,6 +225,40 @@ namespace Firecrawl
         }
 
         /// <summary>
+        /// Adds a pre-serialized query string fragment to the URL.
+        /// </summary>
+        /// <param name="value">The serialized query string value.</param>
+        /// <returns>The current <see cref="PathBuilder"/> instance.</returns>
+        public PathBuilder AddRawQueryString(
+            string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return this;
+            }
+
+            value = value.TrimStart('?', '&');
+            if (value.Length == 0)
+            {
+                return this;
+            }
+
+            if (_firstParameter)
+            {
+                _stringBuilder.Append('?');
+                _firstParameter = false;
+            }
+            else
+            {
+                _stringBuilder.Append('&');
+            }
+
+            _stringBuilder.Append(value);
+
+            return this;
+        }
+
+        /// <summary>
         /// Returns the constructed URL as a string.
         /// </summary>
         /// <returns>The constructed URL.</returns>
@@ -240,6 +274,11 @@ namespace Firecrawl
         /// 
         /// </summary>
         public string Type { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SchemeId { get; set; } = string.Empty;
 
         /// <summary>
         /// 
