@@ -31,6 +31,9 @@ namespace Firecrawl
 #if DEBUG
             = true;
 #endif
+
+        /// <inheritdoc/>
+        public global::Firecrawl.AutoSDKClientOptions Options { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -40,7 +43,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public BillingClient Billing => new BillingClient(HttpClient, authorizations: Authorizations)
+        public BillingClient Billing => new BillingClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -49,7 +52,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public CrawlingClient Crawling => new CrawlingClient(HttpClient, authorizations: Authorizations)
+        public CrawlingClient Crawling => new CrawlingClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -58,7 +61,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public ExtractionClient Extraction => new ExtractionClient(HttpClient, authorizations: Authorizations)
+        public ExtractionClient Extraction => new ExtractionClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -67,7 +70,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public LLMsTxtClient LLMsTxt => new LLMsTxtClient(HttpClient, authorizations: Authorizations)
+        public LLMsTxtClient LLMsTxt => new LLMsTxtClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -76,7 +79,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public MappingClient Mapping => new MappingClient(HttpClient, authorizations: Authorizations)
+        public MappingClient Mapping => new MappingClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -85,7 +88,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public ResearchClient Research => new ResearchClient(HttpClient, authorizations: Authorizations)
+        public ResearchClient Research => new ResearchClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -94,7 +97,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public ScrapingClient Scraping => new ScrapingClient(HttpClient, authorizations: Authorizations)
+        public ScrapingClient Scraping => new ScrapingClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -103,7 +106,7 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
-        public SearchClient Search => new SearchClient(HttpClient, authorizations: Authorizations)
+        public SearchClient Search => new SearchClient(HttpClient, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -122,11 +125,37 @@ namespace Firecrawl
             global::System.Net.Http.HttpClient? httpClient = null,
             global::System.Uri? baseUri = null,
             global::System.Collections.Generic.List<global::Firecrawl.EndPointAuthorization>? authorizations = null,
+            bool disposeHttpClient = true) : this(
+                httpClient,
+                baseUri,
+                authorizations,
+                options: null,
+                disposeHttpClient: disposeHttpClient)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new instance of the FirecrawlClient.
+        /// If no httpClient is provided, a new one will be created.
+        /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
+        /// </summary>
+        /// <param name="httpClient">The HttpClient instance. If not provided, a new one will be created.</param>
+        /// <param name="baseUri">The base URL for the API. If not provided, the default baseUri from OpenAPI spec will be used.</param>
+        /// <param name="authorizations">The authorizations to use for the requests.</param>
+        /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
+        /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
+        public FirecrawlClient(
+            global::System.Net.Http.HttpClient? httpClient = null,
+            global::System.Uri? baseUri = null,
+            global::System.Collections.Generic.List<global::Firecrawl.EndPointAuthorization>? authorizations = null,
+            global::Firecrawl.AutoSDKClientOptions? options = null,
             bool disposeHttpClient = true)
         {
+
             HttpClient = httpClient ?? new global::System.Net.Http.HttpClient();
             HttpClient.BaseAddress ??= baseUri ?? new global::System.Uri(DefaultBaseUrl);
             Authorizations = authorizations ?? new global::System.Collections.Generic.List<global::Firecrawl.EndPointAuthorization>();
+            Options = options ?? new global::Firecrawl.AutoSDKClientOptions();
             _disposeHttpClient = disposeHttpClient;
 
             Initialized(HttpClient);

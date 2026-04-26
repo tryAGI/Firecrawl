@@ -8,11 +8,13 @@ namespace Firecrawl
         /// Extract structured data from pages using LLMs
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.ExtractResponse> ExtractDataAsync(
 
             global::Firecrawl.ExtractDataRequest request,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Extract structured data from pages using LLMs
@@ -45,6 +47,7 @@ namespace Firecrawl
         /// If invalid URLs are specified in the urls array, they will be ignored. Instead of them failing the entire request, an extract using the remaining valid URLs will be performed, and the invalid URLs will be returned in the invalidURLs field of the response.<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.ExtractResponse> ExtractDataAsync(
@@ -57,6 +60,7 @@ namespace Firecrawl
             bool? showSources = default,
             global::Firecrawl.ScrapeOptions? scrapeOptions = default,
             bool? ignoreInvalidURLs = default,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

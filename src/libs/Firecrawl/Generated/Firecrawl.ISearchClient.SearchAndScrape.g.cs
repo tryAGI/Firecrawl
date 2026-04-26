@@ -8,11 +8,13 @@ namespace Firecrawl
         /// Search and optionally scrape search results
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.SearchAndScrapeResponse> SearchAndScrapeAsync(
 
             global::Firecrawl.SearchAndScrapeRequest request,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Search and optionally scrape search results
@@ -42,6 +44,7 @@ namespace Firecrawl
         /// Options for scraping search results<br/>
         /// Default Value: {}
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.SearchAndScrapeResponse> SearchAndScrapeAsync(
@@ -52,6 +55,7 @@ namespace Firecrawl
             int? timeout = default,
             bool? ignoreInvalidURLs = default,
             global::Firecrawl.SearchAndScrapeRequestScrapeOptions? scrapeOptions = default,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

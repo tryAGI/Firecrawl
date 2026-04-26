@@ -8,11 +8,13 @@ namespace Firecrawl
         /// Crawl multiple URLs based on options
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.CrawlResponse> CrawlUrlsAsync(
 
             global::Firecrawl.CrawlUrlsRequest request,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Crawl multiple URLs based on options
@@ -66,6 +68,7 @@ namespace Firecrawl
         /// A webhook specification object.
         /// </param>
         /// <param name="scrapeOptions"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.CrawlResponse> CrawlUrlsAsync(
@@ -82,6 +85,7 @@ namespace Firecrawl
             double? delay = default,
             global::Firecrawl.CrawlUrlsRequestWebhook? webhook = default,
             global::Firecrawl.ScrapeOptions? scrapeOptions = default,
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
