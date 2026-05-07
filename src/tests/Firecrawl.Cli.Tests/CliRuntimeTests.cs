@@ -182,8 +182,11 @@ public sealed class CliRuntimeTests
             var humanParseResult = CliTestSupport.RootCommand.Parse([]);
             var jsonParseResult = CliTestSupport.RootCommand.Parse(["--json"]);
 
-            await CliRuntime.WriteOutputAsync(humanParseResult, new { success = true }, "human output", humanPath).ConfigureAwait(false);
-            await CliRuntime.WriteOutputAsync(jsonParseResult, new { success = true }, "human output", jsonPath).ConfigureAwait(false);
+            using var jsonDocument = JsonDocument.Parse("{\"success\":true}");
+            var response = jsonDocument.RootElement.Clone();
+
+            await CliRuntime.WriteOutputAsync(humanParseResult, response, "human output", humanPath).ConfigureAwait(false);
+            await CliRuntime.WriteOutputAsync(jsonParseResult, response, "human output", jsonPath).ConfigureAwait(false);
 
             (await File.ReadAllTextAsync(humanPath).ConfigureAwait(false)).Should().Be("human output");
             (await File.ReadAllTextAsync(jsonPath).ConfigureAwait(false)).Should().Contain("\"success\": true");

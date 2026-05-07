@@ -17,6 +17,26 @@ public sealed class CliParsingTests
 
         actual.Should().BeEquivalentTo(
         [
+            "api billing get-credit-usage",
+            "api billing get-token-usage",
+            "api crawling cancel-crawl",
+            "api crawling crawl-urls",
+            "api crawling get-active-crawls",
+            "api crawling get-crawl-errors",
+            "api crawling get-crawl-status",
+            "api extraction extract-data",
+            "api extraction get-extract-status",
+            "api llms-txt generate-llms-txt",
+            "api llms-txt get-llms-txt-status",
+            "api mapping map-urls",
+            "api research get-deep-research-status",
+            "api research start-deep-research",
+            "api scraping cancel-batch-scrape",
+            "api scraping get-batch-scrape-errors",
+            "api scraping get-batch-scrape-status",
+            "api scraping scrape-and-extract-from-url",
+            "api scraping scrape-and-extract-from-urls",
+            "api search search-and-scrape",
             "auth clear",
             "auth set",
             "auth status",
@@ -69,6 +89,7 @@ public sealed class CliParsingTests
         yield return [new[] { "auth", "set", "test-api-key" }, "set"];
         yield return [new[] { "auth", "clear" }, "clear"];
         yield return [new[] { "auth", "status", "--output", "auth-status.txt" }, "status"];
+        yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "--request-json", "{\"url\":\"https://example.com\"}" }, "scrape-and-extract-from-url"];
         yield return [new[] { "scrape", "https://example.com", "--format", "markdown", "--format", "html", "--header", "Accept=text/html", "--mobile", "false" }, "scrape"];
         yield return [new[] { "batch-scrape", "start", "https://example.com", "https://example.org", "--ignore-invalid-urls", "--webhook-url", "https://hooks.example.com/firecrawl", "--webhook-event", "completed", "--wait" }, "start"];
         yield return [new[] { "batch-scrape", "status", "job-123", "--output-dir", TempOutputDirectory }, "status"];

@@ -45,6 +45,7 @@ internal static class CliRoot
         rootCommand.Subcommands.Add(CliCommands.CreateTeamCommand());
         rootCommand.Subcommands.Add(CliCommands.CreateSearchCommand());
         rootCommand.Subcommands.Add(CliCommands.CreateLlmstxtCommand());
+        rootCommand.Subcommands.Add(GeneratedApi.Commands.ApiCommand.Create());
 
         return rootCommand;
     }

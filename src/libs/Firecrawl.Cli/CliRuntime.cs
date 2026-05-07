@@ -3,18 +3,13 @@ using System.CommandLine.Parsing;
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace Firecrawl.Cli;
 
 internal static class CliRuntime
 {
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-        WriteIndented = true,
-    };
-
     public static string GetSettingsFolder()
     {
         var folder = Path.Combine(
@@ -196,7 +191,7 @@ internal static class CliRuntime
 
         if (pairs is not null)
         {
-            return JsonSerializer.SerializeToElement(pairs, JsonOptions);
+            return JsonSerializer.SerializeToElement(pairs, CliJsonContext.Default.DictionaryStringString);
         }
 
         return jsonValue;
@@ -279,12 +274,17 @@ internal static class CliRuntime
                     string.Join(Environment.NewLine, item.Links)).ConfigureAwait(false);
             }
 
-            var metadataJson = SerializeJson(new
+            var metadata = new JsonObject
             {
-                sourceUrl = item.SourceUrl,
-                screenshot = item.Screenshot,
-                metadata = item.Metadata,
-            });
+                ["sourceUrl"] = item.SourceUrl,
+                ["screenshot"] = item.Screenshot,
+            };
+            if (item.Metadata is not null)
+            {
+                metadata["metadata"] = ToJsonNode(item.Metadata);
+            }
+
+            var metadataJson = PrettyJson(metadata.ToJsonString());
             await File.WriteAllTextAsync(Path.Combine(outputDirectory, $"{baseName}.metadata.json"), metadataJson).ConfigureAwait(false);
         }
     }
@@ -360,7 +360,36 @@ internal static class CliRuntime
 
     public static string SerializeJson(object value)
     {
-        return JsonSerializer.Serialize(value, JsonOptions);
+        var json = value switch
+        {
+            AuthStatusInfo authStatus => JsonSerializer.Serialize(authStatus, CliJsonContext.Default.AuthStatusInfo),
+            JsonElement element => JsonSerializer.Serialize(element, CliJsonContext.Default.JsonElement),
+            Dictionary<string, string> dictionary => JsonSerializer.Serialize(dictionary, CliJsonContext.Default.DictionaryStringString),
+            _ => JsonSerializer.Serialize(value, value.GetType(), SourceGenerationContext.Default),
+        };
+
+        return PrettyJson(json);
+    }
+
+    private static JsonNode? ToJsonNode(object value)
+    {
+        var json = value is JsonElement element
+            ? JsonSerializer.Serialize(element, CliJsonContext.Default.JsonElement)
+            : JsonSerializer.Serialize(value, value.GetType(), SourceGenerationContext.Default);
+
+        return JsonNode.Parse(json);
+    }
+
+    private static string PrettyJson(string json)
+    {
+        using var document = JsonDocument.Parse(json);
+        using var stream = new MemoryStream();
+        using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = true }))
+        {
+            document.WriteTo(writer);
+        }
+
+        return Encoding.UTF8.GetString(stream.ToArray());
     }
 
     public static string MaskSecret(string secret)
@@ -1086,3 +1115,8 @@ internal sealed record SavedPageResult(
     IEnumerable<string>? Links,
     string? Screenshot,
     object? Metadata);
+
+[JsonSerializable(typeof(Dictionary<string, string>))]
+[JsonSerializable(typeof(JsonElement))]
+[JsonSerializable(typeof(AuthStatusInfo))]
+internal sealed partial class CliJsonContext : JsonSerializerContext;
