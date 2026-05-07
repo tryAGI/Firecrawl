@@ -4,18 +4,18 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class SearchAndScrapeResponse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("success")]
         public bool? Success { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         public global::System.Collections.Generic.IList<global::Firecrawl.SearchAndScrapeResponseDataItem>? Data { get; set; }

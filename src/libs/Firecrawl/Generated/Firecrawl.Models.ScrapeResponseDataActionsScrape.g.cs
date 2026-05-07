@@ -4,18 +4,18 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ScrapeResponseDataActionsScrape
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("url")]
         public string? Url { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("html")]
         public string? Html { get; set; }

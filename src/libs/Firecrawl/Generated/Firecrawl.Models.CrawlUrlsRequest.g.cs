@@ -4,7 +4,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CrawlUrlsRequest
     {
@@ -94,7 +94,7 @@ namespace Firecrawl
         public global::Firecrawl.CrawlUrlsRequestWebhook? Webhook { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("scrapeOptions")]
         public global::Firecrawl.ScrapeOptions? ScrapeOptions { get; set; }

@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionScrollType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Scroll,
     }

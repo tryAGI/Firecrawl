@@ -10,11 +10,11 @@ namespace Firecrawl
     public enum ScrapeOptionsActionScrollDirection
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Down,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Up,
     }

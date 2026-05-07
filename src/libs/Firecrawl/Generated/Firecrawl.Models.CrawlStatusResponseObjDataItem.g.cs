@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CrawlStatusResponseObjDataItem
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("markdown")]
         public string? Markdown { get; set; }
@@ -39,7 +39,7 @@ namespace Firecrawl
         public string? Screenshot { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
         public global::Firecrawl.CrawlStatusResponseObjDataItemMetadata? Metadata { get; set; }

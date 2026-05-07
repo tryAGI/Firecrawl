@@ -7,9 +7,20 @@ namespace Firecrawl
         /// <summary>
         /// Get all active crawls for the authenticated team
         /// </summary>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Firecrawl.GetActiveCrawlsResponse> GetActiveCrawlsAsync(
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get all active crawls for the authenticated team
+        /// </summary>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Firecrawl.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.GetActiveCrawlsResponse>> GetActiveCrawlsAsResponseAsync(
+            global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

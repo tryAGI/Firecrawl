@@ -9,19 +9,19 @@ namespace Firecrawl
     public enum ScrapeResponseDataChangeTrackingChangeStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Changed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         New,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Removed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Same,
     }
