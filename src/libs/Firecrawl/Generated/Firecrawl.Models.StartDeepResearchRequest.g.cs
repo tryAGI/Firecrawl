@@ -4,7 +4,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class StartDeepResearchRequest
     {
@@ -49,7 +49,7 @@ namespace Firecrawl
         public string? SystemPrompt { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("formats")]
         public global::System.Collections.Generic.IList<global::Firecrawl.StartDeepResearchRequestFormat>? Formats { get; set; }

@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionScreenshotType
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Screenshot,
     }

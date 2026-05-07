@@ -4,25 +4,25 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class GetLLMsTxtStatusResponse
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("success")]
         public bool? Success { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("status")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Firecrawl.JsonConverters.GetLLMsTxtStatusResponseStatusJsonConverter))]
         public global::Firecrawl.GetLLMsTxtStatusResponseStatus? Status { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         public global::Firecrawl.GetLLMsTxtStatusResponseData? Data { get; set; }

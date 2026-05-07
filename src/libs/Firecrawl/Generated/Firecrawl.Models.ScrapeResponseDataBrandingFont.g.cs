@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class ScrapeResponseDataBrandingFont
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("family")]
         public string? Family { get; set; }

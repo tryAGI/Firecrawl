@@ -4,7 +4,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class GetCreditUsageResponse
     {
@@ -16,7 +16,7 @@ namespace Firecrawl
         public bool? Success { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         public global::Firecrawl.GetCreditUsageResponseData? Data { get; set; }

@@ -11,7 +11,7 @@ namespace Firecrawl
     public sealed partial class FirecrawlClient : global::Firecrawl.IFirecrawlClient, global::System.IDisposable
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public const string DefaultBaseUrl = "https://api.firecrawl.dev/v1";
 
@@ -35,13 +35,13 @@ namespace Firecrawl
         /// <inheritdoc/>
         public global::Firecrawl.AutoSDKClientOptions Options { get; }
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; } = global::Firecrawl.SourceGenerationContext.Default;
 
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public BillingClient Billing => new BillingClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -50,7 +50,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public CrawlingClient Crawling => new CrawlingClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -59,7 +59,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public ExtractionClient Extraction => new ExtractionClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -68,7 +68,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public LLMsTxtClient LLMsTxt => new LLMsTxtClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -77,7 +77,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public MappingClient Mapping => new MappingClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -86,7 +86,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public ResearchClient Research => new ResearchClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -95,7 +95,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public ScrapingClient Scraping => new ScrapingClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -104,7 +104,7 @@ namespace Firecrawl
         };
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public SearchClient Search => new SearchClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {

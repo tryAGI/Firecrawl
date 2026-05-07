@@ -4,24 +4,24 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public enum CrawlUrlsRequestWebhookEvent
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Completed,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Failed,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Page,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Started,
     }

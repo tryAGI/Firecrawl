@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class ScrapeResponseData
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("markdown")]
         public string? Markdown { get; set; }
@@ -45,7 +45,7 @@ namespace Firecrawl
         public global::Firecrawl.ScrapeResponseDataActions? Actions { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
         public global::Firecrawl.ScrapeResponseDataMetadata? Metadata { get; set; }

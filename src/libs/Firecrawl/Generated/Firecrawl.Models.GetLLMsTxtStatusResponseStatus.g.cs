@@ -4,20 +4,20 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public enum GetLLMsTxtStatusResponseStatus
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Completed,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Failed,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Processing,
     }
