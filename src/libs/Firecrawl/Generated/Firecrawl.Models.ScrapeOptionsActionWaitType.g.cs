@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionWaitType
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Wait,
     }

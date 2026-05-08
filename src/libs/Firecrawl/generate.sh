@@ -119,7 +119,7 @@ new = """        private static bool DetermineRequiresValue(global::System.Type 
         }
 """
 text, count = re.subn(old, new, text)
-if count != 1:
+if count == 0 and 'GetProperties(global::System.Reflection.BindingFlags' in text:
     raise SystemExit('Expected AllOf reflection block was not found.')
 path.write_text(text)
 PY

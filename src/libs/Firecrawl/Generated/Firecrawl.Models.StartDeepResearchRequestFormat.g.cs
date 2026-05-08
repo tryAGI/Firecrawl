@@ -9,15 +9,15 @@ namespace Firecrawl
     public enum StartDeepResearchRequestFormat
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Branding,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Json,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Markdown,
     }

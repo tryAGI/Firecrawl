@@ -9,19 +9,19 @@ namespace Firecrawl
     public enum ExtractStatusResponseStatus
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Cancelled,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Completed,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Failed,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Processing,
     }

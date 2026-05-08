@@ -20,7 +20,7 @@ namespace Firecrawl.JsonConverters
                     {
                         return global::Firecrawl.ScrapeOptionsActionWaitTypeExtensions.ToEnum(stringValue);
                     }
-
+                    
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

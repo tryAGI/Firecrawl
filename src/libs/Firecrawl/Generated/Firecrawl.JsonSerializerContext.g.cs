@@ -7,7 +7,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     [global::System.Text.Json.Serialization.JsonSourceGenerationOptions(
         DefaultIgnoreCondition = global::System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
@@ -279,6 +279,7 @@ namespace Firecrawl
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.GetLLMsTxtStatusResponseStatus), TypeInfoPropertyName = "GetLLMsTxtStatusResponseStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.GetLLMsTxtStatusResponseData))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.GetLLMsTxtStatusResponse2))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionWait, global::Firecrawl.ScrapeOptionsActionScreenshot, global::Firecrawl.ScrapeOptionsActionClick, global::Firecrawl.ScrapeOptionsActionWriteText, global::Firecrawl.ScrapeOptionsActionPressAKey, global::Firecrawl.ScrapeOptionsActionScroll, global::Firecrawl.ScrapeOptionsActionScrape, global::Firecrawl.ScrapeOptionsActionExecuteJavaScript>?), TypeInfoPropertyName = "ScrapeOptionsActionExecuteJavaScript_6530b403140f8d0c")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Firecrawl.ScrapeOptionsFormat>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Firecrawl.OneOf<global::Firecrawl.ScrapeOptionsActionWait, global::Firecrawl.ScrapeOptionsActionScreenshot, global::Firecrawl.ScrapeOptionsActionClick, global::Firecrawl.ScrapeOptionsActionWriteText, global::Firecrawl.ScrapeOptionsActionPressAKey, global::Firecrawl.ScrapeOptionsActionScroll, global::Firecrawl.ScrapeOptionsActionScrape, global::Firecrawl.ScrapeOptionsActionExecuteJavaScript>>), TypeInfoPropertyName = "ScrapeOptionsActionExecuteJavaScript_aa877162c83d46a8")]

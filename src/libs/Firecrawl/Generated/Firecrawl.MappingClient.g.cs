@@ -10,7 +10,7 @@ namespace Firecrawl
     public sealed partial class MappingClient : global::Firecrawl.IMappingClient, global::System.IDisposable
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public const string DefaultBaseUrl = "https://api.firecrawl.dev/v1";
 
@@ -34,7 +34,7 @@ namespace Firecrawl
         /// <inheritdoc/>
         public global::Firecrawl.AutoSDKClientOptions Options { get; }
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; } = global::Firecrawl.SourceGenerationContext.Default;
 

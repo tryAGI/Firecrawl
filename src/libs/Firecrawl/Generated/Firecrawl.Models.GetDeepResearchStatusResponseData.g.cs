@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class GetDeepResearchStatusResponseData
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("finalAnalysis")]
         public string? FinalAnalysis { get; set; }
@@ -21,50 +21,50 @@ namespace Firecrawl
         public object? Json { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("activities")]
         public global::System.Collections.Generic.IList<global::Firecrawl.GetDeepResearchStatusResponseDataActivitie>? Activities { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("sources")]
         public global::System.Collections.Generic.IList<global::Firecrawl.GetDeepResearchStatusResponseDataSource>? Sources { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("status")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Firecrawl.JsonConverters.GetDeepResearchStatusResponseDataStatusJsonConverter))]
         public global::Firecrawl.GetDeepResearchStatusResponseDataStatus? Status { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("error")]
         public string? Error { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("expiresAt")]
         public global::System.DateTime? ExpiresAt { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("currentDepth")]
         public int? CurrentDepth { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("maxDepth")]
         public int? MaxDepth { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("totalUrls")]
         public int? TotalUrls { get; set; }

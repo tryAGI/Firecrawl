@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionExecuteJavaScriptType
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         ExecuteJavascript,
     }

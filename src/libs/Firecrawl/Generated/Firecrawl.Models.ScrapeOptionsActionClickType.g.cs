@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionClickType
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Click,
     }

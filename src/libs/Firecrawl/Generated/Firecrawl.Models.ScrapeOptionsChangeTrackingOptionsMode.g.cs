@@ -4,16 +4,16 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public enum ScrapeOptionsChangeTrackingOptionsMode
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         GitDiff,
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Json,
     }

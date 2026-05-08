@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class ExtractDataRequest
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("urls")]
         [global::System.Text.Json.Serialization.JsonRequired]
@@ -56,7 +56,7 @@ namespace Firecrawl
         public bool? ShowSources { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("scrapeOptions")]
         public global::Firecrawl.ScrapeOptions? ScrapeOptions { get; set; }

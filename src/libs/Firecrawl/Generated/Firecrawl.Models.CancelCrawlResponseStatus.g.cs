@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum CancelCrawlResponseStatus
     {
         /// <summary>
-        ///
+        /// 
         /// </summary>
         Cancelled,
     }

@@ -4,7 +4,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public sealed partial class SearchAndScrapeResponseDataItem
     {
@@ -57,7 +57,7 @@ namespace Firecrawl
         public string? Screenshot { get; set; }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
         public global::Firecrawl.SearchAndScrapeResponseDataItemMetadata? Metadata { get; set; }
