@@ -69,5 +69,6 @@ namespace Firecrawl
         public GetLLMsTxtStatusResponse()
         {
         }
+
     }
 }

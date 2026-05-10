@@ -196,5 +196,6 @@ namespace Firecrawl
         public CrawlUrlsRequest()
         {
         }
+
     }
 }

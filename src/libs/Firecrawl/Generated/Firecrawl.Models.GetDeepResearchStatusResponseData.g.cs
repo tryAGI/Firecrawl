@@ -123,5 +123,6 @@ namespace Firecrawl
         public GetDeepResearchStatusResponseData()
         {
         }
+
     }
 }

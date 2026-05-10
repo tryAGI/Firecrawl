@@ -53,5 +53,6 @@ namespace Firecrawl
         public StartDeepResearchResponse()
         {
         }
+
     }
 }

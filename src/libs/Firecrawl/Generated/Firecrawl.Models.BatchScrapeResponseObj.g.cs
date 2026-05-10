@@ -68,5 +68,6 @@ namespace Firecrawl
         public BatchScrapeResponseObj()
         {
         }
+
     }
 }

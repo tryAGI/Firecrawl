@@ -133,5 +133,6 @@ namespace Firecrawl
         public ScrapeResponseDataBranding()
         {
         }
+
     }
 }
