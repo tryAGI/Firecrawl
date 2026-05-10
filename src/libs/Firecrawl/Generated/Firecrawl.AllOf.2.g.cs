@@ -88,6 +88,11 @@ namespace Firecrawl
         /// <summary>
         /// 
         /// </summary>
+        public static AllOf<T1, T2> FromValue1(T1? value) => new AllOf<T1, T2>(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator AllOf<T1, T2>(T2 value) => new AllOf<T1, T2>((T2?)value);
 
         /// <summary>
@@ -102,6 +107,11 @@ namespace Firecrawl
         {
             Value2 = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static AllOf<T1, T2> FromValue2(T2? value) => new AllOf<T1, T2>(value);
 
         /// <summary>
         /// 
