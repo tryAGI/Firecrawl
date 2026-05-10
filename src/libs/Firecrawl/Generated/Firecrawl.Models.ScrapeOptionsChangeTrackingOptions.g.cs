@@ -76,5 +76,6 @@ namespace Firecrawl
         public ScrapeOptionsChangeTrackingOptions()
         {
         }
+
     }
 }

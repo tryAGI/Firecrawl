@@ -43,5 +43,6 @@ namespace Firecrawl
         public CancelCrawlResponse()
         {
         }
+
     }
 }

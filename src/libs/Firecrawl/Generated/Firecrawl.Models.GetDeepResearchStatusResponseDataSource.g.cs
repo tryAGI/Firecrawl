@@ -66,5 +66,6 @@ namespace Firecrawl
         public GetDeepResearchStatusResponseDataSource()
         {
         }
+
     }
 }

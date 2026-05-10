@@ -59,5 +59,6 @@ namespace Firecrawl
         public ExtractResponse()
         {
         }
+
     }
 }

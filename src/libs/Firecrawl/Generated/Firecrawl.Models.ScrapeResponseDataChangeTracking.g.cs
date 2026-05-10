@@ -87,5 +87,6 @@ namespace Firecrawl
         public ScrapeResponseDataChangeTracking()
         {
         }
+
     }
 }

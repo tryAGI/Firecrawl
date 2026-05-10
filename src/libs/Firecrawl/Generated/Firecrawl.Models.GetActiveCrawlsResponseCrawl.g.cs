@@ -78,5 +78,6 @@ namespace Firecrawl
         public GetActiveCrawlsResponseCrawl()
         {
         }
+
     }
 }

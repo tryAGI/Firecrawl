@@ -54,5 +54,6 @@ namespace Firecrawl
         public SearchAndScrapeResponse2()
         {
         }
+
     }
 }

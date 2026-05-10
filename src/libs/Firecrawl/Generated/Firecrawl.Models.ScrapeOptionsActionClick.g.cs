@@ -70,5 +70,6 @@ namespace Firecrawl
         public ScrapeOptionsActionClick()
         {
         }
+
     }
 }

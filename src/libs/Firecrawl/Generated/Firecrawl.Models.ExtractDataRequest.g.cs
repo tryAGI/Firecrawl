@@ -136,5 +136,6 @@ namespace Firecrawl
         public ExtractDataRequest()
         {
         }
+
     }
 }

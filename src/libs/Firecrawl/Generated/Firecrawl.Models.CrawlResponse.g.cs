@@ -57,5 +57,6 @@ namespace Firecrawl
         public CrawlResponse()
         {
         }
+
     }
 }

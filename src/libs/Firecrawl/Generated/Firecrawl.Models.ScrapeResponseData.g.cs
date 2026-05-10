@@ -147,5 +147,6 @@ namespace Firecrawl
         public ScrapeResponseData()
         {
         }
+
     }
 }
