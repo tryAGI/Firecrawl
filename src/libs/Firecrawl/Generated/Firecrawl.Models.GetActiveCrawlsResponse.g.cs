@@ -52,5 +52,6 @@ namespace Firecrawl
         public GetActiveCrawlsResponse()
         {
         }
+
     }
 }

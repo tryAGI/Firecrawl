@@ -48,5 +48,6 @@ namespace Firecrawl
         public MapResponse()
         {
         }
+
     }
 }

@@ -109,5 +109,6 @@ namespace Firecrawl
         public BatchScrapeStatusResponseObjDataItemMetadata()
         {
         }
+
     }
 }

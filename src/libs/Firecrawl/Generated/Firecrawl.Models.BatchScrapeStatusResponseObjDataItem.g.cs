@@ -92,5 +92,6 @@ namespace Firecrawl
         public BatchScrapeStatusResponseObjDataItem()
         {
         }
+
     }
 }

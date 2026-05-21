@@ -51,5 +51,6 @@ namespace Firecrawl
         public GetCreditUsageResponse()
         {
         }
+
     }
 }

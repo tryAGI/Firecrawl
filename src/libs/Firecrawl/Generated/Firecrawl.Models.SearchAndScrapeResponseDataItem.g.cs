@@ -127,5 +127,6 @@ namespace Firecrawl
         public SearchAndScrapeResponseDataItem()
         {
         }
+
     }
 }

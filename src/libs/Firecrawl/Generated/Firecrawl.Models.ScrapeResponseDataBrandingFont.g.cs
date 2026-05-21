@@ -39,5 +39,6 @@ namespace Firecrawl
         public ScrapeResponseDataBrandingFont()
         {
         }
+
     }
 }

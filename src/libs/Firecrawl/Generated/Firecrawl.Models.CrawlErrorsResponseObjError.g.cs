@@ -72,5 +72,6 @@ namespace Firecrawl
         public CrawlErrorsResponseObjError()
         {
         }
+
     }
 }

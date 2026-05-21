@@ -64,5 +64,6 @@ namespace Firecrawl
         public ScrapeAndExtractFromUrlsRequest2()
         {
         }
+
     }
 }

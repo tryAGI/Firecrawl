@@ -268,5 +268,6 @@ namespace Firecrawl
         public ScrapeOptions()
         {
         }
+
     }
 }

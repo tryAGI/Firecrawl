@@ -55,5 +55,6 @@ namespace Firecrawl
         public ScrapeOptionsActionScreenshot()
         {
         }
+
     }
 }

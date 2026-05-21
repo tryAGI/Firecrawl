@@ -44,5 +44,6 @@ namespace Firecrawl
         public GetTokenUsageResponseData()
         {
         }
+
     }
 }
