@@ -30,7 +30,7 @@ public partial class CrawlingClient
     {
         return PollingHelper.PollUntilAsync(
             fetchStatus: ct => GetCrawlStatusAsync(id: jobId, cancellationToken: ct),
-            isComplete: r => r.Status is "completed" or "failed",
+            isComplete: r => r.Status is "completed" or "failed" or "cancelled",
             jobDescription: $"Crawl job {jobId}",
             pollingInterval: pollingInterval,
             progress: progress,

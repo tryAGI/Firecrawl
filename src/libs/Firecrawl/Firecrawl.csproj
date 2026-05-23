@@ -3,10 +3,26 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
-  
+
   <PropertyGroup Label="Nuget">
     <Description>Generated C# SDK based on Firecrawl OpenAPI specification.</Description>
     <PackageTags>api;client;sdk;dotnet;swagger;openapi;specification;generated;nswag</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Label="HandWrittenSuppressions">
+    <!--
+      Rules below are relaxed for hand-written DTO/extension code in this project.
+      Generated files in Generated/ already comply via AutoSDK's templates.
+        CS1591 — missing XML docs on public members of hand-written DTOs.
+        CA1032 — extra exception constructors not used by our throw sites.
+        CA1056 — Url string properties (Firecrawl returns plain strings, not Uri).
+        CA1308 — ToLowerInvariant used for file-extension matching (intentional).
+        CA1819 — byte[] property on ParseFile (necessary for multipart upload).
+        CA1822 — partial-method overrides that don't touch instance state.
+        CA2000 — StringContent/ByteArrayContent ownership transferred to MultipartFormDataContent.
+        CA2227 — DTO collection setters required for System.Text.Json source-gen round-trip.
+    -->
+    <NoWarn>$(NoWarn);CS1591;CA1032;CA1056;CA1308;CA1819;CA1822;CA2000;CA2227</NoWarn>
   </PropertyGroup>
 
 </Project>

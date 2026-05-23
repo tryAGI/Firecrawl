@@ -30,7 +30,7 @@ public partial class ScrapingClient
     {
         return PollingHelper.PollUntilAsync(
             fetchStatus: ct => GetBatchScrapeStatusAsync(id: jobId, cancellationToken: ct),
-            isComplete: r => r.Status is "completed" or "failed",
+            isComplete: r => r.Status is "completed" or "failed" or "cancelled",
             jobDescription: $"Batch scrape job {jobId}",
             pollingInterval: pollingInterval,
             progress: progress,
