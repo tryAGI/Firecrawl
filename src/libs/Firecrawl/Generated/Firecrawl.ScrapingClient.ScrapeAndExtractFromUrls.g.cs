@@ -358,18 +358,17 @@ namespace Firecrawl
                                     __exception_402 = __ex;
                                 }
 
-                                throw new global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlsResponse>(
+
+                                throw global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlsResponse>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_402 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_402,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_402,
-                                    ResponseObject = __value_402,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_402,
+                                    responseObject: __value_402,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Too many requests
                             if ((int)__response.StatusCode == 429)
@@ -396,18 +395,17 @@ namespace Firecrawl
                                     __exception_429 = __ex;
                                 }
 
-                                throw new global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlsResponse2>(
+
+                                throw global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlsResponse2>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_429 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_429,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_429,
-                                    ResponseObject = __value_429,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_429,
+                                    responseObject: __value_429,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Server error
                             if ((int)__response.StatusCode == 500)
@@ -434,18 +432,17 @@ namespace Firecrawl
                                     __exception_500 = __ex;
                                 }
 
-                                throw new global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlsResponse3>(
+
+                                throw global::Firecrawl.ApiException<global::Firecrawl.ScrapeAndExtractFromUrlsResponse3>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_500,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_500,
-                                    ResponseObject = __value_500,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_500,
+                                    responseObject: __value_500,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
 
                             if (__effectiveReadResponseAsString)
@@ -479,17 +476,15 @@ namespace Firecrawl
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    throw new global::Firecrawl.ApiException(
+                                    throw global::Firecrawl.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
                             else
@@ -526,17 +521,15 @@ namespace Firecrawl
                                     {
                                     }
 
-                                    throw new global::Firecrawl.ApiException(
+                                    throw global::Firecrawl.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
 
