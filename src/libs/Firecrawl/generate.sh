@@ -43,4 +43,10 @@ autosdk generate openapi.json \
   --clientClassName FirecrawlClient \
   --targetFramework net10.0 \
   --output Generated \
-  --exclude-deprecated-operations
+  --exclude-deprecated-operations \
+  --generate-http-exception-hierarchy \
+  --generate-idempotency-helpers \
+  --idempotency-header-name x-idempotency-key \
+  --generate-retry-handler \
+  --generate-pageable-helpers \
+  --generate-multipart-upload-helpers

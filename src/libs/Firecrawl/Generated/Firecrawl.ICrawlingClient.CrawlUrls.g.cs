@@ -7,6 +7,9 @@ namespace Firecrawl
         /// <summary>
         /// Crawl multiple URLs based on options
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -14,11 +17,15 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.CrawlResponse> CrawlUrlsAsync(
 
             global::Firecrawl.CrawlUrlsRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Crawl multiple URLs based on options
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -26,6 +33,7 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.CrawlResponse>> CrawlUrlsAsResponseAsync(
 
             global::Firecrawl.CrawlUrlsRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -80,6 +88,9 @@ namespace Firecrawl
         /// A webhook specification object.
         /// </param>
         /// <param name="scrapeOptions"></param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -97,6 +108,7 @@ namespace Firecrawl
             double? delay = default,
             global::Firecrawl.CrawlUrlsRequestWebhook? webhook = default,
             global::Firecrawl.ScrapeOptions? scrapeOptions = default,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

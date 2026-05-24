@@ -27,10 +27,12 @@ namespace Firecrawl
             };
         partial void PrepareGenerateLLMsTxtArguments(
             global::System.Net.Http.HttpClient httpClient,
+            ref string? idempotencyKey,
             global::Firecrawl.GenerateLLMsTxtRequest request);
         partial void PrepareGenerateLLMsTxtRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
+            string? idempotencyKey,
             global::Firecrawl.GenerateLLMsTxtRequest request);
         partial void ProcessGenerateLLMsTxtResponse(
             global::System.Net.Http.HttpClient httpClient,
@@ -44,6 +46,9 @@ namespace Firecrawl
         /// <summary>
         /// Generate LLMs.txt for a website
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -51,12 +56,14 @@ namespace Firecrawl
         public async global::System.Threading.Tasks.Task<global::Firecrawl.GenerateLLMsTxtResponse> GenerateLLMsTxtAsync(
 
             global::Firecrawl.GenerateLLMsTxtRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             var __response = await GenerateLLMsTxtAsResponseAsync(
 
                 request: request,
+                idempotencyKey: idempotencyKey,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -66,6 +73,9 @@ namespace Firecrawl
         /// <summary>
         /// Generate LLMs.txt for a website
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -73,6 +83,7 @@ namespace Firecrawl
         public async global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.GenerateLLMsTxtResponse>> GenerateLLMsTxtAsResponseAsync(
 
             global::Firecrawl.GenerateLLMsTxtRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -82,6 +93,7 @@ namespace Firecrawl
                 client: HttpClient);
             PrepareGenerateLLMsTxtArguments(
                 httpClient: HttpClient,
+                idempotencyKey: ref idempotencyKey,
                 request: request);
 
 
@@ -139,6 +151,12 @@ namespace Firecrawl
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
+
+            var __idempotencyKey = global::System.String.IsNullOrWhiteSpace(idempotencyKey)
+                ? CreateIdempotencyKey()
+                : idempotencyKey;
+            __httpRequest.Headers.TryAddWithoutValidation("x-idempotency-key", __idempotencyKey);
+
                             var __httpRequestContentBody = request.ToJson(JsonSerializerContext);
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
                                 content: __httpRequestContentBody,
@@ -156,6 +174,7 @@ namespace Firecrawl
                 PrepareGenerateLLMsTxtRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
+                    idempotencyKey: idempotencyKey,
                     request: request);
 
                 return __httpRequest;
@@ -360,18 +379,17 @@ namespace Firecrawl
                                     __exception_400 = __ex;
                                 }
 
-                                throw new global::Firecrawl.ApiException<global::Firecrawl.GenerateLLMsTxtResponse2>(
+
+                                throw global::Firecrawl.ApiException<global::Firecrawl.GenerateLLMsTxtResponse2>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_400,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_400,
-                                    ResponseObject = __value_400,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_400,
+                                    responseObject: __value_400,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
 
                             if (__effectiveReadResponseAsString)
@@ -405,17 +423,15 @@ namespace Firecrawl
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    throw new global::Firecrawl.ApiException(
+                                    throw global::Firecrawl.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
                             else
@@ -452,17 +468,15 @@ namespace Firecrawl
                                     {
                                     }
 
-                                    throw new global::Firecrawl.ApiException(
+                                    throw global::Firecrawl.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
 
@@ -487,6 +501,9 @@ namespace Firecrawl
         /// Include full text content in the response<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -494,6 +511,7 @@ namespace Firecrawl
             string url,
             int? maxUrls = default,
             bool? showFullText = default,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -505,6 +523,7 @@ namespace Firecrawl
             };
 
             return await GenerateLLMsTxtAsync(
+                idempotencyKey: idempotencyKey,
                 request: __request,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken).ConfigureAwait(false);

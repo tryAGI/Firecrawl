@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace Firecrawl;
 
 public partial class ScrapingClient
@@ -8,6 +10,11 @@ public partial class ScrapingClient
     /// into the first response and clearing
     /// <see cref="BatchScrapeStatusResponseObj.Next"/> when done.
     /// The supplied <paramref name="response"/> is mutated and returned.
+    ///
+    /// <para>
+    /// Same-origin validation against <see cref="HttpClient.BaseAddress"/> is
+    /// enforced via <see cref="AutoSDKPager.EnsureSameOrigin"/>.
+    /// </para>
     /// </summary>
     public async Task<BatchScrapeStatusResponseObj> PaginateBatchAsync(
         BatchScrapeStatusResponseObj response,
@@ -21,10 +28,25 @@ public partial class ScrapingClient
         while (!string.IsNullOrEmpty(next))
         {
             cancellationToken.ThrowIfCancellationRequested();
+            AutoSDKPager.EnsureSameOrigin(next, HttpClient.BaseAddress);
 
-            var content = await PaginationHelper
-                .FetchNextPageJsonAsync(HttpClient, next, cancellationToken)
-                .ConfigureAwait(false);
+            using var request = new HttpRequestMessage(HttpMethod.Get, next);
+            if (HttpClient.DefaultRequestHeaders.Authorization is { } auth)
+            {
+                request.Headers.Authorization = auth;
+            }
+
+            using var http = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            if (!http.IsSuccessStatusCode)
+            {
+                throw ApiException.Create(http.StatusCode, http.ReasonPhrase ?? http.StatusCode.ToString());
+            }
+
+            var content = await http.Content.ReadAsStringAsync(
+#if NET5_0_OR_GREATER
+                cancellationToken
+#endif
+                ).ConfigureAwait(false);
 
             var page = BatchScrapeStatusResponseObj.FromJson(content, JsonSerializerContext)
                 ?? throw new InvalidOperationException("Pagination response deserialization returned null.");

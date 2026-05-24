@@ -7,6 +7,9 @@ namespace Firecrawl
         /// <summary>
         /// Generate LLMs.txt for a website
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -14,11 +17,15 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.GenerateLLMsTxtResponse> GenerateLLMsTxtAsync(
 
             global::Firecrawl.GenerateLLMsTxtRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Generate LLMs.txt for a website
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -26,6 +33,7 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.GenerateLLMsTxtResponse>> GenerateLLMsTxtAsResponseAsync(
 
             global::Firecrawl.GenerateLLMsTxtRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -42,6 +50,9 @@ namespace Firecrawl
         /// Include full text content in the response<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -49,6 +60,7 @@ namespace Firecrawl
             string url,
             int? maxUrls = default,
             bool? showFullText = default,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

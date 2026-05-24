@@ -7,6 +7,9 @@ namespace Firecrawl
         /// <summary>
         /// Extract structured data from pages using LLMs
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -14,11 +17,15 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.ExtractResponse> ExtractDataAsync(
 
             global::Firecrawl.ExtractDataRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Extract structured data from pages using LLMs
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -26,6 +33,7 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.ExtractResponse>> ExtractDataAsResponseAsync(
 
             global::Firecrawl.ExtractDataRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -59,6 +67,9 @@ namespace Firecrawl
         /// If invalid URLs are specified in the urls array, they will be ignored. Instead of them failing the entire request, an extract using the remaining valid URLs will be performed, and the invalid URLs will be returned in the invalidURLs field of the response.<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -72,6 +83,7 @@ namespace Firecrawl
             bool? showSources = default,
             global::Firecrawl.ScrapeOptions? scrapeOptions = default,
             bool? ignoreInvalidURLs = default,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

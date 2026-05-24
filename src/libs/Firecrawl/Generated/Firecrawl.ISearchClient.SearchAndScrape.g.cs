@@ -7,6 +7,9 @@ namespace Firecrawl
         /// <summary>
         /// Search and optionally scrape search results
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -14,11 +17,15 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.SearchAndScrapeResponse> SearchAndScrapeAsync(
 
             global::Firecrawl.SearchAndScrapeRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Search and optionally scrape search results
         /// </summary>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="request"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -26,6 +33,7 @@ namespace Firecrawl
         global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.SearchAndScrapeResponse>> SearchAndScrapeAsResponseAsync(
 
             global::Firecrawl.SearchAndScrapeRequest request,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
@@ -56,6 +64,9 @@ namespace Firecrawl
         /// Options for scraping search results<br/>
         /// Default Value: {}
         /// </param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
@@ -67,6 +78,7 @@ namespace Firecrawl
             int? timeout = default,
             bool? ignoreInvalidURLs = default,
             global::Firecrawl.SearchAndScrapeRequestScrapeOptions? scrapeOptions = default,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

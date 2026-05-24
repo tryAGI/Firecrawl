@@ -64,10 +64,12 @@ public sealed class V2Client
 
     /// <summary>
     /// <c>POST /v2/parse</c> — uploads a file via multipart form-data and
-    /// returns the extracted document.
+    /// returns the extracted document. Pair with <see cref="AutoSDKUploadFile.FromPath"/>,
+    /// <see cref="AutoSDKUploadFile.FromBytes(string, byte[], string?)"/>, or
+    /// <see cref="AutoSDKUploadFile.FromStream"/>.
     /// </summary>
     public async Task<V2Document> ParseAsync(
-        ParseFile file,
+        AutoSDKUploadFile file,
         ParseOptions? options = null,
         CancellationToken cancellationToken = default)
     {
@@ -80,10 +82,7 @@ public sealed class V2Client
         var optionsContent = new StringContent(optionsJson, Encoding.UTF8);
         optionsContent.Headers.ContentType = null;
         content.Add(optionsContent, "options");
-
-        var fileContent = new ByteArrayContent(file.Content);
-        fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(file.ResolveContentType());
-        content.Add(fileContent, "file", file.Filename);
+        content.Add(file.ToHttpContent("file"));
 
         using var request = new HttpRequestMessage(HttpMethod.Post, AbsoluteUri("parse"))
         {
@@ -349,7 +348,7 @@ public sealed class V2Client
         while (!string.IsNullOrEmpty(next))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            PaginationHelper.EnsureSameOrigin(_httpClient.BaseAddress, next);
+            AutoSDKPager.EnsureSameOrigin(next, _httpClient.BaseAddress);
 
             using var request = new HttpRequestMessage(HttpMethod.Get, next);
             CopyAuthorization(request);
@@ -422,14 +421,25 @@ public sealed class V2Client
         where T : class
     {
         using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
-        FirecrawlExceptionMapper.ThrowTypedFirecrawlException(response);
-        response.EnsureSuccessStatusCode();
 
         var content = await response.Content.ReadAsStringAsync(
 #if NET5_0_OR_GREATER
             cancellationToken
 #endif
             ).ConfigureAwait(false);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw ApiException.Create(
+                statusCode: response.StatusCode,
+                message: string.IsNullOrEmpty(content) ? (response.ReasonPhrase ?? string.Empty) : content,
+                innerException: null,
+                responseBody: content,
+                responseHeaders: System.Linq.Enumerable.ToDictionary(
+                    response.Headers,
+                    h => h.Key,
+                    h => h.Value));
+        }
 
         return JsonSerializer.Deserialize(content, typeInfo)
             ?? throw new InvalidOperationException(

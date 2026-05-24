@@ -27,11 +27,13 @@ namespace Firecrawl
             };
         partial void PrepareCancelBatchScrapeArguments(
             global::System.Net.Http.HttpClient httpClient,
-            ref string id);
+            ref string id,
+            ref string? idempotencyKey);
         partial void PrepareCancelBatchScrapeRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            string id);
+            string id,
+            string? idempotencyKey);
         partial void ProcessCancelBatchScrapeResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
@@ -45,16 +47,21 @@ namespace Firecrawl
         /// Cancel a batch scrape job
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Firecrawl.CancelBatchScrapeResponse> CancelBatchScrapeAsync(
             string id,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             var __response = await CancelBatchScrapeAsResponseAsync(
                 id: id,
+                idempotencyKey: idempotencyKey,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -65,11 +72,15 @@ namespace Firecrawl
         /// Cancel a batch scrape job
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="idempotencyKey">
+        /// Optional idempotency key. When omitted, the SDK generates one for this request.
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Firecrawl.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Firecrawl.AutoSDKHttpResponse<global::Firecrawl.CancelBatchScrapeResponse>> CancelBatchScrapeAsResponseAsync(
             string id,
+            string? idempotencyKey = default,
             global::Firecrawl.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
@@ -77,7 +88,8 @@ namespace Firecrawl
                 client: HttpClient);
             PrepareCancelBatchScrapeArguments(
                 httpClient: HttpClient,
-                id: ref id);
+                id: ref id,
+                idempotencyKey: ref idempotencyKey);
 
 
             var __authorizations = global::Firecrawl.EndPointSecurityResolver.ResolveAuthorizations(
@@ -134,6 +146,12 @@ namespace Firecrawl
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
                 } 
             }
+
+            var __idempotencyKey = global::System.String.IsNullOrWhiteSpace(idempotencyKey)
+                ? CreateIdempotencyKey()
+                : idempotencyKey;
+            __httpRequest.Headers.TryAddWithoutValidation("x-idempotency-key", __idempotencyKey);
+
                 global::Firecrawl.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,
                     clientHeaders: Options.Headers,
@@ -145,7 +163,8 @@ namespace Firecrawl
                 PrepareCancelBatchScrapeRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    id: id!);
+                    id: id!,
+                    idempotencyKey: idempotencyKey);
 
                 return __httpRequest;
             }
@@ -349,18 +368,17 @@ namespace Firecrawl
                                     __exception_404 = __ex;
                                 }
 
-                                throw new global::Firecrawl.ApiException<global::Firecrawl.CancelBatchScrapeResponse2>(
+
+                                throw global::Firecrawl.ApiException<global::Firecrawl.CancelBatchScrapeResponse2>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_404,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_404,
-                                    ResponseObject = __value_404,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_404,
+                                    responseObject: __value_404,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
                             // Server error
                             if ((int)__response.StatusCode == 500)
@@ -387,18 +405,17 @@ namespace Firecrawl
                                     __exception_500 = __ex;
                                 }
 
-                                throw new global::Firecrawl.ApiException<global::Firecrawl.CancelBatchScrapeResponse3>(
+
+                                throw global::Firecrawl.ApiException<global::Firecrawl.CancelBatchScrapeResponse3>.Create(
+                                    statusCode: __response.StatusCode,
                                     message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_500,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_500,
-                                    ResponseObject = __value_500,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                    responseBody: __content_500,
+                                    responseObject: __value_500,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
-                                        h => h.Value),
-                                };
+                                        h => h.Value));
                             }
 
                             if (__effectiveReadResponseAsString)
@@ -432,17 +449,15 @@ namespace Firecrawl
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    throw new global::Firecrawl.ApiException(
+                                    throw global::Firecrawl.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
                             else
@@ -479,17 +494,15 @@ namespace Firecrawl
                                     {
                                     }
 
-                                    throw new global::Firecrawl.ApiException(
+                                    throw global::Firecrawl.ApiException.Create(
+                                        statusCode: __response.StatusCode,
                                         message: __content ?? __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        statusCode: __response.StatusCode)
-                                    {
-                                        ResponseBody = __content,
-                                        ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        responseBody: __content,
+                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
-                                            h => h.Value),
-                                    };
+                                            h => h.Value));
                                 }
                             }
 

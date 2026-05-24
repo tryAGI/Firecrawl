@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace Firecrawl;
 
 public partial class CrawlingClient
@@ -7,12 +9,14 @@ public partial class CrawlingClient
     /// every page of <see cref="CrawlStatusResponseObj.Data"/> into the first
     /// response and clearing <see cref="CrawlStatusResponseObj.Next"/> when
     /// done. The supplied <paramref name="response"/> is mutated and returned.
+    ///
+    /// <para>
+    /// Same-origin validation against <see cref="HttpClient.BaseAddress"/> is
+    /// enforced via <see cref="AutoSDKPager.EnsureSameOrigin"/> — Firecrawl's
+    /// <c>next</c> pointers are absolute URLs and a hostile server returning a
+    /// foreign URL would otherwise harvest the <c>Authorization</c> header.
+    /// </para>
     /// </summary>
-    /// <remarks>
-    /// Firecrawl's <c>next</c> pointers are absolute URLs; we refuse to
-    /// forward the <c>Authorization</c> header across origins to avoid leaking
-    /// the API key.
-    /// </remarks>
     public async Task<CrawlStatusResponseObj> PaginateAsync(
         CrawlStatusResponseObj response,
         CancellationToken cancellationToken = default)
@@ -25,10 +29,25 @@ public partial class CrawlingClient
         while (!string.IsNullOrEmpty(next))
         {
             cancellationToken.ThrowIfCancellationRequested();
+            AutoSDKPager.EnsureSameOrigin(next, HttpClient.BaseAddress);
 
-            var content = await PaginationHelper
-                .FetchNextPageJsonAsync(HttpClient, next, cancellationToken)
-                .ConfigureAwait(false);
+            using var request = new HttpRequestMessage(HttpMethod.Get, next);
+            if (HttpClient.DefaultRequestHeaders.Authorization is { } auth)
+            {
+                request.Headers.Authorization = auth;
+            }
+
+            using var http = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            if (!http.IsSuccessStatusCode)
+            {
+                throw ApiException.Create(http.StatusCode, http.ReasonPhrase ?? http.StatusCode.ToString());
+            }
+
+            var content = await http.Content.ReadAsStringAsync(
+#if NET5_0_OR_GREATER
+                cancellationToken
+#endif
+                ).ConfigureAwait(false);
 
             var page = CrawlStatusResponseObj.FromJson(content, JsonSerializerContext)
                 ?? throw new InvalidOperationException("Pagination response deserialization returned null.");

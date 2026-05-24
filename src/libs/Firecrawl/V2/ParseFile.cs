@@ -1,69 +1,21 @@
 namespace Firecrawl.V2;
 
 /// <summary>
-/// Uploaded file payload for the <c>/v2/parse</c> endpoint.
+/// Thin compatibility shim around <see cref="AutoSDKUploadFile"/>, kept so
+/// existing callers using <c>Firecrawl.V2.ParseFile</c> keep compiling.
+/// New code should construct <see cref="AutoSDKUploadFile"/> directly.
 /// </summary>
-public sealed class ParseFile
+public static class ParseFile
 {
-    public string Filename { get; }
-    public byte[] Content { get; }
-    public string? ContentType { get; }
+    /// <inheritdoc cref="AutoSDKUploadFile.FromBytes(string, byte[], string?)" />
+    public static AutoSDKUploadFile FromBytes(string filename, byte[] content, string? contentType = null)
+        => AutoSDKUploadFile.FromBytes(filename, content, contentType);
 
-    public ParseFile(string filename, byte[] content, string? contentType = null)
-    {
-        if (string.IsNullOrWhiteSpace(filename))
-            throw new ArgumentException("Filename cannot be empty.", nameof(filename));
-        ArgumentNullException.ThrowIfNull(content);
-        if (content.Length == 0)
-            throw new ArgumentException("File content cannot be empty.", nameof(content));
+    /// <inheritdoc cref="AutoSDKUploadFile.FromPath(string, string?, string?)" />
+    public static AutoSDKUploadFile FromPath(string path, string? filename = null, string? contentType = null)
+        => AutoSDKUploadFile.FromPath(path, filename, contentType);
 
-        Filename = filename;
-        Content = content;
-        ContentType = contentType;
-    }
-
-    /// <summary>
-    /// Build a <see cref="ParseFile"/> from raw bytes.
-    /// </summary>
-    public static ParseFile FromBytes(string filename, byte[] content, string? contentType = null)
-        => new(filename, content, contentType);
-
-    /// <summary>
-    /// Build a <see cref="ParseFile"/> by reading a file from disk.
-    /// </summary>
-    public static ParseFile FromPath(string path, string? filename = null, string? contentType = null)
-    {
-        if (string.IsNullOrWhiteSpace(path))
-            throw new ArgumentException("Path cannot be empty.", nameof(path));
-        if (!File.Exists(path))
-            throw new FileNotFoundException($"Parse file not found: {path}", path);
-
-        var bytes = File.ReadAllBytes(path);
-        var resolvedName = filename ?? Path.GetFileName(path);
-        return new ParseFile(resolvedName, bytes, contentType);
-    }
-
-    internal string ResolveContentType()
-    {
-        if (!string.IsNullOrWhiteSpace(ContentType))
-            return ContentType;
-
-        var extension = Path.GetExtension(Filename).ToLowerInvariant();
-        return extension switch
-        {
-            ".html" or ".htm" => "text/html",
-            ".pdf" => "application/pdf",
-            ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            ".doc" => "application/msword",
-            ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            ".xls" => "application/vnd.ms-excel",
-            ".odt" => "application/vnd.oasis.opendocument.text",
-            ".rtf" => "application/rtf",
-            ".txt" => "text/plain",
-            ".md" => "text/markdown",
-            ".csv" => "text/csv",
-            ".json" => "application/json",
-            _ => "application/octet-stream",
-        };
-    }
+    /// <inheritdoc cref="AutoSDKUploadFile.FromStream(string, System.IO.Stream, string?, bool)" />
+    public static AutoSDKUploadFile FromStream(string filename, System.IO.Stream stream, string? contentType = null, bool leaveOpen = false)
+        => AutoSDKUploadFile.FromStream(filename, stream, contentType, leaveOpen);
 }
