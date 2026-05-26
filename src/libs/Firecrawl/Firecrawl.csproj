@@ -22,7 +22,7 @@
         CA2000 — StringContent/ByteArrayContent ownership transferred to MultipartFormDataContent.
         CA2227 — DTO collection setters required for System.Text.Json source-gen round-trip.
     -->
-    <NoWarn>$(NoWarn);CS1591;CS1584;CS1658;CS0419;CA1032;CA1056;CA1308;CA1819;CA1822;CA2000;CA2227</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;CA1032;CA1056;CA1308;CA1819;CA1822;CA2000;CA2227</NoWarn>
   </PropertyGroup>
 
 </Project>
