@@ -277,17 +277,17 @@ internal static partial class CliCommands
 
     private static void AddScrapeOptions(Command command, ScrapeOptionSet options)
     {
-        command.Options.Add(options.Formats);
-        command.Options.Add(options.OnlyMainContent);
-        command.Options.Add(options.IncludeTags);
-        command.Options.Add(options.ExcludeTags);
-        command.Options.Add(options.MaxAge);
+        command.Options.Add(options.Shared.Formats);
+        command.Options.Add(options.Shared.OnlyMainContent);
+        command.Options.Add(options.Shared.IncludeTags);
+        command.Options.Add(options.Shared.ExcludeTags);
+        command.Options.Add(options.Shared.MaxAge);
         command.Options.Add(options.Headers);
-        command.Options.Add(options.WaitFor);
-        command.Options.Add(options.Mobile);
-        command.Options.Add(options.SkipTlsVerification);
-        command.Options.Add(options.Timeout);
-        command.Options.Add(options.ParsePdf);
+        command.Options.Add(options.Shared.WaitFor);
+        command.Options.Add(options.Shared.Mobile);
+        command.Options.Add(options.Shared.SkipTlsVerification);
+        command.Options.Add(options.Shared.Timeout);
+        command.Options.Add(options.Shared.ParsePDF);
         command.Options.Add(options.JsonPrompt);
         command.Options.Add(options.JsonSystemPrompt);
         command.Options.Add(options.JsonSchemaJson);
@@ -296,15 +296,15 @@ internal static partial class CliCommands
         command.Options.Add(options.ActionFile);
         command.Options.Add(options.LocationCountry);
         command.Options.Add(options.LocationLanguage);
-        command.Options.Add(options.RemoveBase64Images);
-        command.Options.Add(options.BlockAds);
-        command.Options.Add(options.Proxy);
+        command.Options.Add(options.Shared.RemoveBase64Images);
+        command.Options.Add(options.Shared.BlockAds);
+        command.Options.Add(options.Shared.Proxy);
         command.Options.Add(options.ChangeMode);
         command.Options.Add(options.ChangePrompt);
         command.Options.Add(options.ChangeTag);
         command.Options.Add(options.ChangeSchemaJson);
         command.Options.Add(options.ChangeSchemaFile);
-        command.Options.Add(options.StoreInCache);
+        command.Options.Add(options.Shared.StoreInCache);
     }
 
     private static void AddWebhookOptions(Command command, WebhookOptionSet options)

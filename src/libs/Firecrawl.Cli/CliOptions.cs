@@ -1,4 +1,5 @@
 using System.CommandLine;
+using GeneratedScrapeOptionSet = Firecrawl.Cli.GeneratedApi.Commands.ScrapeOptionsOptionSet;
 
 namespace Firecrawl.Cli;
 
@@ -112,18 +113,13 @@ internal static class CliOptions
     public static ScrapeOptionSet CreateScrapeOptionSet(string? prefix = null)
     {
         var normalizedPrefix = string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}-";
+        var shared = GeneratedScrapeOptionSet.Create(prefix);
+        AddRepeatableAlias(shared.Formats, $"--{normalizedPrefix}format");
+        AddRepeatableAlias(shared.IncludeTags, $"--{normalizedPrefix}include-tag");
+        AddRepeatableAlias(shared.ExcludeTags, $"--{normalizedPrefix}exclude-tag");
         return new ScrapeOptionSet(
-            Formats: CreateStringListOption($"--{normalizedPrefix}format", "Formats to include in the output."),
-            OnlyMainContent: CreateNullableBoolOption($"--{normalizedPrefix}only-main-content", "Only return the main page content."),
-            IncludeTags: CreateStringListOption($"--{normalizedPrefix}include-tag", "HTML tags to include in the output."),
-            ExcludeTags: CreateStringListOption($"--{normalizedPrefix}exclude-tag", "HTML tags to exclude from the output."),
-            MaxAge: new Option<int?>($"--{normalizedPrefix}max-age") { Description = "Maximum cache age in milliseconds." },
+            Shared: shared,
             Headers: CreateStringListOption($"--{normalizedPrefix}header", "HTTP headers as key=value."),
-            WaitFor: new Option<int?>($"--{normalizedPrefix}wait-for") { Description = "Delay in milliseconds before reading the page." },
-            Mobile: CreateNullableBoolOption($"--{normalizedPrefix}mobile", "Emulate a mobile device."),
-            SkipTlsVerification: CreateNullableBoolOption($"--{normalizedPrefix}skip-tls-verification", "Skip TLS certificate verification."),
-            Timeout: new Option<int?>($"--{normalizedPrefix}timeout") { Description = "Request timeout in milliseconds." },
-            ParsePdf: CreateNullableBoolOption($"--{normalizedPrefix}parse-pdf", "Parse PDF content into markdown instead of returning base64."),
             JsonPrompt: new Option<string>($"--{normalizedPrefix}json-prompt") { Description = "Prompt to use for JSON extraction." },
             JsonSystemPrompt: new Option<string>($"--{normalizedPrefix}json-system-prompt") { Description = "System prompt to use for JSON extraction." },
             JsonSchemaJson: new Option<string>($"--{normalizedPrefix}json-schema-json") { Description = "Inline JSON Schema for JSON extraction." },
@@ -132,16 +128,20 @@ internal static class CliOptions
             ActionFile: CreateStringListOption($"--{normalizedPrefix}action-file", "Path to a JSON action file, repeatable and order-preserving."),
             LocationCountry: new Option<string>($"--{normalizedPrefix}location-country") { Description = "ISO 3166-1 alpha-2 country code." },
             LocationLanguage: CreateStringListOption($"--{normalizedPrefix}location-language", "Preferred languages for the request."),
-            RemoveBase64Images: CreateNullableBoolOption($"--{normalizedPrefix}remove-base64-images", "Remove base64 images from the output."),
-            BlockAds: CreateNullableBoolOption($"--{normalizedPrefix}block-ads", "Enable ad and cookie popup blocking."),
-            Proxy: new Option<string>($"--{normalizedPrefix}proxy") { Description = "Proxy type: basic, enhanced, auto." },
             ChangeMode: CreateStringListOption($"--{normalizedPrefix}change-mode", "Change tracking mode: git-diff, json."),
             ChangePrompt: new Option<string>($"--{normalizedPrefix}change-prompt") { Description = "Prompt to use for change tracking JSON mode." },
             ChangeTag: new Option<string>($"--{normalizedPrefix}change-tag") { Description = "Change tracking tag." },
             ChangeSchemaJson: new Option<string>($"--{normalizedPrefix}change-schema-json") { Description = "Inline JSON Schema for change tracking JSON mode." },
-            ChangeSchemaFile: new Option<string>($"--{normalizedPrefix}change-schema-file") { Description = "Path to a JSON Schema file for change tracking JSON mode." },
-            StoreInCache: CreateNullableBoolOption($"--{normalizedPrefix}store-in-cache", "Store the page in Firecrawl cache.")
+            ChangeSchemaFile: new Option<string>($"--{normalizedPrefix}change-schema-file") { Description = "Path to a JSON Schema file for change tracking JSON mode." }
         );
+    }
+
+    private static void AddRepeatableAlias<T>(Option<T> option, string alias)
+    {
+        if (!option.Aliases.Contains(alias, StringComparer.Ordinal))
+        {
+            option.Aliases.Add(alias);
+        }
     }
 
     public static WebhookOptionSet CreateBatchWebhookOptionSet()
@@ -170,17 +170,8 @@ internal static class CliOptions
 }
 
 internal sealed record ScrapeOptionSet(
-    Option<string[]> Formats,
-    Option<bool?> OnlyMainContent,
-    Option<string[]> IncludeTags,
-    Option<string[]> ExcludeTags,
-    Option<int?> MaxAge,
+    GeneratedScrapeOptionSet Shared,
     Option<string[]> Headers,
-    Option<int?> WaitFor,
-    Option<bool?> Mobile,
-    Option<bool?> SkipTlsVerification,
-    Option<int?> Timeout,
-    Option<bool?> ParsePdf,
     Option<string> JsonPrompt,
     Option<string> JsonSystemPrompt,
     Option<string> JsonSchemaJson,
@@ -189,15 +180,11 @@ internal sealed record ScrapeOptionSet(
     Option<string[]> ActionFile,
     Option<string> LocationCountry,
     Option<string[]> LocationLanguage,
-    Option<bool?> RemoveBase64Images,
-    Option<bool?> BlockAds,
-    Option<string> Proxy,
     Option<string[]> ChangeMode,
     Option<string> ChangePrompt,
     Option<string> ChangeTag,
     Option<string> ChangeSchemaJson,
-    Option<string> ChangeSchemaFile,
-    Option<bool?> StoreInCache);
+    Option<string> ChangeSchemaFile);
 
 internal sealed record WebhookOptionSet(
     Option<string> Url,

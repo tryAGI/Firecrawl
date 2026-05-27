@@ -822,28 +822,33 @@ internal static class CliRuntime
 
     public static void ApplyScrapeOptions(ParseResult parseResult, ScrapeOptionSet options, ScrapeOptions target)
     {
-        if (WasSpecified(parseResult, options.Formats))
+        if (WasSpecified(parseResult, options.Shared.Formats))
         {
-            target.Formats = parseResult
-                .GetValue(options.Formats)!
-                .Select(ParseScrapeFormat)
-                .ToList();
+            target.Formats = parseResult.GetValue(options.Shared.Formats)?.ToList();
         }
 
-        ApplyNullable(parseResult, options.OnlyMainContent, value => target.OnlyMainContent = value);
-        ApplyList(parseResult, options.IncludeTags, value => target.IncludeTags = value.ToList());
-        ApplyList(parseResult, options.ExcludeTags, value => target.ExcludeTags = value.ToList());
-        ApplyNullable(parseResult, options.MaxAge, value => target.MaxAge = value);
+        ApplyNullable(parseResult, options.Shared.OnlyMainContent, value => target.OnlyMainContent = value);
+        if (WasSpecified(parseResult, options.Shared.IncludeTags))
+        {
+            target.IncludeTags = parseResult.GetValue(options.Shared.IncludeTags)?.ToList();
+        }
+
+        if (WasSpecified(parseResult, options.Shared.ExcludeTags))
+        {
+            target.ExcludeTags = parseResult.GetValue(options.Shared.ExcludeTags)?.ToList();
+        }
+
+        ApplyNullable(parseResult, options.Shared.MaxAge, value => target.MaxAge = value);
         if (WasSpecified(parseResult, options.Headers))
         {
             target.Headers = ParseKeyValuePairs(GetValues(parseResult, options.Headers));
         }
 
-        ApplyNullable(parseResult, options.WaitFor, value => target.WaitFor = value);
-        ApplyNullable(parseResult, options.Mobile, value => target.Mobile = value);
-        ApplyNullable(parseResult, options.SkipTlsVerification, value => target.SkipTlsVerification = value);
-        ApplyNullable(parseResult, options.Timeout, value => target.Timeout = value);
-        ApplyNullable(parseResult, options.ParsePdf, value => target.ParsePDF = value);
+        ApplyNullable(parseResult, options.Shared.WaitFor, value => target.WaitFor = value);
+        ApplyNullable(parseResult, options.Shared.Mobile, value => target.Mobile = value);
+        ApplyNullable(parseResult, options.Shared.SkipTlsVerification, value => target.SkipTlsVerification = value);
+        ApplyNullable(parseResult, options.Shared.Timeout, value => target.Timeout = value);
+        ApplyNullable(parseResult, options.Shared.ParsePDF, value => target.ParsePDF = value);
 
         var jsonOptions = target.JsonOptions;
         if (WasSpecified(parseResult, options.JsonPrompt) ||
@@ -895,18 +900,9 @@ internal static class CliRuntime
             target.Location = location;
         }
 
-        ApplyNullable(parseResult, options.RemoveBase64Images, value => target.RemoveBase64Images = value);
-        ApplyNullable(parseResult, options.BlockAds, value => target.BlockAds = value);
-        if (WasSpecified(parseResult, options.Proxy))
-        {
-            var proxy = ScrapeOptionsProxyExtensions.ToEnum(parseResult.GetValue(options.Proxy) ?? string.Empty);
-            if (proxy is null)
-            {
-                throw new CliException("Proxy must be one of: basic, enhanced, auto.");
-            }
-
-            target.Proxy = proxy;
-        }
+        ApplyNullable(parseResult, options.Shared.RemoveBase64Images, value => target.RemoveBase64Images = value);
+        ApplyNullable(parseResult, options.Shared.BlockAds, value => target.BlockAds = value);
+        ApplyNullable(parseResult, options.Shared.Proxy, value => target.Proxy = value);
 
         var changeOptions = target.ChangeTrackingOptions;
         if (WasSpecified(parseResult, options.ChangeMode) ||
@@ -943,7 +939,7 @@ internal static class CliRuntime
             target.ChangeTrackingOptions = changeOptions;
         }
 
-        ApplyNullable(parseResult, options.StoreInCache, value => target.StoreInCache = value);
+        ApplyNullable(parseResult, options.Shared.StoreInCache, value => target.StoreInCache = value);
     }
 
     public static SearchAndScrapeRequestScrapeOptions? BuildSearchScrapeOptions(ParseResult parseResult, Option<string[]> formatsOption)
@@ -976,12 +972,6 @@ internal static class CliRuntime
         }
 
         return action.Value;
-    }
-
-    private static ScrapeOptionsFormat ParseScrapeFormat(string value)
-    {
-        var parsed = ScrapeOptionsFormatExtensions.ToEnum(value);
-        return parsed ?? throw new CliException($"Invalid format '{value}'.");
     }
 
     private static ScrapeOptionsChangeTrackingOptionsMode ParseChangeMode(string value)
@@ -1042,14 +1032,6 @@ internal static class CliRuntime
         if (WasSpecified(parseResult, option))
         {
             assign(parseResult.GetValue(option)!);
-        }
-    }
-
-    private static void ApplyList(ParseResult parseResult, Option<string[]> option, Action<IReadOnlyList<string>> assign)
-    {
-        if (WasSpecified(parseResult, option))
-        {
-            assign(GetValues(parseResult, option));
         }
     }
 

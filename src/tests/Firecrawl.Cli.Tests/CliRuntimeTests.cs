@@ -231,10 +231,10 @@ public sealed class CliRuntimeTests
 
     private static void AddScrapeOptions(Command command, ScrapeOptionSet options)
     {
-        command.Options.Add(options.Formats);
+        command.Options.Add(options.Shared.Formats);
         command.Options.Add(options.Headers);
-        command.Options.Add(options.Mobile);
-        command.Options.Add(options.BlockAds);
+        command.Options.Add(options.Shared.Mobile);
+        command.Options.Add(options.Shared.BlockAds);
         command.Options.Add(options.JsonPrompt);
         command.Options.Add(options.JsonSchemaJson);
         command.Options.Add(options.LocationCountry);
@@ -242,6 +242,6 @@ public sealed class CliRuntimeTests
         command.Options.Add(options.ChangeMode);
         command.Options.Add(options.ChangeTag);
         command.Options.Add(options.ChangeSchemaJson);
-        command.Options.Add(options.StoreInCache);
+        command.Options.Add(options.Shared.StoreInCache);
     }
 }

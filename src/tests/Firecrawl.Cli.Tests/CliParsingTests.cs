@@ -91,6 +91,7 @@ public sealed class CliParsingTests
         yield return [new[] { "auth", "status", "--output", "auth-status.txt" }, "status"];
         yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "--request-json", "{\"url\":\"https://example.com\"}" }, "scrape-and-extract-from-url"];
         yield return [new[] { "scrape", "https://example.com", "--format", "markdown", "--format", "html", "--header", "Accept=text/html", "--mobile", "false" }, "scrape"];
+        yield return [new[] { "scrape", "https://example.com", "--formats", "markdown", "--include-tags", "article" }, "scrape"];
         yield return [new[] { "batch-scrape", "start", "https://example.com", "https://example.org", "--ignore-invalid-urls", "--webhook-url", "https://hooks.example.com/firecrawl", "--webhook-event", "completed", "--wait" }, "start"];
         yield return [new[] { "batch-scrape", "status", "job-123", "--output-dir", TempOutputDirectory }, "status"];
         yield return [new[] { "batch-scrape", "cancel", "job-123" }, "cancel"];
