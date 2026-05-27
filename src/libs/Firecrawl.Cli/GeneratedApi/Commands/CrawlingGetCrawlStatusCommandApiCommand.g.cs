@@ -4,7 +4,7 @@ using System.CommandLine;
 
 namespace Firecrawl.Cli.GeneratedApi.Commands;
 
-internal static class CrawlingGetCrawlStatusCommandApiCommand
+internal static partial class CrawlingGetCrawlStatusCommandApiCommand
 {
     private static Argument<string> Id { get; } = new(
         name: @"id")
@@ -12,10 +12,31 @@ internal static class CrawlingGetCrawlStatusCommandApiCommand
         Description = @"This is a missing parameter that was added automatically. Please check the OpenAPI spec.",
     };
 
+                    private static string FormatResponse(ParseResult parseResult, global::Firecrawl.CrawlStatusResponseObj value, global::System.Text.Json.Serialization.JsonSerializerContext context, bool truncateLongStrings)
+                    {
+                        string? text = null;
+                        CustomizeResponseText(parseResult, value, ref text);
+                        if (!string.IsNullOrWhiteSpace(text))
+                        {
+                            return text;
+                        }
+
+                        var hints = new Dictionary<string, CliFormatHint>(StringComparer.OrdinalIgnoreCase)
+                        {
+                        };
+                        CustomizeResponseFormatHints(hints);
+                        return CliRuntime.FormatHumanReadable(value, context, truncateLongStrings, hints);
+                    }
+
+                    static partial void CustomizeResponseText(ParseResult parseResult, global::Firecrawl.CrawlStatusResponseObj value, ref string? text);
+                    static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
+
+
     public static Command Create()
     {
         var command = new Command(@"get-crawl-status", @"Get the status of a crawl job");
                         command.Arguments.Add(Id);
+
 
         command.SetAction(async (ParseResult parseResult, CancellationToken cancellationToken) =>
             await CliRuntime.RunAsync(async () =>
@@ -23,15 +44,26 @@ internal static class CrawlingGetCrawlStatusCommandApiCommand
                         var id = parseResult.GetRequiredValue(Id);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
+
                                 var response = await client.Crawling.GetCrawlStatusAsync(
                                     id: id,
                                     cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                                await CliRuntime.WriteJsonAsync(
+
+                                if (!await CliRuntime.TryWriteOutputDirectoryAsync(
+                                        parseResult,
+                                        response,
+                                        global::Firecrawl.SourceGenerationContext.Default,
+                                        @"Data",
+                                        cancellationToken).ConfigureAwait(false))
+                                {
+                                await CliRuntime.WriteResponseAsync(
                                     parseResult,
                                     response,
                                     global::Firecrawl.SourceGenerationContext.Default,
+                                    FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
+                                }
             }, cancellationToken).ConfigureAwait(false));
         return command;
     }

@@ -3,9 +3,30 @@ set -euo pipefail
 
 # OpenAPI spec: https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
 
+use_pinned_spec=false
+for arg in "$@"; do
+  case "$arg" in
+    --pinned-spec)
+      use_pinned_spec=true
+      ;;
+    *)
+      echo "Unknown argument: $arg" >&2
+      exit 1
+      ;;
+  esac
+done
+if [[ "${TRYAGI_PINNED_SPEC:-0}" == "1" ]]; then
+  use_pinned_spec=true
+fi
+
 dotnet tool install --global autosdk.cli --prerelease
 rm -rf Generated
-curl --fail --silent --show-error -L -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
+if [[ "$use_pinned_spec" == false ]]; then
+  curl --fail --silent --show-error -L -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
+elif [[ ! -f openapi.json ]]; then
+  echo "error: --pinned-spec requested but openapi.json does not exist." >&2
+  exit 1
+fi
 
 # Fix metadata description field: Firecrawl API can return string or string[]
 # See: https://github.com/tryAGI/Firecrawl/issues/54
@@ -50,3 +71,21 @@ autosdk generate openapi.json \
   --generate-retry-handler \
   --generate-pageable-helpers \
   --generate-multipart-upload-helpers
+
+rm -rf ../Firecrawl.Cli/GeneratedApi
+autosdk cli-project openapi.json \
+  --output ../Firecrawl.Cli/GeneratedApi \
+  --api-only \
+  --sdk-project ../Firecrawl/Firecrawl.csproj \
+  --targetFramework net10.0 \
+  --namespace Firecrawl \
+  --clientClassName FirecrawlClient \
+  --package-id Firecrawl.Cli.GeneratedApi \
+  --root-namespace Firecrawl.Cli.GeneratedApi \
+  --tool-command-name firecrawl \
+  --user-secrets-id Firecrawl.Cli \
+  --api-key-env-var FIRECRAWL_API_KEY \
+  --base-url-env-var FIRECRAWL_BASE_URL \
+  --cli-credential-file \
+  --cli-keep-api-group \
+  --exclude-deprecated-operations

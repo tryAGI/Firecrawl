@@ -11,7 +11,9 @@ internal static class ApiCommand
         var command = new Command("api", "Generated endpoint commands.");
           command.Options.Add(CliOptions.ApiKey);
           command.Options.Add(CliOptions.BaseUrl);
+          command.Options.Add(CliOptions.Json);
           command.Options.Add(CliOptions.Output);
+          command.Options.Add(CliOptions.OutputDirectory);
                          command.Subcommands.Add(BillingApiGroupCommand.Create());
                          command.Subcommands.Add(CrawlingApiGroupCommand.Create());
                          command.Subcommands.Add(ExtractionApiGroupCommand.Create());
