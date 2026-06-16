@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+install_autosdk_cli() {
+  dotnet tool update --global autosdk.cli --prerelease >/dev/null 2>&1 || \
+    dotnet tool install --global autosdk.cli --prerelease
+}
+
+fetch_spec() {
+  curl "$@" \
+    --fail --silent --show-error --location \
+    --retry 5 --retry-delay 10 --retry-all-errors \
+    --connect-timeout 30 --max-time 300
+}
+
 # OpenAPI spec: https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
 
 use_pinned_spec=false
@@ -18,11 +30,10 @@ done
 if [[ "${TRYAGI_PINNED_SPEC:-0}" == "1" ]]; then
   use_pinned_spec=true
 fi
-
-dotnet tool install --global autosdk.cli --prerelease
+install_autosdk_cli
 rm -rf Generated
 if [[ "$use_pinned_spec" == false ]]; then
-  curl --fail --silent --show-error -L -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
+  fetch_spec --fail --silent --show-error -L -o openapi.json https://raw.githubusercontent.com/mendableai/firecrawl/main/apps/api/v1-openapi.json
 elif [[ ! -f openapi.json ]]; then
   echo "error: --pinned-spec requested but openapi.json does not exist." >&2
   exit 1
