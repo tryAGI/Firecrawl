@@ -4,44 +4,48 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ScrapeOptionsFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Branding,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ChangeTracking,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Html,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Json,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Links,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Markdown,
         /// <summary>
-        /// 
+        ///
+        /// </summary>
+        RawBase64,
+        /// <summary>
+        ///
         /// </summary>
         RawHtml,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Screenshot,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Screenshot_fullPage,
     }
@@ -64,6 +68,7 @@ namespace Firecrawl
                 ScrapeOptionsFormat.Json => "json",
                 ScrapeOptionsFormat.Links => "links",
                 ScrapeOptionsFormat.Markdown => "markdown",
+                ScrapeOptionsFormat.RawBase64 => "rawBase64",
                 ScrapeOptionsFormat.RawHtml => "rawHtml",
                 ScrapeOptionsFormat.Screenshot => "screenshot",
                 ScrapeOptionsFormat.Screenshot_fullPage => "screenshot@fullPage",
@@ -83,6 +88,7 @@ namespace Firecrawl
                 "json" => ScrapeOptionsFormat.Json,
                 "links" => ScrapeOptionsFormat.Links,
                 "markdown" => ScrapeOptionsFormat.Markdown,
+                "rawBase64" => ScrapeOptionsFormat.RawBase64,
                 "rawHtml" => ScrapeOptionsFormat.RawHtml,
                 "screenshot" => ScrapeOptionsFormat.Screenshot,
                 "screenshot@fullPage" => ScrapeOptionsFormat.Screenshot_fullPage,

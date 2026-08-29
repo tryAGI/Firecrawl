@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class BatchScrapeStatusResponseObjDataItem
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("markdown")]
         public string? Markdown { get; set; }
@@ -27,6 +27,12 @@ namespace Firecrawl
         public string? RawHtml { get; set; }
 
         /// <summary>
+        /// Base64-encoded original response body if `rawBase64` is in `formats`
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("rawBase64")]
+        public string? RawBase64 { get; set; }
+
+        /// <summary>
         /// List of links on the page if `includeLinks` is true
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("links")]
@@ -39,7 +45,7 @@ namespace Firecrawl
         public string? Screenshot { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
         public global::Firecrawl.BatchScrapeStatusResponseObjDataItemMetadata? Metadata { get; set; }
@@ -60,6 +66,9 @@ namespace Firecrawl
         /// <param name="rawHtml">
         /// Raw HTML content of the page if `includeRawHtml`  is true
         /// </param>
+        /// <param name="rawBase64">
+        /// Base64-encoded original response body if `rawBase64` is in `formats`
+        /// </param>
         /// <param name="links">
         /// List of links on the page if `includeLinks` is true
         /// </param>
@@ -74,6 +83,7 @@ namespace Firecrawl
             string? markdown,
             string? html,
             string? rawHtml,
+            string? rawBase64,
             global::System.Collections.Generic.IList<string>? links,
             string? screenshot,
             global::Firecrawl.BatchScrapeStatusResponseObjDataItemMetadata? metadata)
@@ -81,6 +91,7 @@ namespace Firecrawl
             this.Markdown = markdown;
             this.Html = html;
             this.RawHtml = rawHtml;
+            this.RawBase64 = rawBase64;
             this.Links = links;
             this.Screenshot = screenshot;
             this.Metadata = metadata;

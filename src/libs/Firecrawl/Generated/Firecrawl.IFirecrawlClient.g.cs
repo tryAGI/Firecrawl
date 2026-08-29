@@ -44,48 +44,48 @@ namespace Firecrawl
         public global::System.Func<string> CreateIdempotencyKey { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public BillingClient Billing { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public CrawlingClient Crawling { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ExtractionClient Extraction { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public LLMsTxtClient LLMsTxt { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public MappingClient Mapping { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ResearchClient Research { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ScrapingClient Scraping { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SearchClient Search { get; }
 

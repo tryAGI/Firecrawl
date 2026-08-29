@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -41,18 +42,18 @@ internal static partial class MappingMapUrlsCommandApiCommand
     {
         Description = @"Timeout in milliseconds. There is no timeout by default.",
     };
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -99,7 +100,7 @@ internal static partial class MappingMapUrlsCommandApiCommand
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -114,12 +115,12 @@ internal static partial class MappingMapUrlsCommandApiCommand
                             global::Firecrawl.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var url = parseResult.GetRequiredValue(Url);
-                        var search = parseResult.GetValue(Search) ?? __requestBase?.Search;
-                        var ignoreSitemap = parseResult.GetValue(IgnoreSitemap) ?? __requestBase?.IgnoreSitemap;
-                        var sitemapOnly = parseResult.GetValue(SitemapOnly) ?? __requestBase?.SitemapOnly;
-                        var includeSubdomains = parseResult.GetValue(IncludeSubdomains) ?? __requestBase?.IncludeSubdomains;
-                        var limit = parseResult.GetValue(Limit) ?? __requestBase?.Limit;
-                        var timeout = parseResult.GetValue(Timeout) ?? __requestBase?.Timeout;
+                        var search = CliRuntime.WasSpecified(parseResult, Search) ? parseResult.GetValue(Search) : (__requestBase is { } __SearchBaseValue ? __SearchBaseValue.Search : default);
+                        var ignoreSitemap = CliRuntime.WasSpecified(parseResult, IgnoreSitemap) ? parseResult.GetValue(IgnoreSitemap) : (__requestBase is { } __IgnoreSitemapBaseValue ? __IgnoreSitemapBaseValue.IgnoreSitemap : default);
+                        var sitemapOnly = CliRuntime.WasSpecified(parseResult, SitemapOnly) ? parseResult.GetValue(SitemapOnly) : (__requestBase is { } __SitemapOnlyBaseValue ? __SitemapOnlyBaseValue.SitemapOnly : default);
+                        var includeSubdomains = CliRuntime.WasSpecified(parseResult, IncludeSubdomains) ? parseResult.GetValue(IncludeSubdomains) : (__requestBase is { } __IncludeSubdomainsBaseValue ? __IncludeSubdomainsBaseValue.IncludeSubdomains : default);
+                        var limit = CliRuntime.WasSpecified(parseResult, Limit) ? parseResult.GetValue(Limit) : (__requestBase is { } __LimitBaseValue ? __LimitBaseValue.Limit : default);
+                        var timeout = CliRuntime.WasSpecified(parseResult, Timeout) ? parseResult.GetValue(Timeout) : (__requestBase is { } __TimeoutBaseValue ? __TimeoutBaseValue.Timeout : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

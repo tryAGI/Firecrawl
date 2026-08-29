@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionPressAKeyType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Press,
     }

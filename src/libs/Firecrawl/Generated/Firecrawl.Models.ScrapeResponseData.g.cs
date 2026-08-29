@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ScrapeResponseData
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("markdown")]
         public string? Markdown { get; set; }
@@ -25,6 +25,12 @@ namespace Firecrawl
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("rawHtml")]
         public string? RawHtml { get; set; }
+
+        /// <summary>
+        /// Base64-encoded original response body if `rawBase64` is in `formats`
+        /// </summary>
+        [global::System.Text.Json.Serialization.JsonPropertyName("rawBase64")]
+        public string? RawBase64 { get; set; }
 
         /// <summary>
         /// Screenshot of the page if `screenshot` is in `formats`
@@ -45,7 +51,7 @@ namespace Firecrawl
         public global::Firecrawl.ScrapeResponseDataActions? Actions { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("metadata")]
         public global::Firecrawl.ScrapeResponseDataMetadata? Metadata { get; set; }
@@ -90,6 +96,9 @@ namespace Firecrawl
         /// <param name="rawHtml">
         /// Raw HTML content of the page if `rawHtml` is in `formats`
         /// </param>
+        /// <param name="rawBase64">
+        /// Base64-encoded original response body if `rawBase64` is in `formats`
+        /// </param>
         /// <param name="screenshot">
         /// Screenshot of the page if `screenshot` is in `formats`
         /// </param>
@@ -119,6 +128,7 @@ namespace Firecrawl
             string? markdown,
             string? html,
             string? rawHtml,
+            string? rawBase64,
             string? screenshot,
             global::System.Collections.Generic.IList<string>? links,
             global::Firecrawl.ScrapeResponseDataActions? actions,
@@ -131,6 +141,7 @@ namespace Firecrawl
             this.Markdown = markdown;
             this.Html = html;
             this.RawHtml = rawHtml;
+            this.RawBase64 = rawBase64;
             this.Screenshot = screenshot;
             this.Links = links;
             this.Actions = actions;

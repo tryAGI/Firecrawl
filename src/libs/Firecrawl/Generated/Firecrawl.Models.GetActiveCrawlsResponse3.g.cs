@@ -4,7 +4,7 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class GetActiveCrawlsResponse3
     {
