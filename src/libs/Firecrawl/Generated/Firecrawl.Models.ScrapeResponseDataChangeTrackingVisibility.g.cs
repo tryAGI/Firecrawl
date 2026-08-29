@@ -9,11 +9,11 @@ namespace Firecrawl
     public enum ScrapeResponseDataChangeTrackingVisibility
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Hidden,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Visible,
     }

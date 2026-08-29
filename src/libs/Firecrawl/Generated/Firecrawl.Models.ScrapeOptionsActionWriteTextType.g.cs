@@ -9,7 +9,7 @@ namespace Firecrawl
     public enum ScrapeOptionsActionWriteTextType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Write,
     }

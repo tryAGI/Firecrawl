@@ -9,7 +9,7 @@ namespace Firecrawl
     public sealed partial class GetActiveCrawlsResponseCrawlOptions
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("scrapeOptions")]
         public global::Firecrawl.ScrapeOptions? ScrapeOptions { get; set; }

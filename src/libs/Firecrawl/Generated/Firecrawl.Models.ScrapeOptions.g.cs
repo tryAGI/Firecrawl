@@ -4,12 +4,12 @@
 namespace Firecrawl
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ScrapeOptions
     {
         /// <summary>
-        /// Formats to include in the output.<br/>
+        /// Formats to include in the output. `rawBase64` must be requested by itself.<br/>
         /// Default Value: [markdown]
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("formats")]
@@ -116,8 +116,8 @@ namespace Firecrawl
         /// <summary>
         /// Specifies the type of proxy to use.<br/>
         ///  - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.<br/>
-        ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
-        ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
+        ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Billed at the same credit cost as basic.<br/>
+        ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. Enhanced proxies carry no credit surcharge, so either way only the regular cost is billed.<br/>
         /// If you do not specify a proxy, Firecrawl will default to basic.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("proxy")]
@@ -147,7 +147,7 @@ namespace Firecrawl
         /// Initializes a new instance of the <see cref="ScrapeOptions" /> class.
         /// </summary>
         /// <param name="formats">
-        /// Formats to include in the output.<br/>
+        /// Formats to include in the output. `rawBase64` must be requested by itself.<br/>
         /// Default Value: [markdown]
         /// </param>
         /// <param name="onlyMainContent">
@@ -206,8 +206,8 @@ namespace Firecrawl
         /// <param name="proxy">
         /// Specifies the type of proxy to use.<br/>
         ///  - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.<br/>
-        ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.<br/>
-        ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.<br/>
+        ///  - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Billed at the same credit cost as basic.<br/>
+        ///  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. Enhanced proxies carry no credit surcharge, so either way only the regular cost is billed.<br/>
         /// If you do not specify a proxy, Firecrawl will default to basic.
         /// </param>
         /// <param name="changeTrackingOptions">

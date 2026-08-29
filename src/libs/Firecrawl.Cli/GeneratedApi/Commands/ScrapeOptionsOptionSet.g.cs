@@ -28,7 +28,7 @@ internal sealed record ScrapeOptionsOptionSet(
         return new ScrapeOptionsOptionSet(
                         Formats: new Option<global::System.Collections.Generic.IList<global::Firecrawl.ScrapeOptionsFormat>?>($"--{normalizedPrefix}formats")
                 {
-                    Description = @"Formats to include in the output.",
+                    Description = @"Formats to include in the output. `rawBase64` must be requested by itself.",
                 },
                 OnlyMainContent: CliRuntime.CreateNullableBoolOption(name: $"--{normalizedPrefix}only-main-content", description: @"Only return the main content of the page excluding headers, navs, footers, etc."),
                 IncludeTags: new Option<global::System.Collections.Generic.IList<string>?>($"--{normalizedPrefix}include-tags")
@@ -61,8 +61,8 @@ internal sealed record ScrapeOptionsOptionSet(
                     Description = @"Specifies the type of proxy to use.
 
  - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.
- - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Costs up to 5 credits per request.
- - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. If the retry with enhanced is successful, 5 credits will be billed for the scrape. If the first attempt with basic is successful, only the regular cost will be billed.
+ - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Billed at the same credit cost as basic.
+ - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. Enhanced proxies carry no credit surcharge, so either way only the regular cost is billed.
 
 If you do not specify a proxy, Firecrawl will default to basic.",
                 },

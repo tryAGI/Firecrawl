@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -54,18 +55,18 @@ internal static partial class ResearchStartDeepResearchCommandApiCommand
     {
         Description = @"Options for JSON output",
     };
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -113,7 +114,7 @@ internal static partial class ResearchStartDeepResearchCommandApiCommand
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -128,13 +129,13 @@ internal static partial class ResearchStartDeepResearchCommandApiCommand
                             global::Firecrawl.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var query = parseResult.GetRequiredValue(Query);
-                        var maxDepth = parseResult.GetValue(MaxDepth) ?? __requestBase?.MaxDepth;
-                        var timeLimit = parseResult.GetValue(TimeLimit) ?? __requestBase?.TimeLimit;
-                        var maxUrls = parseResult.GetValue(MaxUrls) ?? __requestBase?.MaxUrls;
-                        var analysisPrompt = parseResult.GetValue(AnalysisPrompt) ?? __requestBase?.AnalysisPrompt;
-                        var systemPrompt = parseResult.GetValue(SystemPrompt) ?? __requestBase?.SystemPrompt;
-                        var formats = parseResult.GetValue(Formats) ?? __requestBase?.Formats;
-                        var jsonOptions = parseResult.GetValue(JsonOptions) ?? __requestBase?.JsonOptions;
+                        var maxDepth = CliRuntime.WasSpecified(parseResult, MaxDepth) ? parseResult.GetValue(MaxDepth) : (__requestBase is { } __MaxDepthBaseValue ? __MaxDepthBaseValue.MaxDepth : default);
+                        var timeLimit = CliRuntime.WasSpecified(parseResult, TimeLimit) ? parseResult.GetValue(TimeLimit) : (__requestBase is { } __TimeLimitBaseValue ? __TimeLimitBaseValue.TimeLimit : default);
+                        var maxUrls = CliRuntime.WasSpecified(parseResult, MaxUrls) ? parseResult.GetValue(MaxUrls) : (__requestBase is { } __MaxUrlsBaseValue ? __MaxUrlsBaseValue.MaxUrls : default);
+                        var analysisPrompt = CliRuntime.WasSpecified(parseResult, AnalysisPrompt) ? parseResult.GetValue(AnalysisPrompt) : (__requestBase is { } __AnalysisPromptBaseValue ? __AnalysisPromptBaseValue.AnalysisPrompt : default);
+                        var systemPrompt = CliRuntime.WasSpecified(parseResult, SystemPrompt) ? parseResult.GetValue(SystemPrompt) : (__requestBase is { } __SystemPromptBaseValue ? __SystemPromptBaseValue.SystemPrompt : default);
+                        var formats = CliRuntime.WasSpecified(parseResult, Formats) ? parseResult.GetValue(Formats) : (__requestBase is { } __FormatsBaseValue ? __FormatsBaseValue.Formats : default);
+                        var jsonOptions = CliRuntime.WasSpecified(parseResult, JsonOptions) ? parseResult.GetValue(JsonOptions) : (__requestBase is { } __JsonOptionsBaseValue ? __JsonOptionsBaseValue.JsonOptions : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -46,18 +47,18 @@ internal static partial class SearchSearchAndScrapeCommandApiCommand
     {
         Description = @"Options for scraping search results",
     };
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -104,7 +105,7 @@ internal static partial class SearchSearchAndScrapeCommandApiCommand
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -119,12 +120,12 @@ internal static partial class SearchSearchAndScrapeCommandApiCommand
                             global::Firecrawl.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var query = parseResult.GetRequiredValue(Query);
-                        var limit = parseResult.GetValue(Limit) ?? __requestBase?.Limit;
-                        var tbs = parseResult.GetValue(Tbs) ?? __requestBase?.Tbs;
-                        var location = parseResult.GetValue(Location) ?? __requestBase?.Location;
-                        var timeout = parseResult.GetValue(Timeout) ?? __requestBase?.Timeout;
-                        var ignoreInvalidURLs = parseResult.GetValue(IgnoreInvalidURLs) ?? __requestBase?.IgnoreInvalidURLs;
-                        var scrapeOptions = parseResult.GetValue(ScrapeOptions) ?? __requestBase?.ScrapeOptions;
+                        var limit = CliRuntime.WasSpecified(parseResult, Limit) ? parseResult.GetValue(Limit) : (__requestBase is { } __LimitBaseValue ? __LimitBaseValue.Limit : default);
+                        var tbs = CliRuntime.WasSpecified(parseResult, Tbs) ? parseResult.GetValue(Tbs) : (__requestBase is { } __TbsBaseValue ? __TbsBaseValue.Tbs : default);
+                        var location = CliRuntime.WasSpecified(parseResult, Location) ? parseResult.GetValue(Location) : (__requestBase is { } __LocationBaseValue ? __LocationBaseValue.Location : default);
+                        var timeout = CliRuntime.WasSpecified(parseResult, Timeout) ? parseResult.GetValue(Timeout) : (__requestBase is { } __TimeoutBaseValue ? __TimeoutBaseValue.Timeout : default);
+                        var ignoreInvalidURLs = CliRuntime.WasSpecified(parseResult, IgnoreInvalidURLs) ? parseResult.GetValue(IgnoreInvalidURLs) : (__requestBase is { } __IgnoreInvalidURLsBaseValue ? __IgnoreInvalidURLsBaseValue.IgnoreInvalidURLs : default);
+                        var scrapeOptions = CliRuntime.WasSpecified(parseResult, ScrapeOptions) ? parseResult.GetValue(ScrapeOptions) : (__requestBase is { } __ScrapeOptionsBaseValue ? __ScrapeOptionsBaseValue.ScrapeOptions : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -100,18 +101,18 @@ Use true for broader internal coverage beyond nested paths.");
         Description = @"Repeatable event name. Allowed values: completed, page, failed, started.",
         AllowMultipleArgumentsPerToken = true,
     };
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -179,7 +180,7 @@ Use true for broader internal coverage beyond nested paths.");
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -194,36 +195,37 @@ Use true for broader internal coverage beyond nested paths.");
                             global::Firecrawl.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var url = parseResult.GetRequiredValue(Url);
-                        var excludePaths = parseResult.GetValue(ExcludePaths) ?? __requestBase?.ExcludePaths;
-                        var includePaths = parseResult.GetValue(IncludePaths) ?? __requestBase?.IncludePaths;
-                        var maxDepth = parseResult.GetValue(MaxDepth) ?? __requestBase?.MaxDepth;
-                        var maxDiscoveryDepth = parseResult.GetValue(MaxDiscoveryDepth) ?? __requestBase?.MaxDiscoveryDepth;
-                        var ignoreSitemap = parseResult.GetValue(IgnoreSitemap) ?? __requestBase?.IgnoreSitemap;
-                        var ignoreQueryParameters = parseResult.GetValue(IgnoreQueryParameters) ?? __requestBase?.IgnoreQueryParameters;
-                        var limit = parseResult.GetValue(Limit) ?? __requestBase?.Limit;
-                        var allowBackwardLinks = parseResult.GetValue(AllowBackwardLinks) ?? __requestBase?.AllowBackwardLinks;
-                        var allowExternalLinks = parseResult.GetValue(AllowExternalLinks) ?? __requestBase?.AllowExternalLinks;
-                        var delay = parseResult.GetValue(Delay) ?? __requestBase?.Delay;
-                        var scrapeOptionsFormats = parseResult.GetValue(ScrapeOptionsOptions.Formats) ?? __requestBase?.ScrapeOptions?.Formats;
-                        var scrapeOptionsOnlyMainContent = parseResult.GetValue(ScrapeOptionsOptions.OnlyMainContent) ?? __requestBase?.ScrapeOptions?.OnlyMainContent;
-                        var scrapeOptionsIncludeTags = parseResult.GetValue(ScrapeOptionsOptions.IncludeTags) ?? __requestBase?.ScrapeOptions?.IncludeTags;
-                        var scrapeOptionsExcludeTags = parseResult.GetValue(ScrapeOptionsOptions.ExcludeTags) ?? __requestBase?.ScrapeOptions?.ExcludeTags;
-                        var scrapeOptionsMaxAge = parseResult.GetValue(ScrapeOptionsOptions.MaxAge) ?? __requestBase?.ScrapeOptions?.MaxAge;
-                        var scrapeOptionsWaitFor = parseResult.GetValue(ScrapeOptionsOptions.WaitFor) ?? __requestBase?.ScrapeOptions?.WaitFor;
-                        var scrapeOptionsMobile = parseResult.GetValue(ScrapeOptionsOptions.Mobile) ?? __requestBase?.ScrapeOptions?.Mobile;
-                        var scrapeOptionsSkipTlsVerification = parseResult.GetValue(ScrapeOptionsOptions.SkipTlsVerification) ?? __requestBase?.ScrapeOptions?.SkipTlsVerification;
-                        var scrapeOptionsTimeout = parseResult.GetValue(ScrapeOptionsOptions.Timeout) ?? __requestBase?.ScrapeOptions?.Timeout;
-                        var scrapeOptionsParsePDF = parseResult.GetValue(ScrapeOptionsOptions.ParsePDF) ?? __requestBase?.ScrapeOptions?.ParsePDF;
-                        var scrapeOptionsRemoveBase64Images = parseResult.GetValue(ScrapeOptionsOptions.RemoveBase64Images) ?? __requestBase?.ScrapeOptions?.RemoveBase64Images;
-                        var scrapeOptionsBlockAds = parseResult.GetValue(ScrapeOptionsOptions.BlockAds) ?? __requestBase?.ScrapeOptions?.BlockAds;
-                        var scrapeOptionsProxy = parseResult.GetValue(ScrapeOptionsOptions.Proxy) ?? __requestBase?.ScrapeOptions?.Proxy;
-                        var scrapeOptionsStoreInCache = parseResult.GetValue(ScrapeOptionsOptions.StoreInCache) ?? __requestBase?.ScrapeOptions?.StoreInCache;
-                        var __scrapeOptionsSpecified = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Formats) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.OnlyMainContent) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.IncludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ExcludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.MaxAge) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.WaitFor) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Mobile) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.SkipTlsVerification) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Timeout) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ParsePDF) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.RemoveBase64Images) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.BlockAds) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Proxy) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.StoreInCache);
+                        var excludePaths = CliRuntime.WasSpecified(parseResult, ExcludePaths) ? parseResult.GetValue(ExcludePaths) : (__requestBase is { } __ExcludePathsBaseValue ? __ExcludePathsBaseValue.ExcludePaths : default);
+                        var includePaths = CliRuntime.WasSpecified(parseResult, IncludePaths) ? parseResult.GetValue(IncludePaths) : (__requestBase is { } __IncludePathsBaseValue ? __IncludePathsBaseValue.IncludePaths : default);
+                        var maxDepth = CliRuntime.WasSpecified(parseResult, MaxDepth) ? parseResult.GetValue(MaxDepth) : (__requestBase is { } __MaxDepthBaseValue ? __MaxDepthBaseValue.MaxDepth : default);
+                        var maxDiscoveryDepth = CliRuntime.WasSpecified(parseResult, MaxDiscoveryDepth) ? parseResult.GetValue(MaxDiscoveryDepth) : (__requestBase is { } __MaxDiscoveryDepthBaseValue ? __MaxDiscoveryDepthBaseValue.MaxDiscoveryDepth : default);
+                        var ignoreSitemap = CliRuntime.WasSpecified(parseResult, IgnoreSitemap) ? parseResult.GetValue(IgnoreSitemap) : (__requestBase is { } __IgnoreSitemapBaseValue ? __IgnoreSitemapBaseValue.IgnoreSitemap : default);
+                        var ignoreQueryParameters = CliRuntime.WasSpecified(parseResult, IgnoreQueryParameters) ? parseResult.GetValue(IgnoreQueryParameters) : (__requestBase is { } __IgnoreQueryParametersBaseValue ? __IgnoreQueryParametersBaseValue.IgnoreQueryParameters : default);
+                        var limit = CliRuntime.WasSpecified(parseResult, Limit) ? parseResult.GetValue(Limit) : (__requestBase is { } __LimitBaseValue ? __LimitBaseValue.Limit : default);
+                        var allowBackwardLinks = CliRuntime.WasSpecified(parseResult, AllowBackwardLinks) ? parseResult.GetValue(AllowBackwardLinks) : (__requestBase is { } __AllowBackwardLinksBaseValue ? __AllowBackwardLinksBaseValue.AllowBackwardLinks : default);
+                        var allowExternalLinks = CliRuntime.WasSpecified(parseResult, AllowExternalLinks) ? parseResult.GetValue(AllowExternalLinks) : (__requestBase is { } __AllowExternalLinksBaseValue ? __AllowExternalLinksBaseValue.AllowExternalLinks : default);
+                        var delay = CliRuntime.WasSpecified(parseResult, Delay) ? parseResult.GetValue(Delay) : (__requestBase is { } __DelayBaseValue ? __DelayBaseValue.Delay : default);
+
+                        var __ScrapeOptionsBase = __requestBase is { } __ScrapeOptionsBaseValue ? __ScrapeOptionsBaseValue.ScrapeOptions : default;                        var scrapeOptionsFormats = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Formats) ? parseResult.GetValue(ScrapeOptionsOptions.Formats) : (__ScrapeOptionsBase is { } __ScrapeOptionsformatsBaseValue ? __ScrapeOptionsformatsBaseValue.Formats : default);
+                        var scrapeOptionsOnlyMainContent = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.OnlyMainContent) ? parseResult.GetValue(ScrapeOptionsOptions.OnlyMainContent) : (__ScrapeOptionsBase is { } __ScrapeOptionsonlyMainContentBaseValue ? __ScrapeOptionsonlyMainContentBaseValue.OnlyMainContent : default);
+                        var scrapeOptionsIncludeTags = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.IncludeTags) ? parseResult.GetValue(ScrapeOptionsOptions.IncludeTags) : (__ScrapeOptionsBase is { } __ScrapeOptionsincludeTagsBaseValue ? __ScrapeOptionsincludeTagsBaseValue.IncludeTags : default);
+                        var scrapeOptionsExcludeTags = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ExcludeTags) ? parseResult.GetValue(ScrapeOptionsOptions.ExcludeTags) : (__ScrapeOptionsBase is { } __ScrapeOptionsexcludeTagsBaseValue ? __ScrapeOptionsexcludeTagsBaseValue.ExcludeTags : default);
+                        var scrapeOptionsMaxAge = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.MaxAge) ? parseResult.GetValue(ScrapeOptionsOptions.MaxAge) : (__ScrapeOptionsBase is { } __ScrapeOptionsmaxAgeBaseValue ? __ScrapeOptionsmaxAgeBaseValue.MaxAge : default);
+                        var scrapeOptionsWaitFor = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.WaitFor) ? parseResult.GetValue(ScrapeOptionsOptions.WaitFor) : (__ScrapeOptionsBase is { } __ScrapeOptionswaitForBaseValue ? __ScrapeOptionswaitForBaseValue.WaitFor : default);
+                        var scrapeOptionsMobile = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Mobile) ? parseResult.GetValue(ScrapeOptionsOptions.Mobile) : (__ScrapeOptionsBase is { } __ScrapeOptionsmobileBaseValue ? __ScrapeOptionsmobileBaseValue.Mobile : default);
+                        var scrapeOptionsSkipTlsVerification = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.SkipTlsVerification) ? parseResult.GetValue(ScrapeOptionsOptions.SkipTlsVerification) : (__ScrapeOptionsBase is { } __ScrapeOptionsskipTlsVerificationBaseValue ? __ScrapeOptionsskipTlsVerificationBaseValue.SkipTlsVerification : default);
+                        var scrapeOptionsTimeout = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Timeout) ? parseResult.GetValue(ScrapeOptionsOptions.Timeout) : (__ScrapeOptionsBase is { } __ScrapeOptionstimeoutBaseValue ? __ScrapeOptionstimeoutBaseValue.Timeout : default);
+                        var scrapeOptionsParsePDF = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ParsePDF) ? parseResult.GetValue(ScrapeOptionsOptions.ParsePDF) : (__ScrapeOptionsBase is { } __ScrapeOptionsparsePDFBaseValue ? __ScrapeOptionsparsePDFBaseValue.ParsePDF : default);
+                        var scrapeOptionsRemoveBase64Images = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.RemoveBase64Images) ? parseResult.GetValue(ScrapeOptionsOptions.RemoveBase64Images) : (__ScrapeOptionsBase is { } __ScrapeOptionsremoveBase64ImagesBaseValue ? __ScrapeOptionsremoveBase64ImagesBaseValue.RemoveBase64Images : default);
+                        var scrapeOptionsBlockAds = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.BlockAds) ? parseResult.GetValue(ScrapeOptionsOptions.BlockAds) : (__ScrapeOptionsBase is { } __ScrapeOptionsblockAdsBaseValue ? __ScrapeOptionsblockAdsBaseValue.BlockAds : default);
+                        var scrapeOptionsProxy = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Proxy) ? parseResult.GetValue(ScrapeOptionsOptions.Proxy) : (__ScrapeOptionsBase is { } __ScrapeOptionsproxyBaseValue ? __ScrapeOptionsproxyBaseValue.Proxy : default);
+                        var scrapeOptionsStoreInCache = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.StoreInCache) ? parseResult.GetValue(ScrapeOptionsOptions.StoreInCache) : (__ScrapeOptionsBase is { } __ScrapeOptionsstoreInCacheBaseValue ? __ScrapeOptionsstoreInCacheBaseValue.StoreInCache : default);
+                        var __ScrapeOptionsSpecified = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Formats) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.OnlyMainContent) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.IncludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ExcludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.MaxAge) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.WaitFor) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Mobile) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.SkipTlsVerification) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Timeout) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ParsePDF) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.RemoveBase64Images) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.BlockAds) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Proxy) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.StoreInCache);
                         var scrapeOptions =
-                            __scrapeOptionsSpecified || __requestBase?.ScrapeOptions is not null
+                            __ScrapeOptionsSpecified || __ScrapeOptionsBase is not null
                                 ? new global::Firecrawl.ScrapeOptions
                                 {
-                                Formats = scrapeOptionsFormats,
+	                                Formats = scrapeOptionsFormats,
                                 OnlyMainContent = scrapeOptionsOnlyMainContent,
                                 IncludeTags = scrapeOptionsIncludeTags,
                                 ExcludeTags = scrapeOptionsExcludeTags,
@@ -237,40 +239,43 @@ Use true for broader internal coverage beyond nested paths.");
                                 BlockAds = scrapeOptionsBlockAds,
                                 Proxy = scrapeOptionsProxy,
                                 StoreInCache = scrapeOptionsStoreInCache,
-                                }
-                                : __requestBase?.ScrapeOptions;
 
-                        var webhookWebhookUrl = parseResult.GetValue(WebhookWebhookUrl) ?? __requestBase?.Webhook?.Url;
-                        var __webhookHeadersSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookHeader);
-                        var webhookWebhookHeaders = __webhookHeadersSpecified
+                                }
+                                : __ScrapeOptionsBase;
+
+
+                        var __WebhookBase = __requestBase is { } __WebhookBaseValue ? __WebhookBaseValue.Webhook : default;
+                        var webhookWebhookUrl = parseResult.GetValue(WebhookWebhookUrl) ?? __WebhookBase?.Url;
+                        var __WebhookHeadersSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookHeader);
+                        var webhookWebhookHeaders = __WebhookHeadersSpecified
                             ? CliRuntime.DeserializeJsonValue<global::System.Collections.Generic.Dictionary<string, string>?>(
                                 CliRuntime.SerializeKeyValuePairs(parseResult.GetValue(WebhookWebhookHeader) ?? Array.Empty<string>()),
                                 global::Firecrawl.SourceGenerationContext.Default)
-                            : __requestBase?.Webhook?.Headers;
-                        var __webhookMetadataSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookMetadata);
-                        var webhookWebhookMetadata = __webhookMetadataSpecified
+                            : __WebhookBase?.Headers;
+                        var __WebhookMetadataSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookMetadata);
+                        var webhookWebhookMetadata = __WebhookMetadataSpecified
                             ? CliRuntime.DeserializeJsonValue<object?>(
                                 CliRuntime.SerializeKeyValuePairs(parseResult.GetValue(WebhookWebhookMetadata) ?? Array.Empty<string>()),
                                 global::Firecrawl.SourceGenerationContext.Default)
-                            : __requestBase?.Webhook?.Metadata;
-                        var __webhookEventsSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookEvent);
-                        var webhookWebhookEvents = __webhookEventsSpecified
+                            : __WebhookBase?.Metadata;
+                        var __WebhookEventsSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookEvent);
+                        var webhookWebhookEvents = __WebhookEventsSpecified
                             ? CliRuntime.DeserializeJsonValue<global::System.Collections.Generic.IList<global::Firecrawl.CrawlUrlsRequestWebhookEvent>?>(
                                 CliRuntime.SerializeStringArray(parseResult.GetValue(WebhookWebhookEvent) ?? Array.Empty<string>()),
                                 global::Firecrawl.SourceGenerationContext.Default)
-                            : __requestBase?.Webhook?.Events;
-                        var __webhookSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookUrl) || __webhookHeadersSpecified || __webhookMetadataSpecified || __webhookEventsSpecified;
-                        if (__webhookSpecified && string.IsNullOrWhiteSpace(webhookWebhookUrl))
+                            : __WebhookBase?.Events;
+                        var __WebhookSpecified = CliRuntime.WasSpecified(parseResult, WebhookWebhookUrl) || __WebhookHeadersSpecified || __WebhookMetadataSpecified || __WebhookEventsSpecified;
+                        if (__WebhookSpecified && string.IsNullOrWhiteSpace(webhookWebhookUrl))
                         {
-                            throw new CliException("Specify --webhook-url or include it in the base request body before using other --webhook-* options.");
+                            throw new CliException(@"Specify --webhook-url or include it in the base request body before using other --webhook-* options.");
                         }
 
                         var __webhookWebhookUrlRequired =
                             webhookWebhookUrl ??
-                            throw new CliException("Specify --webhook-url or include it in the base request body before using other --webhook-* options.");
+                            throw new CliException(@"Specify --webhook-url or include it in the base request body before using other --webhook-* options.");
 
                         var webhook =
-                            __webhookSpecified || __requestBase?.Webhook is not null
+                            __WebhookSpecified || __WebhookBase is not null
                                 ? new global::Firecrawl.CrawlUrlsRequestWebhook
                                 {
 
@@ -279,7 +284,7 @@ Use true for broader internal coverage beyond nested paths.");
                                 Metadata = webhookWebhookMetadata,
                                 Events = webhookWebhookEvents,
                                 }
-                                : __requestBase?.Webhook;
+                                : __WebhookBase;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

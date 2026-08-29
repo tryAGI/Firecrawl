@@ -1,4 +1,5 @@
 #nullable enable
+#pragma warning disable CS0618
 
 using System.CommandLine;
 
@@ -45,18 +46,18 @@ internal static partial class ExtractionExtractDataCommandApiCommand
         name: @"--ignore-invalid-urls",
         description: @"If invalid URLs are specified in the urls array, they will be ignored. Instead of them failing the entire request, an extract using the remaining valid URLs will be performed, and the invalid URLs will be returned in the invalidURLs field of the response.");
     private static readonly ScrapeOptionsOptionSet ScrapeOptionsOptions = ScrapeOptionsOptionSet.Create(@"scrape");
-      private static Option<string?> Input { get; } = new("--input")
+      private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
       };
 
-      private static Option<string?> RequestJson { get; } = new("--request-json")
+      private static Option<string?> RequestJson { get; } = new(@"--request-json")
       {
           Description = "Request body as JSON.",
           Hidden = true,
       };
 
-      private static Option<string?> RequestFile { get; } = new("--request-file")
+      private static Option<string?> RequestFile { get; } = new(@"--request-file")
       {
           Description = "Path to a JSON request file, or '-' for stdin.",
           Hidden = true,
@@ -117,7 +118,7 @@ internal static partial class ExtractionExtractDataCommandApiCommand
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
               if (specifiedCount > 1)
               {
-                  result.AddError("Specify at most one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
 
@@ -132,33 +133,34 @@ internal static partial class ExtractionExtractDataCommandApiCommand
                             global::Firecrawl.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var urls = parseResult.GetRequiredValue(Urls);
-                        var prompt = parseResult.GetValue(Prompt) ?? __requestBase?.Prompt;
-                        var schema = parseResult.GetValue(Schema) ?? __requestBase?.Schema;
-                        var enableWebSearch = parseResult.GetValue(EnableWebSearch) ?? __requestBase?.EnableWebSearch;
-                        var ignoreSitemap = parseResult.GetValue(IgnoreSitemap) ?? __requestBase?.IgnoreSitemap;
-                        var includeSubdomains = parseResult.GetValue(IncludeSubdomains) ?? __requestBase?.IncludeSubdomains;
-                        var showSources = parseResult.GetValue(ShowSources) ?? __requestBase?.ShowSources;
-                        var ignoreInvalidURLs = parseResult.GetValue(IgnoreInvalidURLs) ?? __requestBase?.IgnoreInvalidURLs;
-                        var scrapeOptionsFormats = parseResult.GetValue(ScrapeOptionsOptions.Formats) ?? __requestBase?.ScrapeOptions?.Formats;
-                        var scrapeOptionsOnlyMainContent = parseResult.GetValue(ScrapeOptionsOptions.OnlyMainContent) ?? __requestBase?.ScrapeOptions?.OnlyMainContent;
-                        var scrapeOptionsIncludeTags = parseResult.GetValue(ScrapeOptionsOptions.IncludeTags) ?? __requestBase?.ScrapeOptions?.IncludeTags;
-                        var scrapeOptionsExcludeTags = parseResult.GetValue(ScrapeOptionsOptions.ExcludeTags) ?? __requestBase?.ScrapeOptions?.ExcludeTags;
-                        var scrapeOptionsMaxAge = parseResult.GetValue(ScrapeOptionsOptions.MaxAge) ?? __requestBase?.ScrapeOptions?.MaxAge;
-                        var scrapeOptionsWaitFor = parseResult.GetValue(ScrapeOptionsOptions.WaitFor) ?? __requestBase?.ScrapeOptions?.WaitFor;
-                        var scrapeOptionsMobile = parseResult.GetValue(ScrapeOptionsOptions.Mobile) ?? __requestBase?.ScrapeOptions?.Mobile;
-                        var scrapeOptionsSkipTlsVerification = parseResult.GetValue(ScrapeOptionsOptions.SkipTlsVerification) ?? __requestBase?.ScrapeOptions?.SkipTlsVerification;
-                        var scrapeOptionsTimeout = parseResult.GetValue(ScrapeOptionsOptions.Timeout) ?? __requestBase?.ScrapeOptions?.Timeout;
-                        var scrapeOptionsParsePDF = parseResult.GetValue(ScrapeOptionsOptions.ParsePDF) ?? __requestBase?.ScrapeOptions?.ParsePDF;
-                        var scrapeOptionsRemoveBase64Images = parseResult.GetValue(ScrapeOptionsOptions.RemoveBase64Images) ?? __requestBase?.ScrapeOptions?.RemoveBase64Images;
-                        var scrapeOptionsBlockAds = parseResult.GetValue(ScrapeOptionsOptions.BlockAds) ?? __requestBase?.ScrapeOptions?.BlockAds;
-                        var scrapeOptionsProxy = parseResult.GetValue(ScrapeOptionsOptions.Proxy) ?? __requestBase?.ScrapeOptions?.Proxy;
-                        var scrapeOptionsStoreInCache = parseResult.GetValue(ScrapeOptionsOptions.StoreInCache) ?? __requestBase?.ScrapeOptions?.StoreInCache;
-                        var __scrapeOptionsSpecified = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Formats) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.OnlyMainContent) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.IncludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ExcludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.MaxAge) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.WaitFor) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Mobile) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.SkipTlsVerification) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Timeout) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ParsePDF) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.RemoveBase64Images) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.BlockAds) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Proxy) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.StoreInCache);
+                        var prompt = CliRuntime.WasSpecified(parseResult, Prompt) ? parseResult.GetValue(Prompt) : (__requestBase is { } __PromptBaseValue ? __PromptBaseValue.Prompt : default);
+                        var schema = CliRuntime.WasSpecified(parseResult, Schema) ? parseResult.GetValue(Schema) : (__requestBase is { } __SchemaBaseValue ? __SchemaBaseValue.Schema : default);
+                        var enableWebSearch = CliRuntime.WasSpecified(parseResult, EnableWebSearch) ? parseResult.GetValue(EnableWebSearch) : (__requestBase is { } __EnableWebSearchBaseValue ? __EnableWebSearchBaseValue.EnableWebSearch : default);
+                        var ignoreSitemap = CliRuntime.WasSpecified(parseResult, IgnoreSitemap) ? parseResult.GetValue(IgnoreSitemap) : (__requestBase is { } __IgnoreSitemapBaseValue ? __IgnoreSitemapBaseValue.IgnoreSitemap : default);
+                        var includeSubdomains = CliRuntime.WasSpecified(parseResult, IncludeSubdomains) ? parseResult.GetValue(IncludeSubdomains) : (__requestBase is { } __IncludeSubdomainsBaseValue ? __IncludeSubdomainsBaseValue.IncludeSubdomains : default);
+                        var showSources = CliRuntime.WasSpecified(parseResult, ShowSources) ? parseResult.GetValue(ShowSources) : (__requestBase is { } __ShowSourcesBaseValue ? __ShowSourcesBaseValue.ShowSources : default);
+                        var ignoreInvalidURLs = CliRuntime.WasSpecified(parseResult, IgnoreInvalidURLs) ? parseResult.GetValue(IgnoreInvalidURLs) : (__requestBase is { } __IgnoreInvalidURLsBaseValue ? __IgnoreInvalidURLsBaseValue.IgnoreInvalidURLs : default);
+
+                        var __ScrapeOptionsBase = __requestBase is { } __ScrapeOptionsBaseValue ? __ScrapeOptionsBaseValue.ScrapeOptions : default;                        var scrapeOptionsFormats = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Formats) ? parseResult.GetValue(ScrapeOptionsOptions.Formats) : (__ScrapeOptionsBase is { } __ScrapeOptionsformatsBaseValue ? __ScrapeOptionsformatsBaseValue.Formats : default);
+                        var scrapeOptionsOnlyMainContent = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.OnlyMainContent) ? parseResult.GetValue(ScrapeOptionsOptions.OnlyMainContent) : (__ScrapeOptionsBase is { } __ScrapeOptionsonlyMainContentBaseValue ? __ScrapeOptionsonlyMainContentBaseValue.OnlyMainContent : default);
+                        var scrapeOptionsIncludeTags = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.IncludeTags) ? parseResult.GetValue(ScrapeOptionsOptions.IncludeTags) : (__ScrapeOptionsBase is { } __ScrapeOptionsincludeTagsBaseValue ? __ScrapeOptionsincludeTagsBaseValue.IncludeTags : default);
+                        var scrapeOptionsExcludeTags = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ExcludeTags) ? parseResult.GetValue(ScrapeOptionsOptions.ExcludeTags) : (__ScrapeOptionsBase is { } __ScrapeOptionsexcludeTagsBaseValue ? __ScrapeOptionsexcludeTagsBaseValue.ExcludeTags : default);
+                        var scrapeOptionsMaxAge = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.MaxAge) ? parseResult.GetValue(ScrapeOptionsOptions.MaxAge) : (__ScrapeOptionsBase is { } __ScrapeOptionsmaxAgeBaseValue ? __ScrapeOptionsmaxAgeBaseValue.MaxAge : default);
+                        var scrapeOptionsWaitFor = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.WaitFor) ? parseResult.GetValue(ScrapeOptionsOptions.WaitFor) : (__ScrapeOptionsBase is { } __ScrapeOptionswaitForBaseValue ? __ScrapeOptionswaitForBaseValue.WaitFor : default);
+                        var scrapeOptionsMobile = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Mobile) ? parseResult.GetValue(ScrapeOptionsOptions.Mobile) : (__ScrapeOptionsBase is { } __ScrapeOptionsmobileBaseValue ? __ScrapeOptionsmobileBaseValue.Mobile : default);
+                        var scrapeOptionsSkipTlsVerification = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.SkipTlsVerification) ? parseResult.GetValue(ScrapeOptionsOptions.SkipTlsVerification) : (__ScrapeOptionsBase is { } __ScrapeOptionsskipTlsVerificationBaseValue ? __ScrapeOptionsskipTlsVerificationBaseValue.SkipTlsVerification : default);
+                        var scrapeOptionsTimeout = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Timeout) ? parseResult.GetValue(ScrapeOptionsOptions.Timeout) : (__ScrapeOptionsBase is { } __ScrapeOptionstimeoutBaseValue ? __ScrapeOptionstimeoutBaseValue.Timeout : default);
+                        var scrapeOptionsParsePDF = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ParsePDF) ? parseResult.GetValue(ScrapeOptionsOptions.ParsePDF) : (__ScrapeOptionsBase is { } __ScrapeOptionsparsePDFBaseValue ? __ScrapeOptionsparsePDFBaseValue.ParsePDF : default);
+                        var scrapeOptionsRemoveBase64Images = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.RemoveBase64Images) ? parseResult.GetValue(ScrapeOptionsOptions.RemoveBase64Images) : (__ScrapeOptionsBase is { } __ScrapeOptionsremoveBase64ImagesBaseValue ? __ScrapeOptionsremoveBase64ImagesBaseValue.RemoveBase64Images : default);
+                        var scrapeOptionsBlockAds = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.BlockAds) ? parseResult.GetValue(ScrapeOptionsOptions.BlockAds) : (__ScrapeOptionsBase is { } __ScrapeOptionsblockAdsBaseValue ? __ScrapeOptionsblockAdsBaseValue.BlockAds : default);
+                        var scrapeOptionsProxy = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Proxy) ? parseResult.GetValue(ScrapeOptionsOptions.Proxy) : (__ScrapeOptionsBase is { } __ScrapeOptionsproxyBaseValue ? __ScrapeOptionsproxyBaseValue.Proxy : default);
+                        var scrapeOptionsStoreInCache = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.StoreInCache) ? parseResult.GetValue(ScrapeOptionsOptions.StoreInCache) : (__ScrapeOptionsBase is { } __ScrapeOptionsstoreInCacheBaseValue ? __ScrapeOptionsstoreInCacheBaseValue.StoreInCache : default);
+                        var __ScrapeOptionsSpecified = CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Formats) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.OnlyMainContent) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.IncludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ExcludeTags) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.MaxAge) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.WaitFor) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Mobile) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.SkipTlsVerification) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Timeout) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.ParsePDF) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.RemoveBase64Images) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.BlockAds) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.Proxy) || CliRuntime.WasSpecified(parseResult, ScrapeOptionsOptions.StoreInCache);
                         var scrapeOptions =
-                            __scrapeOptionsSpecified || __requestBase?.ScrapeOptions is not null
+                            __ScrapeOptionsSpecified || __ScrapeOptionsBase is not null
                                 ? new global::Firecrawl.ScrapeOptions
                                 {
-                                Formats = scrapeOptionsFormats,
+	                                Formats = scrapeOptionsFormats,
                                 OnlyMainContent = scrapeOptionsOnlyMainContent,
                                 IncludeTags = scrapeOptionsIncludeTags,
                                 ExcludeTags = scrapeOptionsExcludeTags,
@@ -172,8 +174,9 @@ internal static partial class ExtractionExtractDataCommandApiCommand
                                 BlockAds = scrapeOptionsBlockAds,
                                 Proxy = scrapeOptionsProxy,
                                 StoreInCache = scrapeOptionsStoreInCache,
+
                                 }
-                                : __requestBase?.ScrapeOptions;
+                                : __ScrapeOptionsBase;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
