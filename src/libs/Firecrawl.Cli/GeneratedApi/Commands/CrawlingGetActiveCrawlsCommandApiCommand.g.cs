@@ -29,6 +29,8 @@ internal static partial class CrawlingGetActiveCrawlsCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-active-crawls", @"Get all active crawls for the authenticated team");
@@ -62,6 +64,7 @@ internal static partial class CrawlingGetActiveCrawlsCommandApiCommand
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

@@ -33,6 +33,8 @@ internal static partial class CrawlingGetCrawlStatusCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-crawl-status", @"Get the status of a crawl job");
@@ -66,6 +68,7 @@ internal static partial class CrawlingGetCrawlStatusCommandApiCommand
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

@@ -33,6 +33,8 @@ internal static partial class ResearchGetDeepResearchStatusCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-deep-research-status", @"Get the status and results of a deep research operation");
@@ -58,6 +60,7 @@ internal static partial class ResearchGetDeepResearchStatusCommandApiCommand
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

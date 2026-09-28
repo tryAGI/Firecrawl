@@ -108,6 +108,8 @@ internal static partial class ResearchStartDeepResearchCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"start-deep-research", @"Start a deep research operation on a query");
@@ -213,6 +215,7 @@ internal static partial class ResearchStartDeepResearchCommandApiCommand
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

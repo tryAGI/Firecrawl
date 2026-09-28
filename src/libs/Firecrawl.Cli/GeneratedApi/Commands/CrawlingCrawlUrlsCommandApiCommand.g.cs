@@ -154,6 +154,8 @@ Use true for broader internal coverage beyond nested paths.");
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"crawl-urls", @"Crawl multiple URLs based on options");
@@ -372,6 +374,7 @@ Use true for broader internal coverage beyond nested paths.");
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

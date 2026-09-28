@@ -30,6 +30,9 @@ internal static class CliRoot
 
     public static RootCommand CreateRootCommand()
     {
+        // The generated API group releases its shared options in its partial hook before
+        // the root attaches them, so both handwritten and generated commands read one symbol.
+        var apiCommand = GeneratedApi.Commands.ApiCommand.Create();
         var rootCommand = new RootCommand("First-class CLI for the Firecrawl API");
         rootCommand.Options.Add(CliOptions.ApiKey);
         rootCommand.Options.Add(CliOptions.BaseUrl);
@@ -45,7 +48,7 @@ internal static class CliRoot
         rootCommand.Subcommands.Add(CliCommands.CreateTeamCommand());
         rootCommand.Subcommands.Add(CliCommands.CreateSearchCommand());
         rootCommand.Subcommands.Add(CliCommands.CreateLlmstxtCommand());
-        rootCommand.Subcommands.Add(GeneratedApi.Commands.ApiCommand.Create());
+        rootCommand.Subcommands.Add(apiCommand);
 
         return rootCommand;
     }

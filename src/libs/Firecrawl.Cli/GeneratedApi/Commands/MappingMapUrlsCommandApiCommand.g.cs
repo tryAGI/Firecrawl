@@ -79,6 +79,8 @@ internal static partial class MappingMapUrlsCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"map-urls", @"Map multiple URLs based on options");
@@ -150,6 +152,7 @@ internal static partial class MappingMapUrlsCommandApiCommand
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

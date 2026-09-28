@@ -84,6 +84,8 @@ internal static partial class SearchSearchAndScrapeCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"search-and-scrape", @"Search and optionally scrape search results");
@@ -155,6 +157,7 @@ internal static partial class SearchSearchAndScrapeCommandApiCommand
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

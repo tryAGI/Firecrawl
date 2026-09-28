@@ -4,8 +4,10 @@ using System.CommandLine;
 
 namespace Firecrawl.Cli.GeneratedApi.Commands;
 
-internal static class ScrapingApiGroupCommand
+internal static partial class ScrapingApiGroupCommand
 {
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"scraping", @"Scraping endpoint commands.");
@@ -14,6 +16,7 @@ internal static class ScrapingApiGroupCommand
                          command.Subcommands.Add(ScrapingGetBatchScrapeStatusCommandApiCommand.Create());
                          command.Subcommands.Add(ScrapingScrapeAndExtractFromUrlCommandApiCommand.Create());
                          command.Subcommands.Add(ScrapingScrapeAndExtractFromUrlsCommandApiCommand.Create());
+        CustomizeCommand(ref command);
         return command;
     }
 }

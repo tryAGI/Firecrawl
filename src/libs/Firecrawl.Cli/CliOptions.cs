@@ -5,23 +5,11 @@ namespace Firecrawl.Cli;
 
 internal static class CliOptions
 {
-    public static Option<string> ApiKey { get; } = new("--api-key")
-    {
-        Description = "Firecrawl API key. Overrides FIRECRAWL_API_KEY and any stored key.",
-        Recursive = true,
-    };
+    public static Option<string?> ApiKey { get; } = GeneratedApi.CliOptions.ApiKey;
 
-    public static Option<string> BaseUrl { get; } = new("--base-url")
-    {
-        Description = "Base URL for the Firecrawl API. Overrides FIRECRAWL_BASE_URL.",
-        Recursive = true,
-    };
+    public static Option<string?> BaseUrl { get; } = GeneratedApi.CliOptions.BaseUrl;
 
-    public static Option<bool> Json { get; } = new("--json")
-    {
-        Description = "Print the SDK response as JSON instead of human-readable text.",
-        Recursive = true,
-    };
+    public static Option<bool> Json { get; } = GeneratedApi.CliOptions.Json;
 
     public static Option<string> CreateInputOption()
     {

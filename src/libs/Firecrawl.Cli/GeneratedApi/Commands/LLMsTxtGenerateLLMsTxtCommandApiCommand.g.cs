@@ -75,6 +75,8 @@ internal static partial class LLMsTxtGenerateLLMsTxtCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"generate-llms-txt", @"Generate LLMs.txt for a website");
@@ -160,6 +162,7 @@ internal static partial class LLMsTxtGenerateLLMsTxtCommandApiCommand
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

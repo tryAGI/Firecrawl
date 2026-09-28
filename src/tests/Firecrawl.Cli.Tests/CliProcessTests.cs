@@ -6,6 +6,34 @@ namespace Firecrawl.Cli.Tests;
 public sealed class CliProcessTests
 {
     [TestMethod]
+    public async Task Generated_api_help_lists_shared_root_options_once()
+    {
+        var result = await CliTestSupport.RunCliAsync(
+            ["api", "llms-txt", "generate-llms-txt", "--help"]).ConfigureAwait(false);
+
+        result.ExitCode.Should().Be(0, result.StandardError);
+        var optionLines = result.StandardOutput.Split('\n')
+            .Select(static line => line.TrimStart())
+            .ToArray();
+        optionLines.Count(static line =>
+                line.StartsWith("-k, --api-key ", StringComparison.Ordinal) ||
+                line.StartsWith("--api-key ", StringComparison.Ordinal))
+            .Should().Be(1);
+        optionLines.Count(static line => line.StartsWith("--base-url ", StringComparison.Ordinal))
+            .Should().Be(1);
+        optionLines.Count(static line => line.StartsWith("--json ", StringComparison.Ordinal))
+            .Should().Be(1);
+
+        var parseResult = CliTestSupport.RootCommand.Parse(
+            ["api", "llms-txt", "generate-llms-txt", "https://example.com",
+                "--api-key", "option-key", "--base-url", "https://api.example.com", "--json"]);
+        parseResult.Errors.Should().BeEmpty();
+        parseResult.GetValue(CliOptions.ApiKey).Should().Be("option-key");
+        parseResult.GetValue(CliOptions.BaseUrl).Should().Be("https://api.example.com");
+        parseResult.GetValue(CliOptions.Json).Should().BeTrue();
+    }
+
+    [TestMethod]
     public async Task Auth_status_uses_file_then_environment_then_option_precedence()
     {
         var homeDirectory = CliTestSupport.CreateTemporaryDirectory();

@@ -33,6 +33,8 @@ internal static partial class LLMsTxtGetLLMsTxtStatusCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"get-llms-txt-status", @"Get the status and results of an LLMs.txt generation job");
@@ -58,6 +60,7 @@ internal static partial class LLMsTxtGetLLMsTxtStatusCommandApiCommand
                                     FormatResponse,
                                     cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }

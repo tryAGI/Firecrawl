@@ -61,6 +61,8 @@ internal static partial class ScrapingScrapeAndExtractFromUrlsCommandApiCommand
                     static partial void CustomizeResponseFormatHints(Dictionary<string, CliFormatHint> hints);
 
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"scrape-and-extract-from-urls", @"Scrape multiple URLs and optionally extract information using an LLM");
@@ -148,6 +150,7 @@ internal static partial class ScrapingScrapeAndExtractFromUrlsCommandApiCommand
                                     cancellationToken).ConfigureAwait(false);
                                 }
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
