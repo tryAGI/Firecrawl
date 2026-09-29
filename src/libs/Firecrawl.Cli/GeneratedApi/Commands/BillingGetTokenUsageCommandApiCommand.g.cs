@@ -31,9 +31,9 @@ internal static partial class BillingGetTokenUsageCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-token-usage", @"Get remaining tokens for the authenticated team (Extract only)");
+        var command = new Command(commandName ?? @"get-token-usage", @"Get remaining tokens for the authenticated team (Extract only)");
 
 
 

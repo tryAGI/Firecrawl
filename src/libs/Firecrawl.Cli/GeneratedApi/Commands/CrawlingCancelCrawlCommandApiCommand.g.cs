@@ -35,9 +35,9 @@ internal static partial class CrawlingCancelCrawlCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"cancel-crawl", @"Cancel a crawl job");
+        var command = new Command(commandName ?? @"cancel-crawl", @"Cancel a crawl job");
                         command.Arguments.Add(Id);
 
 

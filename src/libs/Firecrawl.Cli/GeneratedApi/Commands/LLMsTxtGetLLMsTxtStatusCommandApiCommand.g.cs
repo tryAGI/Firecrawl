@@ -35,9 +35,9 @@ internal static partial class LLMsTxtGetLLMsTxtStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-llms-txt-status", @"Get the status and results of an LLMs.txt generation job");
+        var command = new Command(commandName ?? @"get-llms-txt-status", @"Get the status and results of an LLMs.txt generation job");
                         command.Arguments.Add(Id);
 
 

@@ -156,9 +156,9 @@ Use true for broader internal coverage beyond nested paths.");
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"crawl-urls", @"Crawl multiple URLs based on options");
+        var command = new Command(commandName ?? @"crawl-urls", @"Crawl multiple URLs based on options");
                         command.Arguments.Add(Url);
                         command.Options.Add(ExcludePaths);
                         command.Options.Add(IncludePaths);

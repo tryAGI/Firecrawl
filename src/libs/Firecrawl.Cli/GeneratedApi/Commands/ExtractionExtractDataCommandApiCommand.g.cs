@@ -101,9 +101,9 @@ internal static partial class ExtractionExtractDataCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"extract-data", @"Extract structured data from pages using LLMs");
+        var command = new Command(commandName ?? @"extract-data", @"Extract structured data from pages using LLMs");
                         command.Options.Add(Urls);
                         command.Options.Add(Prompt);
                         command.Options.Add(Schema);

@@ -63,7 +63,6 @@ internal static partial class CliCommands
         var outputOption = CliOptions.CreateOutputOption();
 
         var command = new Command("status", "Show which authentication source the CLI will use.");
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             var status = await CliRuntime.GetAuthStatusAsync(parseResult).ConfigureAwait(false);

@@ -31,9 +31,9 @@ internal static partial class CrawlingGetActiveCrawlsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-active-crawls", @"Get all active crawls for the authenticated team");
+        var command = new Command(commandName ?? @"get-active-crawls", @"Get all active crawls for the authenticated team");
 
 
 

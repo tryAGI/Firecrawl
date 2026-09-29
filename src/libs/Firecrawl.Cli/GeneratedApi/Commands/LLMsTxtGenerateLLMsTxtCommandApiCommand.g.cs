@@ -77,9 +77,9 @@ internal static partial class LLMsTxtGenerateLLMsTxtCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"generate-llms-txt", @"Generate LLMs.txt for a website");
+        var command = new Command(commandName ?? @"generate-llms-txt", @"Generate LLMs.txt for a website");
                         command.Arguments.Add(Url);
                         command.Options.Add(MaxUrls);
                         command.Options.Add(ShowFullText);

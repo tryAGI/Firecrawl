@@ -37,6 +37,7 @@ internal static class CliRoot
         rootCommand.Options.Add(CliOptions.ApiKey);
         rootCommand.Options.Add(CliOptions.BaseUrl);
         rootCommand.Options.Add(CliOptions.Json);
+        rootCommand.Options.Add(CliOptions.Output);
 
         rootCommand.Subcommands.Add(CliCommands.CreateAuthCommand());
         rootCommand.Subcommands.Add(CliCommands.CreateScrapeCommand());

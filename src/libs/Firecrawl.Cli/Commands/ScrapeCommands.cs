@@ -17,7 +17,6 @@ internal static partial class CliCommands
         var command = new Command("scrape", "Scrape a single URL and optionally extract information using an LLM.");
         command.Arguments.Add(urlArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         AddScrapeOptions(command, scrapeOptions);
         command.SetAction(async parseResult =>
         {
@@ -80,7 +79,6 @@ internal static partial class CliCommands
         var command = new Command("start", "Start a batch scrape job.");
         command.Arguments.Add(urlsArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         command.Options.Add(waitOption);
         command.Options.Add(pollIntervalOption);
         command.Options.Add(waitTimeoutOption);
@@ -156,7 +154,6 @@ internal static partial class CliCommands
 
         var command = new Command("status", "Get the status of a batch scrape job.");
         command.Arguments.Add(idArgument);
-        command.Options.Add(outputOption);
         command.Options.Add(outputDirectoryOption);
         command.SetAction(async parseResult =>
         {
@@ -199,7 +196,6 @@ internal static partial class CliCommands
 
         var command = new Command("cancel", "Cancel a batch scrape job.");
         command.Arguments.Add(idArgument);
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             var id = CliRuntime.GetRequiredValue(parseResult, idArgument);
@@ -225,7 +221,6 @@ internal static partial class CliCommands
 
         var command = new Command("errors", "Get the errors for a batch scrape job.");
         command.Arguments.Add(idArgument);
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             var id = CliRuntime.GetRequiredValue(parseResult, idArgument);

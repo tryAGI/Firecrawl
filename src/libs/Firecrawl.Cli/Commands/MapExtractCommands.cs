@@ -22,7 +22,6 @@ internal static partial class CliCommands
         var command = new Command("map", "Map multiple URLs based on options.");
         command.Arguments.Add(urlArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         command.Options.Add(searchOption);
         command.Options.Add(ignoreSitemapOption);
         command.Options.Add(sitemapOnlyOption);
@@ -117,7 +116,6 @@ internal static partial class CliCommands
         var command = new Command("start", "Start an extraction job.");
         command.Arguments.Add(urlsArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         command.Options.Add(waitOption);
         command.Options.Add(pollIntervalOption);
         command.Options.Add(waitTimeoutOption);
@@ -223,7 +221,6 @@ internal static partial class CliCommands
 
         var command = new Command("status", "Get the status of an extraction job.");
         command.Arguments.Add(idArgument);
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             var id = CliRuntime.GetRequiredValue(parseResult, idArgument);

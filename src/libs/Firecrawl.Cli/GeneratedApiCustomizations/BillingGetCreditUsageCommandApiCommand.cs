@@ -1,0 +1,14 @@
+using System.CommandLine;
+
+namespace Firecrawl.Cli.GeneratedApi.Commands;
+
+internal static partial class BillingGetCreditUsageCommandApiCommand
+{
+    static partial void CustomizeResponseText(
+        ParseResult parseResult,
+        global::Firecrawl.GetCreditUsageResponse value,
+        ref string? text)
+    {
+        text = global::Firecrawl.Cli.CliRuntime.FormatCreditUsage(value);
+    }
+}

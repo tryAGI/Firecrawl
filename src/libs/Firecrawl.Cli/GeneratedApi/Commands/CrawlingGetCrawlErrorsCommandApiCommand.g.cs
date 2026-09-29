@@ -35,9 +35,9 @@ internal static partial class CrawlingGetCrawlErrorsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-crawl-errors", @"Get the errors of a crawl job");
+        var command = new Command(commandName ?? @"get-crawl-errors", @"Get the errors of a crawl job");
                         command.Arguments.Add(Id);
 
 

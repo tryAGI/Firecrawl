@@ -82,6 +82,16 @@ public sealed class CliParsingTests
         parseResult.GetValue(CliOptions.ApiKey).Should().Be("option-key");
         parseResult.GetValue(CliOptions.BaseUrl).Should().Be("https://api.example.com");
         parseResult.GetValue(CliOptions.Json).Should().BeTrue();
+
+        var generated = CliTestSupport.RootCommand.Parse(
+            ["team", "credit-usage", "--output", "credit-usage.txt"]);
+        generated.Errors.Should().BeEmpty();
+        generated.GetValue(CliOptions.Output).Should().Be("credit-usage.txt");
+
+        var handwritten = CliTestSupport.RootCommand.Parse(
+            ["team", "token-usage", "--output", "token-usage.txt"]);
+        handwritten.Errors.Should().BeEmpty();
+        handwritten.GetValue(CliOptions.Output).Should().Be("token-usage.txt");
     }
 
     public static IEnumerable<object[]> GetRepresentativeParseCases()
@@ -90,6 +100,8 @@ public sealed class CliParsingTests
         yield return [new[] { "auth", "clear" }, "clear"];
         yield return [new[] { "auth", "status", "--output", "auth-status.txt" }, "status"];
         yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "--request-json", "{\"url\":\"https://example.com\"}" }, "scrape-and-extract-from-url"];
+        yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "https://example.com", "--formats", "markdown", "--only-main-content", "false" }, "scrape-and-extract-from-url"];
+        yield return [new[] { "api", "scraping", "scrape-and-extract-from-urls", "--urls", "https://example.com", "--formats", "markdown", "--ignore-invalid-urls" }, "scrape-and-extract-from-urls"];
         yield return [new[] { "api", "crawling", "crawl-urls", "https://example.com", "--limit", "5", "--webhook-url", "https://hooks.example.com/crawl", "--webhook-event", "completed", "--wait" }, "crawl-urls"];
         yield return [new[] { "api", "llms-txt", "generate-llms-txt", "https://example.com", "--max-urls", "5", "--wait" }, "generate-llms-txt"];
         yield return [new[] { "scrape", "https://example.com", "--format", "markdown", "--format", "html", "--header", "Accept=text/html", "--mobile", "false" }, "scrape"];

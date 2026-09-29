@@ -35,9 +35,9 @@ internal static partial class ScrapingCancelBatchScrapeCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"cancel-batch-scrape", @"Cancel a batch scrape job");
+        var command = new Command(commandName ?? @"cancel-batch-scrape", @"Cancel a batch scrape job");
                         command.Arguments.Add(Id);
 
 

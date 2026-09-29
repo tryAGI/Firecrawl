@@ -86,9 +86,9 @@ internal static partial class SearchSearchAndScrapeCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"search-and-scrape", @"Search and optionally scrape search results");
+        var command = new Command(commandName ?? @"search-and-scrape", @"Search and optionally scrape search results");
                         command.Options.Add(Query);
                         command.Options.Add(Limit);
                         command.Options.Add(Tbs);

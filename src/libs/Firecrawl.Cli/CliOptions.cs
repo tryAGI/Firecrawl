@@ -11,6 +11,8 @@ internal static class CliOptions
 
     public static Option<bool> Json { get; } = GeneratedApi.CliOptions.Json;
 
+    public static Option<string?> Output { get; } = GeneratedApi.CliOptions.Output;
+
     public static Option<string> CreateInputOption()
     {
         return new Option<string>("--input")
@@ -19,13 +21,7 @@ internal static class CliOptions
         };
     }
 
-    public static Option<string> CreateOutputOption()
-    {
-        return new Option<string>("--output")
-        {
-            Description = "Write the rendered command output to a file instead of stdout.",
-        };
-    }
+    public static Option<string?> CreateOutputOption() => Output;
 
     public static Option<string> CreateOutputDirectoryOption()
     {

@@ -81,9 +81,9 @@ internal static partial class MappingMapUrlsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"map-urls", @"Map multiple URLs based on options");
+        var command = new Command(commandName ?? @"map-urls", @"Map multiple URLs based on options");
                         command.Arguments.Add(Url);
                         command.Options.Add(Search);
                         command.Options.Add(IgnoreSitemap);

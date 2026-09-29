@@ -10,5 +10,6 @@ internal static partial class ApiCommand
         command.Options.Remove(global::Firecrawl.Cli.GeneratedApi.CliOptions.ApiKey);
         command.Options.Remove(global::Firecrawl.Cli.GeneratedApi.CliOptions.BaseUrl);
         command.Options.Remove(global::Firecrawl.Cli.GeneratedApi.CliOptions.Json);
+        command.Options.Remove(global::Firecrawl.Cli.GeneratedApi.CliOptions.Output);
     }
 }

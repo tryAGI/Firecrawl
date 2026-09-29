@@ -35,9 +35,9 @@ internal static partial class ExtractionGetExtractStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-extract-status", @"Get the status of an extract job");
+        var command = new Command(commandName ?? @"get-extract-status", @"Get the status of an extract job");
                         command.Arguments.Add(Id);
 
 

@@ -35,9 +35,9 @@ internal static partial class ResearchGetDeepResearchStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-deep-research-status", @"Get the status and results of a deep research operation");
+        var command = new Command(commandName ?? @"get-deep-research-status", @"Get the status and results of a deep research operation");
                         command.Arguments.Add(Id);
 
 

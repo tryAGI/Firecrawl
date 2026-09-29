@@ -110,9 +110,9 @@ internal static partial class ResearchStartDeepResearchCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"start-deep-research", @"Start a deep research operation on a query");
+        var command = new Command(commandName ?? @"start-deep-research", @"Start a deep research operation on a query");
                         command.Options.Add(Query);
                         command.Options.Add(MaxDepth);
                         command.Options.Add(TimeLimit);

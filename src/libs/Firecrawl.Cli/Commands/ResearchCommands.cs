@@ -15,7 +15,7 @@ internal static partial class CliCommands
     public static Command CreateTeamCommand()
     {
         var team = new Command("team", "Inspect team usage endpoints.");
-        team.Subcommands.Add(CreateCreditUsageCommand());
+        team.Subcommands.Add(GeneratedApi.Commands.BillingGetCreditUsageCommandApiCommand.Create("credit-usage"));
         team.Subcommands.Add(CreateTokenUsageCommand());
         return team;
     }
@@ -38,7 +38,6 @@ internal static partial class CliCommands
         var command = new Command("search", "Search and optionally scrape search results.");
         command.Arguments.Add(queryArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         command.Options.Add(limitOption);
         command.Options.Add(tbsOption);
         command.Options.Add(locationOption);
@@ -130,7 +129,6 @@ internal static partial class CliCommands
         var command = new Command("start", "Start a deep research job.");
         command.Arguments.Add(queryArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         command.Options.Add(waitOption);
         command.Options.Add(pollIntervalOption);
         command.Options.Add(waitTimeoutOption);
@@ -252,7 +250,6 @@ internal static partial class CliCommands
 
         var command = new Command("status", "Get the status of a deep research job.");
         command.Arguments.Add(idArgument);
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             var id = CliRuntime.GetRequiredValue(parseResult, idArgument);
@@ -268,30 +265,10 @@ internal static partial class CliCommands
         return command;
     }
 
-    private static Command CreateCreditUsageCommand()
-    {
-        var outputOption = CliOptions.CreateOutputOption();
-        var command = new Command("credit-usage", "Get remaining credits for the authenticated team.");
-        command.Options.Add(outputOption);
-        command.SetAction(async parseResult =>
-        {
-            using var client = await CliRuntime.CreateClientAsync(parseResult).ConfigureAwait(false);
-            var response = await client.Billing.GetCreditUsageAsync().ConfigureAwait(false);
-            await CliRuntime.WriteOutputAsync(
-                parseResult,
-                response,
-                CliRuntime.FormatCreditUsage(response),
-                parseResult.GetValue(outputOption)).ConfigureAwait(false);
-        });
-
-        return command;
-    }
-
     private static Command CreateTokenUsageCommand()
     {
         var outputOption = CliOptions.CreateOutputOption();
         var command = new Command("token-usage", "Get remaining tokens for the authenticated team.");
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             using var client = await CliRuntime.CreateClientAsync(parseResult).ConfigureAwait(false);
@@ -323,7 +300,6 @@ internal static partial class CliCommands
         var command = new Command("generate", "Generate an LLMs.txt job.");
         command.Arguments.Add(urlArgument);
         command.Options.Add(inputOption);
-        command.Options.Add(outputOption);
         command.Options.Add(waitOption);
         command.Options.Add(pollIntervalOption);
         command.Options.Add(waitTimeoutOption);
@@ -394,7 +370,6 @@ internal static partial class CliCommands
 
         var command = new Command("status", "Get the status of an LLMs.txt job.");
         command.Arguments.Add(idArgument);
-        command.Options.Add(outputOption);
         command.SetAction(async parseResult =>
         {
             var id = CliRuntime.GetRequiredValue(parseResult, idArgument);

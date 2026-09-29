@@ -35,9 +35,9 @@ internal static partial class ScrapingGetBatchScrapeStatusCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-batch-scrape-status", @"Get the status of a batch scrape job");
+        var command = new Command(commandName ?? @"get-batch-scrape-status", @"Get the status of a batch scrape job");
                         command.Arguments.Add(Id);
 
 

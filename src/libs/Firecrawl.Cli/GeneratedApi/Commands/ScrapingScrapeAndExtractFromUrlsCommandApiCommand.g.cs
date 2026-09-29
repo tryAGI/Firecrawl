@@ -7,7 +7,91 @@ namespace Firecrawl.Cli.GeneratedApi.Commands;
 
 internal static partial class ScrapingScrapeAndExtractFromUrlsCommandApiCommand
 {
+    private static Option<global::System.Collections.Generic.IList<string>> Urls { get; } = new(
+        name: @"--urls")
+    {
+        Description = @"",
+    };
 
+    private static Option<bool?> IgnoreInvalidURLs { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--ignore-invalid-urls",
+        description: @"If invalid URLs are specified in the urls array, they will be ignored. Instead of them failing the entire request, a batch scrape using the remaining valid URLs will be created, and the invalid URLs will be returned in the invalidURLs field of the response.");
+
+    private static Option<global::System.Collections.Generic.IList<global::Firecrawl.ScrapeOptionsFormat>?> Formats { get; } = new(
+        name: @"--formats")
+    {
+        Description = @"Formats to include in the output. `rawBase64` must be requested by itself.",
+    };
+
+    private static Option<bool?> OnlyMainContent { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--only-main-content",
+        description: @"Only return the main content of the page excluding headers, navs, footers, etc.");
+
+    private static Option<global::System.Collections.Generic.IList<string>?> IncludeTags { get; } = new(
+        name: @"--include-tags")
+    {
+        Description = @"Tags to include in the output.",
+    };
+
+    private static Option<global::System.Collections.Generic.IList<string>?> ExcludeTags { get; } = new(
+        name: @"--exclude-tags")
+    {
+        Description = @"Tags to exclude from the output.",
+    };
+
+    private static Option<int?> MaxAge { get; } = new(
+        name: @"--max-age")
+    {
+        Description = @"Returns a cached version of the page if it is younger than this age in milliseconds. If a cached version of the page is older than this value, the page will be scraped. If you do not need extremely fresh data, enabling this can speed up your scrapes by 500%. Defaults to 0, which disables caching.",
+    };
+
+    private static Option<int?> WaitFor { get; } = new(
+        name: @"--wait-for")
+    {
+        Description = @"Specify a delay in milliseconds before fetching the content, allowing the page sufficient time to load.",
+    };
+
+    private static Option<bool?> Mobile { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--mobile",
+        description: @"Set to true if you want to emulate scraping from a mobile device. Useful for testing responsive pages and taking mobile screenshots.");
+
+    private static Option<bool?> SkipTlsVerification { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--skip-tls-verification",
+        description: @"Skip TLS certificate verification when making requests");
+
+    private static Option<int?> Timeout { get; } = new(
+        name: @"--timeout")
+    {
+        Description = @"Timeout in milliseconds for the request",
+    };
+
+    private static Option<bool?> ParsePDF { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--parse-pdf",
+        description: @"Controls how PDF files are processed during scraping. When true, the PDF content is extracted and converted to markdown format, with billing based on the number of pages (1 credit per page). When false, the PDF file is returned in base64 encoding with a flat rate of 1 credit total.");
+
+    private static Option<bool?> RemoveBase64Images { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--remove-base64-images",
+        description: @"Removes all base 64 images from the output, which may be overwhelmingly long. The image's alt text remains in the output, but the URL is replaced with a placeholder.");
+
+    private static Option<bool?> BlockAds { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--block-ads",
+        description: @"Enables ad-blocking and cookie popup blocking.");
+
+    private static Option<global::Firecrawl.ScrapeOptionsProxy?> Proxy { get; } = new(
+        name: @"--proxy")
+    {
+        Description = @"Specifies the type of proxy to use.
+
+ - **basic**: Proxies for scraping sites with none to basic anti-bot solutions. Fast and usually works.
+ - **enhanced**: Enhanced proxies for scraping sites with advanced anti-bot solutions. Slower, but more reliable on certain sites. Billed at the same credit cost as basic.
+ - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. Enhanced proxies carry no credit surcharge, so either way only the regular cost is billed.
+
+If you do not specify a proxy, Firecrawl will default to basic.",
+    };
+
+    private static Option<bool?> StoreInCache { get; } = CliRuntime.CreateNullableBoolOption(
+        name: @"--store-in-cache",
+        description: @"If true, the page will be stored in the Firecrawl index and cache. Setting this to false is useful if your scraping activity may have data protection concerns. Using some parameters associated with sensitive scraping (actions, headers) will force this parameter to be false.");
       private static Option<string?> Input { get; } = new(@"--input")
       {
           Description = "Load request JSON from a file path, '-' for stdin, or an inline JSON object/array string.",
@@ -63,10 +147,25 @@ internal static partial class ScrapingScrapeAndExtractFromUrlsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"scrape-and-extract-from-urls", @"Scrape multiple URLs and optionally extract information using an LLM");
-
+        var command = new Command(commandName ?? @"scrape-and-extract-from-urls", @"Scrape multiple URLs and optionally extract information using an LLM");
+                        command.Options.Add(Urls);
+                        command.Options.Add(IgnoreInvalidURLs);
+                        command.Options.Add(Formats);
+                        command.Options.Add(OnlyMainContent);
+                        command.Options.Add(IncludeTags);
+                        command.Options.Add(ExcludeTags);
+                        command.Options.Add(MaxAge);
+                        command.Options.Add(WaitFor);
+                        command.Options.Add(Mobile);
+                        command.Options.Add(SkipTlsVerification);
+                        command.Options.Add(Timeout);
+                        command.Options.Add(ParsePDF);
+                        command.Options.Add(RemoveBase64Images);
+                        command.Options.Add(BlockAds);
+                        command.Options.Add(Proxy);
+                        command.Options.Add(StoreInCache);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
           command.Options.Add(RequestFile);
@@ -76,9 +175,9 @@ internal static partial class ScrapingScrapeAndExtractFromUrlsCommandApiCommand
               var hasRequestJson = result.GetResult(RequestJson) is not null;
               var hasRequestFile = result.GetResult(RequestFile) is not null;
               var specifiedCount = (hasInput ? 1 : 0) + (hasRequestJson ? 1 : 0) + (hasRequestFile ? 1 : 0);
-              if (specifiedCount != 1)
+              if (specifiedCount > 1)
               {
-                  result.AddError(@"Specify exactly one of --input, --request-json, or --request-file.");
+                  result.AddError(@"Specify at most one of --input, --request-json, or --request-file.");
               }
           });
           command.Options.Add(Wait);
@@ -87,14 +186,117 @@ internal static partial class ScrapingScrapeAndExtractFromUrlsCommandApiCommand
         command.SetAction(async (ParseResult parseResult, CancellationToken cancellationToken) =>
             await CliRuntime.RunAsync(async () =>
             {
-
-                        var request = await CliRuntime.ReadRequestAsync<global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>>(
+                        var __requestBase = await CliRuntime.ReadRequestOrDefaultAsync<global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>>(
                             parseResult,
                             Input,
                             RequestJson,
                             RequestFile,
                             global::Firecrawl.SourceGenerationContext.Default,
-                            cancellationToken).ConfigureAwait(false);          var wait = parseResult.GetValue(Wait);
+                            cancellationToken).ConfigureAwait(false);
+                        var urls = (CliRuntime.WasSpecified(parseResult, Urls)
+                            ? parseResult.GetValue(Urls)
+                            : __requestBase.Value1?.Urls)
+                            ?? throw new CliException(@"Specify urls or include it in the base request body.");
+                        var ignoreInvalidURLs = CliRuntime.WasSpecified(parseResult, IgnoreInvalidURLs) ? parseResult.GetValue(IgnoreInvalidURLs) : (__requestBase is { } __IgnoreInvalidURLsBaseValue ? __IgnoreInvalidURLsBaseValue.Value1?.IgnoreInvalidURLs : default);
+                        var formats = CliRuntime.WasSpecified(parseResult, Formats) ? parseResult.GetValue(Formats) : (__requestBase is { } __FormatsBaseValue ? __FormatsBaseValue.Value2?.Formats : default);
+                        var onlyMainContent = CliRuntime.WasSpecified(parseResult, OnlyMainContent) ? parseResult.GetValue(OnlyMainContent) : (__requestBase is { } __OnlyMainContentBaseValue ? __OnlyMainContentBaseValue.Value2?.OnlyMainContent : default);
+                        var includeTags = CliRuntime.WasSpecified(parseResult, IncludeTags) ? parseResult.GetValue(IncludeTags) : (__requestBase is { } __IncludeTagsBaseValue ? __IncludeTagsBaseValue.Value2?.IncludeTags : default);
+                        var excludeTags = CliRuntime.WasSpecified(parseResult, ExcludeTags) ? parseResult.GetValue(ExcludeTags) : (__requestBase is { } __ExcludeTagsBaseValue ? __ExcludeTagsBaseValue.Value2?.ExcludeTags : default);
+                        var maxAge = CliRuntime.WasSpecified(parseResult, MaxAge) ? parseResult.GetValue(MaxAge) : (__requestBase is { } __MaxAgeBaseValue ? __MaxAgeBaseValue.Value2?.MaxAge : default);
+                        var waitFor = CliRuntime.WasSpecified(parseResult, WaitFor) ? parseResult.GetValue(WaitFor) : (__requestBase is { } __WaitForBaseValue ? __WaitForBaseValue.Value2?.WaitFor : default);
+                        var mobile = CliRuntime.WasSpecified(parseResult, Mobile) ? parseResult.GetValue(Mobile) : (__requestBase is { } __MobileBaseValue ? __MobileBaseValue.Value2?.Mobile : default);
+                        var skipTlsVerification = CliRuntime.WasSpecified(parseResult, SkipTlsVerification) ? parseResult.GetValue(SkipTlsVerification) : (__requestBase is { } __SkipTlsVerificationBaseValue ? __SkipTlsVerificationBaseValue.Value2?.SkipTlsVerification : default);
+                        var timeout = CliRuntime.WasSpecified(parseResult, Timeout) ? parseResult.GetValue(Timeout) : (__requestBase is { } __TimeoutBaseValue ? __TimeoutBaseValue.Value2?.Timeout : default);
+                        var parsePDF = CliRuntime.WasSpecified(parseResult, ParsePDF) ? parseResult.GetValue(ParsePDF) : (__requestBase is { } __ParsePDFBaseValue ? __ParsePDFBaseValue.Value2?.ParsePDF : default);
+                        var removeBase64Images = CliRuntime.WasSpecified(parseResult, RemoveBase64Images) ? parseResult.GetValue(RemoveBase64Images) : (__requestBase is { } __RemoveBase64ImagesBaseValue ? __RemoveBase64ImagesBaseValue.Value2?.RemoveBase64Images : default);
+                        var blockAds = CliRuntime.WasSpecified(parseResult, BlockAds) ? parseResult.GetValue(BlockAds) : (__requestBase is { } __BlockAdsBaseValue ? __BlockAdsBaseValue.Value2?.BlockAds : default);
+                        var proxy = CliRuntime.WasSpecified(parseResult, Proxy) ? parseResult.GetValue(Proxy) : (__requestBase is { } __ProxyBaseValue ? __ProxyBaseValue.Value2?.Proxy : default);
+                        var storeInCache = CliRuntime.WasSpecified(parseResult, StoreInCache) ? parseResult.GetValue(StoreInCache) : (__requestBase is { } __StoreInCacheBaseValue ? __StoreInCacheBaseValue.Value2?.StoreInCache : default);
+                        var __component1 = __requestBase.Value1 ?? new global::Firecrawl.ScrapeAndExtractFromUrlsRequest2 { Urls = urls! };
+                        __component1.Urls = urls;
+                        __component1.IgnoreInvalidURLs = ignoreInvalidURLs;
+                        var __component2 = __requestBase.Value2 ?? new global::Firecrawl.ScrapeOptions();
+                        __component2.Formats = formats;
+                        __component2.OnlyMainContent = onlyMainContent;
+                        __component2.IncludeTags = includeTags;
+                        __component2.ExcludeTags = excludeTags;
+                        __component2.MaxAge = maxAge;
+                        __component2.WaitFor = waitFor;
+                        __component2.Mobile = mobile;
+                        __component2.SkipTlsVerification = skipTlsVerification;
+                        __component2.Timeout = timeout;
+                        __component2.ParsePDF = parsePDF;
+                        __component2.RemoveBase64Images = removeBase64Images;
+                        __component2.BlockAds = blockAds;
+                        __component2.Proxy = proxy;
+                        __component2.StoreInCache = storeInCache;
+                        if (CliRuntime.WasSpecified(parseResult, Formats))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"formats");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, OnlyMainContent))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"onlyMainContent");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, IncludeTags))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"includeTags");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, ExcludeTags))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"excludeTags");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, MaxAge))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"maxAge");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, WaitFor))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"waitFor");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, Mobile))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"mobile");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, SkipTlsVerification))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"skipTlsVerification");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, Timeout))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"timeout");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, ParsePDF))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"parsePDF");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, RemoveBase64Images))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"removeBase64Images");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, BlockAds))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"blockAds");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, Proxy))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"proxy");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, StoreInCache))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"storeInCache");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, Urls))
+                        {
+                            __component2.AdditionalProperties?.Remove(@"urls");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, IgnoreInvalidURLs))
+                        {
+                            __component2.AdditionalProperties?.Remove(@"ignoreInvalidURLs");
+                        }
+                        var request = new global::Firecrawl.AllOf<global::Firecrawl.ScrapeAndExtractFromUrlsRequest2, global::Firecrawl.ScrapeOptions>(
+                            __component1, __component2);
+          var wait = parseResult.GetValue(Wait);
           var pollInterval = wait ? CliRuntime.ParseDuration(parseResult.GetRequiredValue(PollInterval), PollInterval.Name) : default;
           var waitTimeout = wait ? CliRuntime.ParseDuration(parseResult.GetRequiredValue(WaitTimeout), WaitTimeout.Name) : default;
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
