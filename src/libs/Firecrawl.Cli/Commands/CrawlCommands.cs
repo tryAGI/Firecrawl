@@ -11,7 +11,7 @@ internal static partial class CliCommands
         crawl.Subcommands.Add(CreateCrawlStatusCommand());
         crawl.Subcommands.Add(CreateCrawlCancelCommand());
         crawl.Subcommands.Add(CreateCrawlErrorsCommand());
-        crawl.Subcommands.Add(CreateCrawlActiveCommand());
+        crawl.Subcommands.Add(GeneratedApi.Commands.CrawlingGetActiveCrawlsCommandApiCommand.Create("active"));
         return crawl;
     }
 
@@ -246,25 +246,6 @@ internal static partial class CliCommands
                 parseResult,
                 response,
                 CliRuntime.FormatErrors(response),
-                parseResult.GetValue(outputOption)).ConfigureAwait(false);
-        });
-
-        return command;
-    }
-
-    private static Command CreateCrawlActiveCommand()
-    {
-        var outputOption = CliOptions.CreateOutputOption();
-
-        var command = new Command("active", "Get all active crawls for the authenticated team.");
-        command.SetAction(async parseResult =>
-        {
-            using var client = await CliRuntime.CreateClientAsync(parseResult).ConfigureAwait(false);
-            var response = await client.Crawling.GetActiveCrawlsAsync().ConfigureAwait(false);
-            await CliRuntime.WriteOutputAsync(
-                parseResult,
-                response,
-                CliRuntime.FormatActiveCrawls(response),
                 parseResult.GetValue(outputOption)).ConfigureAwait(false);
         });
 

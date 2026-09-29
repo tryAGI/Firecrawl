@@ -16,7 +16,7 @@ internal static partial class CliCommands
     {
         var team = new Command("team", "Inspect team usage endpoints.");
         team.Subcommands.Add(GeneratedApi.Commands.BillingGetCreditUsageCommandApiCommand.Create("credit-usage"));
-        team.Subcommands.Add(CreateTokenUsageCommand());
+        team.Subcommands.Add(GeneratedApi.Commands.BillingGetTokenUsageCommandApiCommand.Create("token-usage"));
         return team;
     }
 
@@ -259,24 +259,6 @@ internal static partial class CliCommands
                 parseResult,
                 response,
                 CliRuntime.FormatDeepResearchStatus(response),
-                parseResult.GetValue(outputOption)).ConfigureAwait(false);
-        });
-
-        return command;
-    }
-
-    private static Command CreateTokenUsageCommand()
-    {
-        var outputOption = CliOptions.CreateOutputOption();
-        var command = new Command("token-usage", "Get remaining tokens for the authenticated team.");
-        command.SetAction(async parseResult =>
-        {
-            using var client = await CliRuntime.CreateClientAsync(parseResult).ConfigureAwait(false);
-            var response = await client.Billing.GetTokenUsageAsync().ConfigureAwait(false);
-            await CliRuntime.WriteOutputAsync(
-                parseResult,
-                response,
-                CliRuntime.FormatTokenUsage(response),
                 parseResult.GetValue(outputOption)).ConfigureAwait(false);
         });
 

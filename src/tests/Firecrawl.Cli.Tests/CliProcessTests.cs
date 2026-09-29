@@ -17,6 +17,8 @@ public sealed class CliProcessTests
         scrape.StandardOutput.Should().Contain("<url>");
         scrape.StandardOutput.Should().Contain("--formats");
         scrape.StandardOutput.Should().Contain("--only-main-content");
+        scrape.StandardOutput.Should().Contain("--location-country");
+        scrape.StandardOutput.Should().Contain("--json-options-prompt");
         scrape.StandardOutput.Should().Contain("--input");
 
         var batch = await CliTestSupport.RunCliAsync(
@@ -25,6 +27,7 @@ public sealed class CliProcessTests
         batch.StandardOutput.Should().Contain("--urls");
         batch.StandardOutput.Should().Contain("--ignore-invalid-urls");
         batch.StandardOutput.Should().Contain("--formats");
+        batch.StandardOutput.Should().Contain("--location-languages");
 
         var credit = await CliTestSupport.RunCliAsync(
             ["team", "credit-usage", "--help"]).ConfigureAwait(false);
@@ -68,6 +71,71 @@ public sealed class CliProcessTests
     }
 
     [TestMethod]
+    public async Task Migrated_token_usage_writes_the_existing_text_format_to_a_file()
+    {
+        var directory = CliTestSupport.CreateTemporaryDirectory();
+        var outputPath = Path.Combine(directory, "token-usage.txt");
+        var server = new TcpListener(IPAddress.Loopback, 0);
+        server.Start();
+        using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+        try
+        {
+            var port = ((IPEndPoint)server.LocalEndpoint).Port;
+            var requestTask = ReplyOnceAsync(
+                server,
+                "{\"success\":true,\"data\":{\"remaining_tokens\":17}}",
+                cancellation.Token);
+            var result = await CliTestSupport.RunCliAsync(
+                ["team", "token-usage", "--api-key", "test-key",
+                    "--base-url", $"http://127.0.0.1:{port}", "--output", outputPath],
+                timeout: TimeSpan.FromSeconds(20)).ConfigureAwait(false);
+
+            result.ExitCode.Should().Be(0, result.StandardError);
+            (await requestTask.ConfigureAwait(false)).RequestLine
+                .Should().Contain("GET /team/token-usage ");
+            (await File.ReadAllTextAsync(outputPath).ConfigureAwait(false))
+                .Should().Contain("remaining-tokens: 17");
+        }
+        finally
+        {
+            await cancellation.CancelAsync().ConfigureAwait(false);
+            server.Stop();
+            Directory.Delete(directory, recursive: true);
+        }
+    }
+
+    [TestMethod]
+    public async Task Migrated_active_crawls_keep_the_existing_text_format()
+    {
+        var server = new TcpListener(IPAddress.Loopback, 0);
+        server.Start();
+        using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+        try
+        {
+            var port = ((IPEndPoint)server.LocalEndpoint).Port;
+            var requestTask = ReplyOnceAsync(
+                server,
+                "{\"success\":true,\"crawls\":[{\"id\":\"00000000-0000-0000-0000-000000000001\",\"teamId\":\"team-1\",\"url\":\"https://example.com\",\"options\":{}}]}",
+                cancellation.Token);
+            var result = await CliTestSupport.RunCliAsync(
+                ["crawl", "active", "--api-key", "test-key",
+                    "--base-url", $"http://127.0.0.1:{port}"],
+                timeout: TimeSpan.FromSeconds(20)).ConfigureAwait(false);
+
+            result.ExitCode.Should().Be(0, result.StandardError);
+            (await requestTask.ConfigureAwait(false)).RequestLine
+                .Should().Contain("GET /crawl/active ");
+            result.StandardOutput.Should().Contain("id: 00000000-0000-0000-0000-000000000001");
+            result.StandardOutput.Should().Contain("team-id: team-1");
+        }
+        finally
+        {
+            await cancellation.CancelAsync().ConfigureAwait(false);
+            server.Stop();
+        }
+    }
+
+    [TestMethod]
     public async Task Composite_scrape_merges_flags_with_the_input_body()
     {
         var server = new TcpListener(IPAddress.Loopback, 0);
@@ -83,7 +151,8 @@ public sealed class CliProcessTests
             var result = await CliTestSupport.RunCliAsync(
                 ["api", "scraping", "scrape-and-extract-from-url", "https://from-flag.example",
                     "--formats", "markdown", "--only-main-content", "false",
-                    "--input", "{\"url\":\"https://from-input.example\",\"maxAge\":123,\"formats\":[\"html\"],\"onlyMainContent\":true}",
+                    "--location-country", "DE", "--json-options-prompt", "Extract title",
+                    "--input", "{\"url\":\"https://from-input.example\",\"maxAge\":123,\"formats\":[\"html\"],\"onlyMainContent\":true,\"location\":{\"country\":\"US\",\"languages\":[\"en-US\"]},\"jsonOptions\":{\"systemPrompt\":\"Keep it short\"}}",
                     "--api-key", "test-key", "--base-url", $"http://127.0.0.1:{port}", "--json"],
                 timeout: TimeSpan.FromSeconds(20)).ConfigureAwait(false);
 
@@ -95,6 +164,10 @@ public sealed class CliProcessTests
             body.RootElement.GetProperty("maxAge").GetInt32().Should().Be(123);
             body.RootElement.GetProperty("onlyMainContent").GetBoolean().Should().BeFalse();
             body.RootElement.GetProperty("formats")[0].GetString().Should().Be("markdown");
+            body.RootElement.GetProperty("location").GetProperty("country").GetString().Should().Be("DE");
+            body.RootElement.GetProperty("location").GetProperty("languages")[0].GetString().Should().Be("en-US");
+            body.RootElement.GetProperty("jsonOptions").GetProperty("prompt").GetString().Should().Be("Extract title");
+            body.RootElement.GetProperty("jsonOptions").GetProperty("systemPrompt").GetString().Should().Be("Keep it short");
         }
         finally
         {

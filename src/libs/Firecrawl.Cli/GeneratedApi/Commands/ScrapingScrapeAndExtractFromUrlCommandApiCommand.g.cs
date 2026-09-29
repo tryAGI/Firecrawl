@@ -66,6 +66,30 @@ internal static partial class ScrapingScrapeAndExtractFromUrlCommandApiCommand
         name: @"--parse-pdf",
         description: @"Controls how PDF files are processed during scraping. When true, the PDF content is extracted and converted to markdown format, with billing based on the number of pages (1 credit per page). When false, the PDF file is returned in base64 encoding with a flat rate of 1 credit total.");
 
+    private static Option<string?> JsonOptionsSystemPrompt { get; } = new(
+        name: @"--json-options-system-prompt")
+    {
+        Description = @"The system prompt to use for the extraction (Optional)",
+    };
+
+    private static Option<string?> JsonOptionsPrompt { get; } = new(
+        name: @"--json-options-prompt")
+    {
+        Description = @"The prompt to use for the extraction without a schema (Optional)",
+    };
+
+    private static Option<string?> LocationCountry { get; } = new(
+        name: @"--location-country")
+    {
+        Description = @"ISO 3166-1 alpha-2 country code (e.g., 'US', 'AU', 'DE', 'JP')",
+    };
+
+    private static Option<global::System.Collections.Generic.IList<string>?> LocationLanguages { get; } = new(
+        name: @"--location-languages")
+    {
+        Description = @"Preferred languages and locales for the request in order of priority. Defaults to the language of the specified location. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language",
+    };
+
     private static Option<bool?> RemoveBase64Images { get; } = CliRuntime.CreateNullableBoolOption(
         name: @"--remove-base64-images",
         description: @"Removes all base 64 images from the output, which may be overwhelmingly long. The image's alt text remains in the output, but the URL is replaced with a placeholder.");
@@ -84,6 +108,24 @@ internal static partial class ScrapingScrapeAndExtractFromUrlCommandApiCommand
  - **auto**: Firecrawl will automatically retry scraping with enhanced proxies if the basic proxy fails. Enhanced proxies carry no credit surcharge, so either way only the regular cost is billed.
 
 If you do not specify a proxy, Firecrawl will default to basic.",
+    };
+
+    private static Option<global::System.Collections.Generic.IList<global::Firecrawl.ScrapeOptionsChangeTrackingOptionsMode>?> ChangeTrackingOptionsModes { get; } = new(
+        name: @"--change-tracking-options-modes")
+    {
+        Description = @"The mode to use for change tracking. 'git-diff' provides a detailed diff, and 'json' compares extracted JSON data.",
+    };
+
+    private static Option<string?> ChangeTrackingOptionsPrompt { get; } = new(
+        name: @"--change-tracking-options-prompt")
+    {
+        Description = @"Prompt to use for change tracking when using 'json' mode. If not provided, the default prompt will be used.",
+    };
+
+    private static Option<string?> ChangeTrackingOptionsTag { get; } = new(
+        name: @"--change-tracking-options-tag")
+    {
+        Description = @"Tag to use for change tracking. Tags can separate change tracking history into separate ""branches"", where change tracking with a specific tagwill only compare to scrapes made in the same tag. If not provided, the default tag (null) will be used.",
     };
 
     private static Option<bool?> StoreInCache { get; } = CliRuntime.CreateNullableBoolOption(
@@ -142,9 +184,16 @@ If you do not specify a proxy, Firecrawl will default to basic.",
                         command.Options.Add(SkipTlsVerification);
                         command.Options.Add(Timeout);
                         command.Options.Add(ParsePDF);
+                        command.Options.Add(JsonOptionsSystemPrompt);
+                        command.Options.Add(JsonOptionsPrompt);
+                        command.Options.Add(LocationCountry);
+                        command.Options.Add(LocationLanguages);
                         command.Options.Add(RemoveBase64Images);
                         command.Options.Add(BlockAds);
                         command.Options.Add(Proxy);
+                        command.Options.Add(ChangeTrackingOptionsModes);
+                        command.Options.Add(ChangeTrackingOptionsPrompt);
+                        command.Options.Add(ChangeTrackingOptionsTag);
                         command.Options.Add(StoreInCache);
           command.Options.Add(Input);
           command.Options.Add(RequestJson);
@@ -185,12 +234,20 @@ If you do not specify a proxy, Firecrawl will default to basic.",
                         var skipTlsVerification = CliRuntime.WasSpecified(parseResult, SkipTlsVerification) ? parseResult.GetValue(SkipTlsVerification) : (__requestBase is { } __SkipTlsVerificationBaseValue ? __SkipTlsVerificationBaseValue.Value2?.SkipTlsVerification : default);
                         var timeout = CliRuntime.WasSpecified(parseResult, Timeout) ? parseResult.GetValue(Timeout) : (__requestBase is { } __TimeoutBaseValue ? __TimeoutBaseValue.Value2?.Timeout : default);
                         var parsePDF = CliRuntime.WasSpecified(parseResult, ParsePDF) ? parseResult.GetValue(ParsePDF) : (__requestBase is { } __ParsePDFBaseValue ? __ParsePDFBaseValue.Value2?.ParsePDF : default);
+                        var jsonOptionsSystemPrompt = CliRuntime.WasSpecified(parseResult, JsonOptionsSystemPrompt) ? parseResult.GetValue(JsonOptionsSystemPrompt) : (__requestBase is { } __JsonOptionsSystemPromptBaseValue ? __JsonOptionsSystemPromptBaseValue.Value2?.JsonOptions?.SystemPrompt : default);
+                        var jsonOptionsPrompt = CliRuntime.WasSpecified(parseResult, JsonOptionsPrompt) ? parseResult.GetValue(JsonOptionsPrompt) : (__requestBase is { } __JsonOptionsPromptBaseValue ? __JsonOptionsPromptBaseValue.Value2?.JsonOptions?.Prompt : default);
+                        var locationCountry = CliRuntime.WasSpecified(parseResult, LocationCountry) ? parseResult.GetValue(LocationCountry) : (__requestBase is { } __LocationCountryBaseValue ? __LocationCountryBaseValue.Value2?.Location?.Country : default);
+                        var locationLanguages = CliRuntime.WasSpecified(parseResult, LocationLanguages) ? parseResult.GetValue(LocationLanguages) : (__requestBase is { } __LocationLanguagesBaseValue ? __LocationLanguagesBaseValue.Value2?.Location?.Languages : default);
                         var removeBase64Images = CliRuntime.WasSpecified(parseResult, RemoveBase64Images) ? parseResult.GetValue(RemoveBase64Images) : (__requestBase is { } __RemoveBase64ImagesBaseValue ? __RemoveBase64ImagesBaseValue.Value2?.RemoveBase64Images : default);
                         var blockAds = CliRuntime.WasSpecified(parseResult, BlockAds) ? parseResult.GetValue(BlockAds) : (__requestBase is { } __BlockAdsBaseValue ? __BlockAdsBaseValue.Value2?.BlockAds : default);
                         var proxy = CliRuntime.WasSpecified(parseResult, Proxy) ? parseResult.GetValue(Proxy) : (__requestBase is { } __ProxyBaseValue ? __ProxyBaseValue.Value2?.Proxy : default);
+                        var changeTrackingOptionsModes = CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsModes) ? parseResult.GetValue(ChangeTrackingOptionsModes) : (__requestBase is { } __ChangeTrackingOptionsModesBaseValue ? __ChangeTrackingOptionsModesBaseValue.Value2?.ChangeTrackingOptions?.Modes : default);
+                        var changeTrackingOptionsPrompt = CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsPrompt) ? parseResult.GetValue(ChangeTrackingOptionsPrompt) : (__requestBase is { } __ChangeTrackingOptionsPromptBaseValue ? __ChangeTrackingOptionsPromptBaseValue.Value2?.ChangeTrackingOptions?.Prompt : default);
+                        var changeTrackingOptionsTag = CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsTag) ? parseResult.GetValue(ChangeTrackingOptionsTag) : (__requestBase is { } __ChangeTrackingOptionsTagBaseValue ? __ChangeTrackingOptionsTagBaseValue.Value2?.ChangeTrackingOptions?.Tag : default);
                         var storeInCache = CliRuntime.WasSpecified(parseResult, StoreInCache) ? parseResult.GetValue(StoreInCache) : (__requestBase is { } __StoreInCacheBaseValue ? __StoreInCacheBaseValue.Value2?.StoreInCache : default);
                         var __component1 = __requestBase.Value1 ?? new global::Firecrawl.ScrapeAndExtractFromUrlRequest2 { Url = url! };
                         __component1.Url = url;
+
                         var __component2 = __requestBase.Value2 ?? new global::Firecrawl.ScrapeOptions();
                         __component2.Formats = formats;
                         __component2.OnlyMainContent = onlyMainContent;
@@ -206,6 +263,46 @@ If you do not specify a proxy, Firecrawl will default to basic.",
                         __component2.BlockAds = blockAds;
                         __component2.Proxy = proxy;
                         __component2.StoreInCache = storeInCache;
+                        if (CliRuntime.WasSpecified(parseResult, JsonOptionsSystemPrompt) || CliRuntime.WasSpecified(parseResult, JsonOptionsPrompt))
+                        {
+                            __component2.JsonOptions ??= new global::Firecrawl.ScrapeOptionsJsonOptions();
+                            if (CliRuntime.WasSpecified(parseResult, JsonOptionsSystemPrompt))
+                            {
+                                __component2.JsonOptions.SystemPrompt = jsonOptionsSystemPrompt;
+                            }
+                            if (CliRuntime.WasSpecified(parseResult, JsonOptionsPrompt))
+                            {
+                                __component2.JsonOptions.Prompt = jsonOptionsPrompt;
+                            }
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, LocationCountry) || CliRuntime.WasSpecified(parseResult, LocationLanguages))
+                        {
+                            __component2.Location ??= new global::Firecrawl.ScrapeOptionsLocation();
+                            if (CliRuntime.WasSpecified(parseResult, LocationCountry))
+                            {
+                                __component2.Location.Country = locationCountry;
+                            }
+                            if (CliRuntime.WasSpecified(parseResult, LocationLanguages))
+                            {
+                                __component2.Location.Languages = locationLanguages;
+                            }
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsModes) || CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsPrompt) || CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsTag))
+                        {
+                            __component2.ChangeTrackingOptions ??= new global::Firecrawl.ScrapeOptionsChangeTrackingOptions();
+                            if (CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsModes))
+                            {
+                                __component2.ChangeTrackingOptions.Modes = changeTrackingOptionsModes;
+                            }
+                            if (CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsPrompt))
+                            {
+                                __component2.ChangeTrackingOptions.Prompt = changeTrackingOptionsPrompt;
+                            }
+                            if (CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsTag))
+                            {
+                                __component2.ChangeTrackingOptions.Tag = changeTrackingOptionsTag;
+                            }
+                        }
                         if (CliRuntime.WasSpecified(parseResult, Formats))
                         {
                             __component1.AdditionalProperties?.Remove(@"formats");
@@ -246,6 +343,14 @@ If you do not specify a proxy, Firecrawl will default to basic.",
                         {
                             __component1.AdditionalProperties?.Remove(@"parsePDF");
                         }
+                        if (CliRuntime.WasSpecified(parseResult, JsonOptionsSystemPrompt) || CliRuntime.WasSpecified(parseResult, JsonOptionsPrompt))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"jsonOptions");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, LocationCountry) || CliRuntime.WasSpecified(parseResult, LocationLanguages))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"location");
+                        }
                         if (CliRuntime.WasSpecified(parseResult, RemoveBase64Images))
                         {
                             __component1.AdditionalProperties?.Remove(@"removeBase64Images");
@@ -257,6 +362,10 @@ If you do not specify a proxy, Firecrawl will default to basic.",
                         if (CliRuntime.WasSpecified(parseResult, Proxy))
                         {
                             __component1.AdditionalProperties?.Remove(@"proxy");
+                        }
+                        if (CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsModes) || CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsPrompt) || CliRuntime.WasSpecified(parseResult, ChangeTrackingOptionsTag))
+                        {
+                            __component1.AdditionalProperties?.Remove(@"changeTrackingOptions");
                         }
                         if (CliRuntime.WasSpecified(parseResult, StoreInCache))
                         {

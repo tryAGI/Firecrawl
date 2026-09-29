@@ -88,10 +88,15 @@ public sealed class CliParsingTests
         generated.Errors.Should().BeEmpty();
         generated.GetValue(CliOptions.Output).Should().Be("credit-usage.txt");
 
-        var handwritten = CliTestSupport.RootCommand.Parse(
+        var tokenUsage = CliTestSupport.RootCommand.Parse(
             ["team", "token-usage", "--output", "token-usage.txt"]);
-        handwritten.Errors.Should().BeEmpty();
-        handwritten.GetValue(CliOptions.Output).Should().Be("token-usage.txt");
+        tokenUsage.Errors.Should().BeEmpty();
+        tokenUsage.GetValue(CliOptions.Output).Should().Be("token-usage.txt");
+
+        var activeCrawls = CliTestSupport.RootCommand.Parse(
+            ["crawl", "active", "--output", "active-crawls.txt"]);
+        activeCrawls.Errors.Should().BeEmpty();
+        activeCrawls.GetValue(CliOptions.Output).Should().Be("active-crawls.txt");
     }
 
     public static IEnumerable<object[]> GetRepresentativeParseCases()
@@ -100,7 +105,7 @@ public sealed class CliParsingTests
         yield return [new[] { "auth", "clear" }, "clear"];
         yield return [new[] { "auth", "status", "--output", "auth-status.txt" }, "status"];
         yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "--request-json", "{\"url\":\"https://example.com\"}" }, "scrape-and-extract-from-url"];
-        yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "https://example.com", "--formats", "markdown", "--only-main-content", "false" }, "scrape-and-extract-from-url"];
+        yield return [new[] { "api", "scraping", "scrape-and-extract-from-url", "https://example.com", "--formats", "markdown", "--only-main-content", "false", "--location-country", "DE", "--json-options-prompt", "Extract title" }, "scrape-and-extract-from-url"];
         yield return [new[] { "api", "scraping", "scrape-and-extract-from-urls", "--urls", "https://example.com", "--formats", "markdown", "--ignore-invalid-urls" }, "scrape-and-extract-from-urls"];
         yield return [new[] { "api", "crawling", "crawl-urls", "https://example.com", "--limit", "5", "--webhook-url", "https://hooks.example.com/crawl", "--webhook-event", "completed", "--wait" }, "crawl-urls"];
         yield return [new[] { "api", "llms-txt", "generate-llms-txt", "https://example.com", "--max-urls", "5", "--wait" }, "generate-llms-txt"];
