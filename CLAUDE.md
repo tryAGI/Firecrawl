@@ -19,10 +19,11 @@ dotnet build Firecrawl.slnx -c Release
 dotnet test src/tests/IntegrationTests/Firecrawl.IntegrationTests.csproj
 
 # Regenerate SDK from OpenAPI spec.
-# generate.sh refuses to run unless autosdk.cli is at least 0.35.0-preview.2.176, the version that
-# narrows --reject-unknown-enum-values to enums that cannot appear in a response. An older CLI accepts
-# the flag but also hardens response enums, including the one-value `status: "cancelled"` that
-# DELETE /crawl/{id} answers with. The version is read from `autosdk --version`.
+# generate.sh refuses to run unless the installed autosdk.cli reports
+# `behavior:request-scoped-enum-rejection` from `autosdk capabilities`. An older CLI accepts
+# --reject-unknown-enum-values but also hardens response enums, including the one-value
+# `status: "cancelled"` that DELETE /crawl/{id} answers with. Asking the build what it does replaces the
+# version floor this used to carry; a CLI with no `capabilities` subcommand fails the check.
 cd src/libs/Firecrawl && ./generate.sh
 
 # Install and use the CLI tool
