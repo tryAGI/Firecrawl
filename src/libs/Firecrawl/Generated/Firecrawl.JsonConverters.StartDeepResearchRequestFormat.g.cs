@@ -18,7 +18,7 @@ namespace Firecrawl.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Firecrawl.StartDeepResearchRequestFormatExtensions.ToEnum(stringValue) ?? default;
+                        return global::Firecrawl.StartDeepResearchRequestFormatExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Firecrawl.StartDeepResearchRequestFormat.");
                     }
 
                     break;

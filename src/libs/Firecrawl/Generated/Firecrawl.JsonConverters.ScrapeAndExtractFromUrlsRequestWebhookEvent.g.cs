@@ -18,7 +18,7 @@ namespace Firecrawl.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhookEventExtensions.ToEnum(stringValue) ?? default;
+                        return global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhookEventExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Firecrawl.ScrapeAndExtractFromUrlsRequestWebhookEvent.");
                     }
 
                     break;
