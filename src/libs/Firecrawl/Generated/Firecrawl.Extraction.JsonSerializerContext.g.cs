@@ -55,7 +55,6 @@ namespace Firecrawl
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.ExtractStatusResponseStatus), TypeInfoPropertyName = "ExtractStatusResponseStatus2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.ExtractDataRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.ExtractDataResponse))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.ExtractDataResponse2))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.ScrapeOptionsFormat?), TypeInfoPropertyName = "NullableScrapeOptionsFormat2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int?))]
