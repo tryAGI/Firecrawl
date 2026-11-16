@@ -366,19 +366,19 @@ namespace Firecrawl
                             {
                                 string? __content_429 = null;
                                 global::System.Exception? __exception_429 = null;
-                                global::Firecrawl.GetCrawlStatusResponse2? __value_429 = null;
+                                global::Firecrawl.GetCrawlStatusResponse? __value_429 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_429 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_429 = global::Firecrawl.GetCrawlStatusResponse2.FromJson(__content_429, JsonSerializerContext);
+                                        __value_429 = global::Firecrawl.GetCrawlStatusResponse.FromJson(__content_429, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_429 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_429 = global::Firecrawl.GetCrawlStatusResponse2.FromJson(__content_429, JsonSerializerContext);
+                                        __value_429 = global::Firecrawl.GetCrawlStatusResponse.FromJson(__content_429, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -387,7 +387,7 @@ namespace Firecrawl
                                 }
 
 
-                                throw global::Firecrawl.ApiException<global::Firecrawl.GetCrawlStatusResponse2>.Create(
+                                throw global::Firecrawl.ApiException<global::Firecrawl.GetCrawlStatusResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_429 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_429,
@@ -403,19 +403,19 @@ namespace Firecrawl
                             {
                                 string? __content_500 = null;
                                 global::System.Exception? __exception_500 = null;
-                                global::Firecrawl.GetCrawlStatusResponse3? __value_500 = null;
+                                global::Firecrawl.GetCrawlStatusResponse? __value_500 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
                                         __content_500 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                        __value_500 = global::Firecrawl.GetCrawlStatusResponse3.FromJson(__content_500, JsonSerializerContext);
+                                        __value_500 = global::Firecrawl.GetCrawlStatusResponse.FromJson(__content_500, JsonSerializerContext);
                                     }
                                     else
                                     {
                                         __content_500 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
 
-                                        __value_500 = global::Firecrawl.GetCrawlStatusResponse3.FromJson(__content_500, JsonSerializerContext);
+                                        __value_500 = global::Firecrawl.GetCrawlStatusResponse.FromJson(__content_500, JsonSerializerContext);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
@@ -424,7 +424,7 @@ namespace Firecrawl
                                 }
 
 
-                                throw global::Firecrawl.ApiException<global::Firecrawl.GetCrawlStatusResponse3>.Create(
+                                throw global::Firecrawl.ApiException<global::Firecrawl.GetCrawlStatusResponse>.Create(
                                     statusCode: __response.StatusCode,
                                     message: __content_500 ?? __response.ReasonPhrase ?? string.Empty,
                                     innerException: __exception_500,

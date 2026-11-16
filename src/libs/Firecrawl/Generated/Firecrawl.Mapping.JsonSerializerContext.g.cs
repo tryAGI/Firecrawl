@@ -21,8 +21,6 @@ namespace Firecrawl
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.MapResponse))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.MapUrlsRequest))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.MapUrlsResponse))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.MapUrlsResponse2))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Firecrawl.MapUrlsResponse3))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(bool?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(int?))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<string>))]
